@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
     private final static String SELECT_USER_BY_LOGIN_PASSWORD = "SELECT * FROM user "
             +"JOIN user_role on user.role_id = user_role.role_id "
             +"WHERE login=? AND password=?";
-    private final static String INSERT_USER = "INSERT INTO user (login, password, email, role_id) VALUES(?, ?, ?, ?)";
+    private final static String INSERT_USER = "INSERT INTO user (login, `password`, phone, role_id) VALUES(?, ?, ?, ?)";
     private final static String SELECT_ROLE_ID_BY_NAME = "SELECT role_id FROM user_role WHERE name=?";
 
     public static UserDao getInstance() {
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement st = cn.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
-            st.setString(3, user.getEmail());
+            st.setString(3, user.getPhone());
             st.setInt(4, selectRoleIdByName(user.getRole().toString().toUpperCase()));
             st.executeUpdate();
             ResultSet resultSet = st.getGeneratedKeys();
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
             resultSet.next();
             user.setId(resultSet.getLong("user_id"));
             user.setLogin(resultSet.getString("login"));
-            user.setEmail(resultSet.getString("email"));
+            user.setPhone(resultSet.getString("phone"));
             user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
         } catch (SQLException e) {
             throw new DaoException("Request to database failed", e);
@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
                 user = new User();
                 user.setId(resultSet.getInt("user_id"));
                 user.setLogin(resultSet.getString("login"));
-                user.setEmail(resultSet.getString("email"));
+                user.setPhone(resultSet.getString("phone"));
                 user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
             }
         } catch (SQLException e) {

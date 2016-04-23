@@ -3,7 +3,7 @@ package by.bsuir.deliveryservice.entity;
 public class User extends Entity{
     private String login;
     private String password;
-    private String email;
+    private String phone;
     private UserRole role;
 
     public User() {}
@@ -22,13 +22,13 @@ public class User extends Entity{
         this.password = password;
     }
 
-    public User(String login,  String password, String email) {
+    public User(String login,  String password, String phone) {
         this(login, password);
-        this.email = email;
+        this.phone = phone;
     }
 
-    public User(String login, String password, String email, UserRole role) {
-        this(login, password, email);
+    public User(String login, String password, String phone, UserRole role) {
+        this(login, password, phone);
         this.role = role;
     }
 
@@ -48,12 +48,12 @@ public class User extends Entity{
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public UserRole getRole() {
@@ -73,7 +73,7 @@ public class User extends Entity{
 
         if (!login.equals(user.login)) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
         return role != user.role;
 
     }
@@ -82,7 +82,7 @@ public class User extends Entity{
     public int hashCode() {
         int result = login.hashCode();
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
