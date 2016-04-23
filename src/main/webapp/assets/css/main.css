@@ -51,7 +51,7 @@ a:focus {
   left: 0;
   width: 100%;
   height: 80px;
-  z-index: 99999;
+  z-index: 999;
 }
 
 /*======================REG FORM==================*/
@@ -513,8 +513,7 @@ a:focus {
 }
 .navbar-default {
   background: #fff;
-  border-radius: 0 0 5px 5px;
-  border: 0;
+ 
   padding: 0;
   -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
@@ -522,10 +521,10 @@ a:focus {
   overflow: hidden;
 }
 .navbar-default .first a {
-  border-radius: 0 0 0 5px;
+
 }
 .navbar-default .navbar-brand {
-  margin-right: 50px;
+  margin-right: 20px;
   margin-left: 20px;
   width: 200px;
   height: 78px;
@@ -556,6 +555,8 @@ a:focus {
   background-color: #52b6ec;
   color: #fff;
 }
+
+.navbar-toggle{margin-top: 18px;}
 .icon-lg {
   font-size: 48px;
   height: 108px;
