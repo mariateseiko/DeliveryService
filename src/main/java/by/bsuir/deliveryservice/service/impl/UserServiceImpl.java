@@ -32,13 +32,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long registerUser(String login, String password, String email) throws ServiceException {
+    public Long registerUser(User user) throws ServiceException {
         try {
-            String hashedPassword = Hasher.md5Hash(password);
-            User user = new User();
-            user.setLogin(login);
+            String hashedPassword = Hasher.md5Hash(user.getPassword());
             user.setPassword(hashedPassword);
-            user.setEmail(email);
             user.setRole(UserRole.CLIENT);
             return userDao.insert(user);
         } catch (DaoException e) {

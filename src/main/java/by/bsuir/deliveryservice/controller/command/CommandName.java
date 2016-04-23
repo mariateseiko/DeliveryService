@@ -1,6 +1,5 @@
 package by.bsuir.deliveryservice.controller.command;
 
-import by.bsuir.deliveryservice.controller.util.RequestType;
 import by.bsuir.deliveryservice.entity.UserRole;
 
 import java.util.ArrayList;
@@ -8,12 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum CommandName {
-    LOGIN(RequestType.POST, UserRole.GUEST),
-    REGISTER(RequestType.POST, UserRole.GUEST);
+    LOGIN(UserRole.GUEST),
+    REGISTER(UserRole.GUEST);
     private List<UserRole> allowedUsers = new ArrayList<>();
-    private RequestType type;
-    CommandName(RequestType type, UserRole... allowedUsers) {
-        this.type = type;
+    CommandName(UserRole... allowedUsers) {
         this.allowedUsers.addAll(Arrays.asList(allowedUsers));
     }
 
@@ -26,7 +23,4 @@ public enum CommandName {
         return allowedUsers.contains(role);
     }
 
-    public RequestType getRequestType() {
-        return type;
-    }
 }

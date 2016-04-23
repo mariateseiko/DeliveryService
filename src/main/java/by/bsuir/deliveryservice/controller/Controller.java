@@ -25,7 +25,6 @@ public class Controller extends HttpServlet {
     @Override
     public void init() throws ServletException {
         storage = CommandStorage.getInstance();
-        ConnectionPool.getInstance();
     }
 
     @Override
@@ -51,7 +50,7 @@ public class Controller extends HttpServlet {
         try {
             ActionCommand command = storage.getCommand(req);
             LOG.debug("Executing a " + command);
-            page = command.execute(req);
+            page = command.execute(req, resp);
 
             if (page != null) {
                 if (req.getMethod().equalsIgnoreCase("get")) {

@@ -20,13 +20,11 @@ public interface UserService {
 
     /**
      * Attempts to register a new user with given personal info. Login should be unique in the system
-     * @param login user's login
-     * @param password user's password
-     * @param email user's email
+     * @param user user to registrate
      * @return id of the registered user or null if registration failed
      * @throws ServiceException if DaoException occurred
      */
-    Long registerUser(String login, String password, String email) throws ServiceException;
+    Long registerUser(User user) throws ServiceException;
 
     /**
      * Retrieves a user with a specified id
