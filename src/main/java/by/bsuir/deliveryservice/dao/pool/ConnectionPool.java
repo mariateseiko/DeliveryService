@@ -1,6 +1,5 @@
 package by.bsuir.deliveryservice.dao.pool;
 
-import manager.DatabaseManager;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
-
+import by.bsuir.deliveryservice.manager.DatabaseManager;
 /**
  * A pool of {@link ProxyConnection} connections for database access. A thread-safe singleton.
  */

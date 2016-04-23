@@ -1,4 +1,4 @@
-package manager;
+package by.bsuir.deliveryservice.manager;
 
 import java.util.ResourceBundle;
 
