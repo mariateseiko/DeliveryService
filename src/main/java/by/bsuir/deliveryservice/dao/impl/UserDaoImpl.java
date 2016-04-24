@@ -71,7 +71,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(User entity) throws DaoException {
+    public void delete(Long id) throws DaoException {
         //TODO
     }
 

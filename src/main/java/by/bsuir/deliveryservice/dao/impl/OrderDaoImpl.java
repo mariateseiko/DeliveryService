@@ -20,6 +20,15 @@ public class OrderDaoImpl implements OrderDao {
     private static final String UPDATE_ORDER = "UPDATE `order` SET user_id=?, `from`=?, `to`=?, distance=?, " +
             "weight=?, price=?, approved=?";
 
+    private static final String UPDATE_ORDER_APPROVED_STATUS = "UPDATE `order` SET approved=? WHERE order_id=?";
+
+    private static final String DELETE_ORDER = "DELETE FROM `order` WHERE order_id=?";
+    private static OrderDao instance = new OrderDaoImpl();
+    private OrderDaoImpl() {}
+    public static OrderDao getInstance() {
+        return instance;
+    }
+
     @Override
     public Long insert(Order order) throws DaoException {
         Long result = null;
@@ -67,7 +76,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void update(Order order) throws DaoException {
+      public void update(Order order) throws DaoException {
         try (Connection cn = ConnectionPool.getInstance().takeConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_ORDER)) {
             st.setLong(1, order.getUser().getId());
@@ -84,7 +93,25 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void delete(Order entity) throws DaoException {
-        throw new DaoException("Method not supported");
+    public void updateApprovedStatus(Boolean approved, Long orderId) throws DaoException {
+        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+             PreparedStatement st = cn.prepareStatement(UPDATE_ORDER_APPROVED_STATUS)) {
+            st.setBoolean(1, approved);
+            st.setLong(2, orderId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+    }
+
+    @Override
+    public void delete(Long id) throws DaoException {
+        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+            PreparedStatement st = cn.prepareStatement(DELETE_ORDER)) {
+            st.setLong(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Request to database failed", e);
+        }
     }
 }
