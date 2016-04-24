@@ -404,6 +404,9 @@ a:focus {
 #services .box {
   padding-bottom: 0;
 }
+.row{
+  width: 200%;
+}
 #services .row > div {
   margin-bottom: 50px;
 }
@@ -862,6 +865,14 @@ z-index: 10;
 
 .pad{
   padding: 20px;
+}
+.error-message{
+  background: #ffb6b6;
+  padding: 7px 52px;
+  margin-bottom: 15px;
+  color: red;
+  font-weight: normal;
+  transition-duration: 0.5s;
 }
 
 .bootstrap-iso .form-group button, .bootstrap-iso form input.form-control, .bootstrap-iso form textarea.form-control, .bootstrap-iso form select.form-control{-webkit-border-radius: 0 !important;-moz-border-radius: 0; border-radius: 0;}.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: #52b6ec}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: #ffffff !important;} .bootstrap-iso .btn-custom{background: #52b6ec} .bootstrap-iso .btn-custom:hover{background: #3ea2d8;}.bootstrap-iso .form-control:focus { border-color: #52b6ec;  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 182, 236, 0.6); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 182, 236, 0.6);} .asteriskField{color: red;}.bootstrap-iso form .input-group-addon {color:#555555; background-color: #eeeeee; border-radius: 0px; padding-left:12px}

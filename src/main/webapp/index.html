@@ -26,6 +26,8 @@
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
 <div ng-init="chooseModal=2"></div>
+
+
                <!-- header -->
     <header id="header" role="banner">
         <div class="container-fluid">
@@ -84,7 +86,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-user" aria-hidden="true"></i>
                                                 </div>
-                                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="name"/>
+                                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="name" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +95,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                             </div>
-                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="email"/>
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="email" required/>
                                         </div>
                                     </div>
 
@@ -102,7 +104,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                             </div>
-                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" required/>
                                         </div>
                                     </div>
                                     <div ng-if="chooseModal==1">
@@ -111,18 +113,25 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                                 </div>
-                                                <input type="password" class="form-control" id="password-repeat" placeholder="Confirm password" ng-model="passwordRepeat">
+                                                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="passwordRepeat" required/>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group"><!-- regButton -->
-                                        <div ng-if="chooseModal==1">
-                                            <div ng-controller="registerController">
-                                            <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register(name, email, password, passwordRepeat)">Register</button>
+                                    <div ng-if="chooseModal==1">
+                                        <div ng-controller="registerController">
+                                            <div ng-if="errorMessage!=''">
+                                            <div class="error-message">{{errorMessage}}</div>
                                             </div>
+                                        <div class="form-group"><!-- regButton -->
+                                            <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register(name, email, password, passwordRepeat)">Register</button>
+
                                         </div>
+                                        </div>
+                                    </div>
                                         <div ng-if="chooseModal==0">
                                             <div ng-controller="loginController">
+
+                                            <div class="form-group">
                                             <button class="btn btn-custom outline" name="login" type="submit" data-ng-click="login(email, password)">Log in</button>
                                             </div>
                                         </div>
