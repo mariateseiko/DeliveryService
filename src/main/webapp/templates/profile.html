@@ -25,44 +25,6 @@
     <script src="assets/js/angular-route.min.js"></script>
 </head><!--/head-->
 
-               <!-- header -->
-    <header id="header" role="banner">
-        <div class="container-fluid">
-            <div id="navbar" class="navbar-default">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"></a>
-                </div>
-                <div class="collapse navbar-collapse text-center">
-                    <ul class="nav navbar-nav" id="menu">
-                        <li class="active"><a href="#main-slider"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#about-us">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
-                        <ul class="nav navbar-nav">
-                            <li type="button" class=" " data-toggle="modal" data-target="#myModalLogin">
-                                <a href="#login" data-target="#login" ng-click="angular.element('#myModalLogin').triggerHandler('click');" >Sign in</a></li>
-                            <li type="button" class=" " data-toggle="modal" data-target="#myModalRegister">
-                                <a href="#reg" data-target="#reg">Registration</a>
-                            </li>
-                        </ul>    
-                    </div>
-                            <!-- regForm -->
-                </div>
-            </div>
-        </div>
-    </header>
-
-
-
-
 <div class="container">
     <div class="row profile">
         <div class="col-md-3">
@@ -75,16 +37,17 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        USER NAME
+                        Marcus Doe
                     </div>
                     <div class="profile-usertitle-job">
-                        USER
+                        Developer
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                   
+                    <button type="button" class="btn btn-success btn-sm">Follow</button>
+                    <button type="button" class="btn btn-danger btn-sm">Message</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
