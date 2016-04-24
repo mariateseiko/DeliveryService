@@ -1,9 +1,9 @@
 /**
  * Created by Анастасия on 23.04.2016.
  */
-var deviveryApp = angular.module('homeServices', ['ngRoute']);
+var app = angular.module('homeServices', ['ngRoute']);
 
-deviveryApp.config(['$routeProvider', function($routeProvide){
+app.config(['$routeProvider', function($routeProvide){
     $routeProvide
     .when('/', {
         templateUrl: 'templates/home.html',
@@ -14,7 +14,7 @@ deviveryApp.config(['$routeProvider', function($routeProvide){
     })
 }]);
 
-deviveryApp.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
     $scope.users = [
         {'name' : 'Grivachevsky Andrey',
             'img' : 'assets/images/team1.jpg'},
@@ -29,4 +29,19 @@ deviveryApp.controller('homeCtrl', ['$scope', '$http', '$location', function($sc
         $scope.prices = data;
     });
 }]);
-
+app.controller('registerController', ['$scope','$http', function($scope, $http) {
+    $scope.register = function (name, email, password, passwordRepeat) {
+        console.log(email);
+        /*$http.post("register", user).success(function(data) {
+            console.log('REGISTRATION');
+        });*/
+    };
+}]);
+app.controller('loginController', ['$scope','$http', function($scope, $http) {
+    $scope.login = function (email, password) {
+        console.log(email+' '+password);
+        /*$http.post("register", user).success(function(data) {
+         console.log('REGISTRATION');
+         });*/
+    };
+}]);
