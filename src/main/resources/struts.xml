@@ -6,10 +6,7 @@
     <constant name="struts.devMode" value="true" />
     <package name="guest" extends="json-default" >
         <action name="login" class="by.bsuir.deliveryservice.action.LoginAction">
-            <result name="success" type="redirect">
-                <param name="location">/index.jsp</param>
-            </result>
-            <result name="error" type="json">
+            <result type="json">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>
                 <param name="root">message</param>
