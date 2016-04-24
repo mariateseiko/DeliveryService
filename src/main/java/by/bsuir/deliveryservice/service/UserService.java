@@ -11,12 +11,11 @@ import java.util.List;
 public interface UserService {
     /**
      * Attempts to authenticate and authorize a user with a given login and password
-     * @param login user's login
-     * @param password user's password
+     * @param user user to login
      * @return {@code User} object with id and role or null, if credentials are invalid
      * @throws ServiceException if DaoException occurred
      */
-    User loginUser(String login, String password) throws ServiceException;
+    User loginUser(User user) throws ServiceException;
 
     /**
      * Attempts to register a new user with given personal info. Login should be unique in the system
