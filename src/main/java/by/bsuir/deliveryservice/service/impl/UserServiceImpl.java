@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     public User loginUser(User user) throws ServiceException {
         try {
             String hashedPassword = Hasher.md5Hash(user.getPassword());
-            user = userDao.selectByLoginPassword(user.getLogin(), hashedPassword);
+            user = userDao.selectByLoginPassword(user.getEmail(), hashedPassword);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

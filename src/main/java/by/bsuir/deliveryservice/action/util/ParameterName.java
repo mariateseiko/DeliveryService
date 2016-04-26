@@ -1,4 +1,4 @@
-package by.bsuir.deliveryservice.controller.util;
+package by.bsuir.deliveryservice.action.util;
 
 public class ParameterName {
     public static final String USER = "user";
@@ -8,7 +8,4 @@ public class ParameterName {
 
     public static final String ERROR = "errorMessage";
     public static final String SUCCESS = "successMessage";
-
-    public static final String MESSAGE_MANAGER = "messageManager";
-
 }

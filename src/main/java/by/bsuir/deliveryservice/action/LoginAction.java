@@ -1,6 +1,5 @@
 package by.bsuir.deliveryservice.action;
 
-import by.bsuir.deliveryservice.entity.Message;
 import by.bsuir.deliveryservice.entity.User;
 import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.UserService;
@@ -11,11 +10,11 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static by.bsuir.deliveryservice.controller.util.ParameterName.*;
+import static by.bsuir.deliveryservice.action.util.ParameterName.*;
 
 public class LoginAction implements Action {
     private User user;
-    private boolean result;
+    private boolean success;
     private static UserService userService = UserServiceImpl.getInstance();
 
     @Override
@@ -25,9 +24,9 @@ public class LoginAction implements Action {
                 HttpServletRequest request = ServletActionContext.getRequest();
                 HttpSession session = request.getSession();
                 session.setAttribute(USER, user);
-                result = true;
+                success = true;
             } else {
-               result = false;
+               success = false;
             }
         } catch (ServiceException e) {
             return ERROR;
@@ -35,19 +34,17 @@ public class LoginAction implements Action {
         return SUCCESS;
     }
 
-    public User getUser() {
-        return user;
+    public void setEmail(String email) {
+        user.setEmail(email);
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPassword(String password) { user.setPassword(password); }
+
+    public boolean isSuccess() {
+        return success;
     }
 
-    public boolean isResult() {
-        return result;
-    }
-
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

@@ -5,18 +5,33 @@
 <struts>
     <constant name="struts.devMode" value="true" />
     <package name="guest" extends="json-default" >
+        <interceptors>
+            <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
+        </interceptors>
         <action name="login" class="by.bsuir.deliveryservice.action.LoginAction">
-            <result type="json">
+            <interceptor-ref name="json"/>
+            <result type="json" name="error">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>
-                <param name="root">message</param>
+                <param name="root">success</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">success</param>
             </result>
         </action>
         <action name="register" class="by.bsuir.deliveryservice.action.RegisterAction">
-            <result type="json">
+            <interceptor-ref name="json"/>
+            <result type="json" name="error">
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>
-                <param name="root">message</param>
+                <param name="root">success</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">success</param>
             </result>
         </action>
     </package>

@@ -7,17 +7,17 @@ import by.bsuir.deliveryservice.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.Action;
 
 public class RegisterAction implements Action {
-    private User user;
-    private boolean result;
+    private User user = new User();
+    private boolean success;
     private static UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public String execute() throws Exception {
         try {
             if (userService.registerUser(user) != null) {
-                result = true;
+                success = true;
             } else {
-                result = false;
+                success = false;
             }
         } catch (ServiceException e) {
             return ERROR;
@@ -25,19 +25,23 @@ public class RegisterAction implements Action {
         return SUCCESS;
     }
 
-    public User getUser() {
-        return user;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public boolean isResult() {
-        return result;
+    public void setLogin(String login) {
+        user.setLogin(login);
     }
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setPassword(String password) {
+        user.setPassword(password);
+    }
+
+    public void setEmail(String email) {
+        user.setEmail(email);
     }
 }

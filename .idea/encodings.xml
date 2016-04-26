@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/controller/command/ActionCommand.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/controller/command/CommandException.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/controller/command/CommandStorage.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/controller/command/impl/EmptyCommand.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/DaoException.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/pool/ConnectionPool.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/pool/ProxyConnection.java" charset="UTF-8" />

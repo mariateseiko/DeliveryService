@@ -28,7 +28,4 @@
       <module name="DeliveryService" target="1.8" />
     </bytecodeTargetLevel>
   </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="-Xss40m" />
-  </component>
 </project>
