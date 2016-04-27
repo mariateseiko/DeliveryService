@@ -46,7 +46,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
         }
     ];
 
-    $http.get('price.json').then(function(data) {
+    $http.get('price.json').success(function(data) {
         $scope.prices = data;
     });
 }]);
@@ -54,11 +54,9 @@ app.controller('registerCtrl', ['$scope','$http', function($scope, $http) {
     $scope.errorMessage="";
     $scope.successMessage="";
     $scope.credentials = {
-        name: null,
-        surname: null,
-        email: null,
-        phone: null,
+        userName: null,
         password: null,
+        email: null,
         passwordRepeat: null
     };
 
@@ -69,42 +67,37 @@ app.controller('registerCtrl', ['$scope','$http', function($scope, $http) {
         var pattern = /[\d|\w]{6,10}/;
         if ($scope.credentials.password != $scope.credentials.passwordRepeat) {
             $scope.errorMessage="Passwords don't match";
+
         } else if (!pattern.exec($scope.credentials.password)){
-            console.log($scope.credentials.password);
             $scope.errorMessage="Password should only consist of letters and numbers, be at least 6 and no longer than 10 characters";
         }
-
         var dataToSend = {
-            name: $scope.credentials.name,
-            surname: $scope.credentials.surname,
-            email: $scope.credentials.email,
+            name: $scope.credentials.userName,
             password: $scope.credentials.password,
+            email: $scope.credentials.email,
             phone: $scope.credentials.phone
         };
         $http.post("register", dataToSend).then(function(response) {
-            if (response.data == true) {
-                $scope.successMessage = "You are registered!";
-            } else {
-                $scope.errorMessage = "This user is already exist :(";
-            }
+            console.log(response.data);
+            $scope.successMessage = "You are registered";
         });
     };
 }]);
 
-app.controller('loginCtrl', ['$scope','$http', '$location', function($scope, $http, $location) {
-    $scope.errorMessage="";
+app.controller('loginCtrl', ['$scope','$http', '$location', function($scope, $http) {
     $scope.credentials = {
-        email: null,
+        name: null,
         password: null
     };
+    $scope.errorMessage="";
 
     $scope.login = function () {
         $http.post("login", $scope.credentials).then(function(response) {
-            if (response.data == true) {
-                $location.path('/profile');
-            } else {
-                $scope.errorMessage = "Wrong email or password";
-            }
-        });
+             if (response.data == true) {
+                 console.log('Success');
+             } else {
+                 $scope.errorMessage = "Wrong email or password";
+             }
+         });
     };
 }]);

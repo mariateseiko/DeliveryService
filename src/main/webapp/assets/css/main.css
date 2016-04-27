@@ -873,11 +873,10 @@ z-index: 10;
 
 #register{
   margin-top: 70px;
+
+
 }
-#header-reg{
-  margin-left: 20.2%;
-  font-size: large;
-}
+
 .modal-content{
   box-shadow: none;
  width: 70%;
@@ -885,7 +884,7 @@ z-index: 10;
  position: absolute;
  left: 0;
  border-radius: 0;
-  border-color: white;
+
 
 }
 
