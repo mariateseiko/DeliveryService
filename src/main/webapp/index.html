@@ -24,9 +24,7 @@
     <script src="assets/js/angular-route.min.js"></script>
 </head><!--/head-->
 
-<body data-spy="scroll" data-target="#navbar" data-offset="0">
-<div ng-init="chooseModal=2"></div>
-
+<body data-spy="scroll" data-target="#navbar" data-offset="0" ng-controller="homeCtrl">
 
                <!-- header -->
     <header id="header" role="banner">
@@ -50,9 +48,9 @@
                     </ul>
                     <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
                         <ul class="nav navbar-nav">
-                            <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="chooseModal=0">
+                            <li type="button" class=" " data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
-                            <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="chooseModal=1">
+                            <li type="button" class=" " data-ng-click="go('/register')">
                                 <a href="" data-target="#reg">Registration</a>
                             </li>
                         </ul>    
@@ -64,9 +62,8 @@
     </header>
 
     <div ng-view></div>
-    <!-- endHeader-->
-
-<div class="modal fade" id="myModal" role="dialog">
+<!--
+<div class="modal fade" id="myModal" role="dialog" data-toggle="modal" data-target="#myModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,63 +75,134 @@
                 <div class="bootstrap-iso">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <form method="post"><!-- startForm -->
-                                    <div ng-if="chooseModal==1">
-                                        <div class="form-group "><!-- name -->
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                </div>
-                                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="name" required/>
+                            <div data-ng-controller="registerCtrl" class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
                                             </div>
+                                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="credentials.name" required/>
                                         </div>
                                     </div>
-                                    <div class="form-group "><!-- email -->
+
+                                    <div class="form-group ">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                             </div>
-                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="email" required/>
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="credentials.email" required/>
                                         </div>
                                     </div>
 
-                                    <div class="form-group "><!-- pass -->
+                                    <div class="form-group ">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                             </div>
-                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" required/>
+                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="credentials.passwordRepeat" required/>
+                                        </div>
+                                    </div>
+
+
+                                    <div ng-if="errorMessage!=''">
+                                        <div class="error-message"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register()">Register</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+-->
+    <!-- endHeader-->
+<!--<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div ng-if="chooseModal==1"><h4 class="modal-title text-center">Registration</h4></div>
+                <div ng-if="chooseModal==0"><h4 class="modal-title text-center">Login</h4></div>
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div data-ng-controller="registerController" class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div ng-if="chooseModal==1">
+                                        <div class="form-group ">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </div>
+                                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="credentials.name" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="credentials.email" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password" required/>
                                         </div>
                                     </div>
                                     <div ng-if="chooseModal==1">
-                                        <div class="form-group "><!-- confPass -->
+                                        <div class="form-group ">
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                                 </div>
-                                                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="passwordRepeat" required/>
+                                                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="credentials.passwordRepeat" required/>
                                             </div>
                                         </div>
                                     </div>
                                     <div ng-if="chooseModal==1">
-                                        <div ng-controller="registerController">
+
                                             <div ng-if="errorMessage!=''">
                                             <div class="error-message">{{errorMessage}}</div>
                                             </div>
-                                        <div class="form-group"><!-- regButton -->
+                                        <div class="form-group">
                                             <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register(name, email, password, passwordRepeat)">Register</button>
 
-                                        </div>
+
                                         </div>
                                     </div>
                                         <div ng-if="chooseModal==0">
-                                            <div ng-controller="loginController">
+
 
                                             <div class="form-group">
                                             <button class="btn btn-custom outline" name="login" type="submit" data-ng-click="login(email, password)">Log in</button>
                                             </div>
-                                        </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -143,14 +211,16 @@
                 </div>
             </div>
         </div>
-        <!-- endRegForm -->
+
     </div>
 </div>
+-->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.isotope.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="app.js"></script>
+<script src="assets/js/ui-bootstrap-tpls-min.js"></script>
 </body>
 </html>

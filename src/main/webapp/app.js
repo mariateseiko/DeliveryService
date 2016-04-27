@@ -9,6 +9,14 @@ app.config(['$routeProvider', function($routeProvide){
         templateUrl: 'templates/home.html',
         controller: 'homeCtrl'
     })
+    .when('/register', {
+        templateUrl: 'templates/register.html',
+        controller:  'registerCtrl'
+    })
+    .when('/login', {
+        templateUrl: 'templates/login.html',
+        controller:  'loginCtrl'
+    })
     .when('/profile', {
         templateUrl: 'templates/profile.html'
     })
@@ -24,6 +32,10 @@ app.config(['$routeProvider', function($routeProvide){
 }]);
 
 app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    $scope.go = function (path) {
+        $location.path(path);
+    };
+
     $scope.users = [
         {'name' : 'Grivachevsky Andrey',
             'img' : 'assets/images/team1.jpg'},
@@ -34,35 +46,65 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
         }
     ];
 
-    $http.get('price.json').success(function(data) {
+    $http.get('price.json').then(function(data) {
         $scope.prices = data;
     });
 }]);
-app.controller('registerController', ['$scope','$http', function($scope, $http) {
+app.controller('registerCtrl', ['$scope','$http', function($scope, $http) {
     $scope.errorMessage="";
-    $scope.register = function (name, email, password, passwordRepeat) {
-        $scope.errorMessage="";
-        var pattern = /[\d|\w]{6,10}/;
-       /* if (password != passwordRepeat) {
-            console.log(password+' '+passwordRepeat);
-            $scope.errorMessage="Passwords don't match";
+    $scope.successMessage="";
+    $scope.credentials = {
+        name: null,
+        surname: null,
+        email: null,
+        phone: null,
+        password: null,
+        passwordRepeat: null
+    };
 
-        } else */if (!pattern.exec(password)){
-            console.log(password);
+    $scope.register = function () {
+        $scope.errorMessage="";
+        $scope.successMessage="";
+
+        var pattern = /[\d|\w]{6,10}/;
+        if ($scope.credentials.password != $scope.credentials.passwordRepeat) {
+            $scope.errorMessage="Passwords don't match";
+        } else if (!pattern.exec($scope.credentials.password)){
+            console.log($scope.credentials.password);
             $scope.errorMessage="Password should only consist of letters and numbers, be at least 6 and no longer than 10 characters";
         }
-        /*$http.post("register", user).success(function(data) {
-            console.log('REGISTRATION');
-        });*/
+
+        var dataToSend = {
+            name: $scope.credentials.name,
+            surname: $scope.credentials.surname,
+            email: $scope.credentials.email,
+            password: $scope.credentials.password,
+            phone: $scope.credentials.phone
+        };
+        $http.post("register", dataToSend).then(function(response) {
+            if (response.data == true) {
+                $scope.successMessage = "You are registered!";
+            } else {
+                $scope.errorMessage = "This user is already exist :(";
+            }
+        });
     };
 }]);
 
-app.controller('loginController', ['$scope','$http', '$location', function($scope, $http, $location) {
-    $scope.login = function (email, password) {
-        console.log(email+' '+password);
-        $location.path('/profile');
-        /*$http.post("register", user).success(function(data) {
-         console.log('REGISTRATION');
-         });*/
+app.controller('loginCtrl', ['$scope','$http', '$location', function($scope, $http, $location) {
+    $scope.errorMessage="";
+    $scope.credentials = {
+        email: null,
+        password: null
+    };
+
+    $scope.login = function () {
+        $http.post("login", $scope.credentials).then(function(response) {
+            if (response.data == true) {
+                $location.path('/profile');
+            } else {
+                $scope.errorMessage = "Wrong email or password";
+            }
+        });
     };
 }]);
