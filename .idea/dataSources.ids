@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - delivery@localhost" uuid="70f9bef9-d274-45d1-ad9b-944a62916a91">
+    <database-info product="MySQL" version="5.7.10-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="delivery"/>
+    <table name="order" schema="" catalog="delivery" type="TABLE">
+      <column name="order_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="distance" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="price" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="from" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="to" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="approved" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+      <foreign-key name="fk_order_user1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="delivery" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_order_user1_idx" unique="false" columns="user_id"/>
+    </table>
+    <table name="user" schema="" catalog="delivery" type="TABLE">
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <foreign-key name="fk_user_user_role" columns="role_id" ref-table="user_role" ref-schema="" ref-catalog="delivery" ref-columns="role_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_order_user1" table="order" schema="" catalog="delivery" columns="user_id"/>
+      <index name="fk_user_user_role_idx" unique="false" columns="role_id"/>
+    </table>
+    <table name="user_role" schema="" catalog="delivery" type="TABLE">
+      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="role_id"/>
+      <exported-key name="fk_user_user_role" table="user" schema="" catalog="delivery" columns="role_id"/>
+    </table>
+  </data-source>
+</component>
