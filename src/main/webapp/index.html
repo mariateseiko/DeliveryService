@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="homeServices">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Xeon | OnePage Responsive Theme</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link href="assets/css/prettyPhoto.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+   
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assets/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+</head><!--/head-->
+
+<body data-spy="scroll" data-target="#navbar" data-offset="0" ng-controller="homeCtrl">
+<div ng-init="chooseModal=2"></div>
+
+
+               <!-- header -->
+    <header id="header" role="banner">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"></a>
+                </div>
+                <div class="collapse navbar-collapse text-center">
+                    <ul class="nav navbar-nav" id="menu">
+                        <li class="active"><a href="#main-slider"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
+                        <ul class="nav navbar-nav">
+                            <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
+                                <a href="" data-target="#login"  >Sign in</a></li>
+                            <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
+                                <a href="" data-target="#reg">Registration</a>
+                            </li>
+                        </ul>    
+                    </div>
+                            <!-- regForm -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div ng-view></div>
+<!--
+<div class="modal fade" id="myModal" role="dialog" data-toggle="modal" data-target="#myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div ng-if="chooseModal==1"><h4 class="modal-title text-center">Registration</h4></div>
+                <div ng-if="chooseModal==0"><h4 class="modal-title text-center">Login</h4></div>
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div data-ng-controller="registerCtrl" class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="credentials.name" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="credentials.email" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="credentials.passwordRepeat" required/>
+                                        </div>
+                                    </div>
+
+
+                                    <div ng-if="errorMessage!=''">
+                                        <div class="error-message"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register()">Register</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+-->
+    <!-- endHeader-->
+<!--<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div ng-if="chooseModal==1"><h4 class="modal-title text-center">Registration</h4></div>
+                <div ng-if="chooseModal==0"><h4 class="modal-title text-center">Login</h4></div>
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div data-ng-controller="registerController" class="col-md-6 col-sm-6 col-xs-12">
+                                <form method="post">
+                                    <div ng-if="chooseModal==1">
+                                        <div class="form-group ">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                </div>
+                                                <input class="form-control" id="name" name="name" placeholder="Name" type="text" ng-model="credentials.name" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </div>
+                                            <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="credentials.email" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                            </div>
+                                            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password" required/>
+                                        </div>
+                                    </div>
+                                    <div ng-if="chooseModal==1">
+                                        <div class="form-group ">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                                </div>
+                                                <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Confirm password" ng-model="credentials.passwordRepeat" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="chooseModal==1">
+
+                                            <div ng-if="errorMessage!=''">
+                                            <div class="error-message">{{errorMessage}}</div>
+                                            </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-custom outline" name="submit" type="submit" data-ng-click="register(name, email, password, passwordRepeat)">Register</button>
+
+
+                                        </div>
+                                    </div>
+                                        <div ng-if="chooseModal==0">
+
+
+                                            <div class="form-group">
+                                            <button class="btn btn-custom outline" name="login" type="submit" data-ng-click="login(email, password)">Log in</button>
+                                            </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+-->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="app.js"></script>
+<script src="assets/js/ui-bootstrap-tpls-min.js"></script>
+</body>
+</html>

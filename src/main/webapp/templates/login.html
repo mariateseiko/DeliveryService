@@ -1,0 +1,53 @@
+<div class="modal-dialog" id="register">
+    <div class="container- form ">
+        <div class="row form ">
+            <div class="modal-content col-md-12 col-sm-6 col-xs-12 col-md-offset-2 col-sm-offset-2">
+                <div class="header">
+                    <h4 class="modal-title text-center">Registration</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="bootstrap-iso" >
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div data-ng-controller="loginCtrl" class="col-md-8 col-sm-12  col-md-offset-2 col-xs-12">
+                                    <form method="post">
+
+                                        <div class="form-group ">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                </div>
+                                                <input class="form-control" id="email" name="email" placeholder="Email" type="text" ng-model="credentials.email" required/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                                </div>
+                                                <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password" required/>
+                                            </div>
+                                        </div>
+
+                                        <div ng-if="errorMessage!=''">
+                                            <div class="error-message">{{errorMessage}}</div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <button class="btn btn-custom outline " name="submit" type="submit" data-ng-click="login()">Register</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
