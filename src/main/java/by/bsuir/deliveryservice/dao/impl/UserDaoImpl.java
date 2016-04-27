@@ -2,10 +2,10 @@ package by.bsuir.deliveryservice.dao.impl;
 
 import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.UserDao;
-import by.bsuir.deliveryservice.dao.pool.ConnectionPool;
 import by.bsuir.deliveryservice.entity.User;
 import by.bsuir.deliveryservice.entity.UserRole;
 
+import javax.naming.NamingException;
 import java.sql.*;
 
 public class UserDaoImpl implements UserDao {
@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Long insert(User user) throws DaoException {
         Long result = null;
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setString(1, user.getLogin());
             st.setString(2, user.getPassword());
@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             result = null;
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
         return result;
@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User selectById(Long id) throws DaoException {
         User user = new User();
-        try(Connection cn = ConnectionPool.getInstance().takeConnection();
+        try(Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(SELECT_USER_BY_ID)) {
             st.setLong(1, id);
             ResultSet resultSet = st.executeQuery();
@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
             user.setLogin(resultSet.getString("login"));
             user.setPhone(resultSet.getString("phone"));
             user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
         return user;
@@ -78,7 +78,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User selectByLoginPassword(String login, String password) throws DaoException {
         User user = null;
-        try(Connection cn = ConnectionPool.getInstance().takeConnection();
+        try(Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(SELECT_USER_BY_LOGIN_PASSWORD)) {
             st.setString(1, login);
             st.setString(2, String.valueOf(password));
@@ -90,20 +90,20 @@ public class UserDaoImpl implements UserDao {
                 user.setPhone(resultSet.getString("phone"));
                 user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
             }
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
         return user;
     }
 
     private int selectRoleIdByName(String name) throws DaoException {
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_ROLE_ID_BY_NAME)) {
             st.setString(1, name);
             ResultSet resultSet = st.executeQuery();
             resultSet.next();
             return resultSet.getInt("role_id");
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
     }

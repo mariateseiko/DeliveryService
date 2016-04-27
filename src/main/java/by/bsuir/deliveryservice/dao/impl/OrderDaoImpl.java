@@ -2,10 +2,10 @@ package by.bsuir.deliveryservice.dao.impl;
 
 import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.OrderDao;
-import by.bsuir.deliveryservice.dao.pool.ConnectionPool;
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.User;
 
+import javax.naming.NamingException;
 import java.sql.*;
 
 public class OrderDaoImpl implements OrderDao {
@@ -32,7 +32,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Long insert(Order order) throws DaoException {
         Long result = null;
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(INSERT_ORDER, PreparedStatement.RETURN_GENERATED_KEYS)) {
             st.setLong(1, order.getUser().getId());
             st.setString(2, order.getFrom());
@@ -45,7 +45,7 @@ public class OrderDaoImpl implements OrderDao {
             if (resultSet.next()){
                 result = resultSet.getLong(1);
             }
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
         return result;
@@ -54,7 +54,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order selectById(Long orderId) throws DaoException {
         Order order = null;
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_ORDER_BY_ID)) {
             st.setLong(1, orderId);
             ResultSet resultSet = st.executeQuery();
@@ -69,7 +69,7 @@ public class OrderDaoImpl implements OrderDao {
                 order.setWeight(resultSet.getInt("weight"));
                 order.setPrice(resultSet.getInt("price"));
             }
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
         return order;
@@ -77,7 +77,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
       public void update(Order order) throws DaoException {
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_ORDER)) {
             st.setLong(1, order.getUser().getId());
             st.setString(2, order.getFrom());
@@ -87,30 +87,30 @@ public class OrderDaoImpl implements OrderDao {
             st.setInt(6, order.getPrice());
             st.setBoolean(6, order.getApproved());
             st.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
     }
 
     @Override
     public void updateApprovedStatus(Boolean approved, Long orderId) throws DaoException {
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_ORDER_APPROVED_STATUS)) {
             st.setBoolean(1, approved);
             st.setLong(2, orderId);
             st.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
     }
 
     @Override
     public void delete(Long id) throws DaoException {
-        try (Connection cn = ConnectionPool.getInstance().takeConnection();
+        try (Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(DELETE_ORDER)) {
             st.setLong(1, id);
             st.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
     }

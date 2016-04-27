@@ -4,7 +4,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/DaoException.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/pool/ConnectionPool.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/dao/pool/ProxyConnection.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/filter/LocaleFilter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/manager/DatabaseManager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/manager/MessageManager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/by/bsuir/deliveryservice/service/ServiceException.java" charset="UTF-8" />

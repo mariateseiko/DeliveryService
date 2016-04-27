@@ -10,13 +10,11 @@ import org.apache.struts2.ServletActionContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static by.bsuir.deliveryservice.action.util.ParameterName.*;
-
 public class LoginAction implements Action {
     private User user;
     private boolean success;
     private static UserService userService = UserServiceImpl.getInstance();
-
+    private static final String USER = "user";
     @Override
     public String execute() throws Exception {
         try {
