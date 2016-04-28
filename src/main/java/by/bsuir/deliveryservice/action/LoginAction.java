@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 public class LoginAction implements Action {
     private User user;
-    private boolean success;
     private static UserService userService = UserServiceImpl.getInstance();
     private static final String USER = "user";
     @Override
@@ -22,9 +21,6 @@ public class LoginAction implements Action {
                 HttpServletRequest request = ServletActionContext.getRequest();
                 HttpSession session = request.getSession();
                 session.setAttribute(USER, user);
-                success = true;
-            } else {
-               success = false;
             }
         } catch (ServiceException e) {
             return ERROR;
@@ -38,11 +34,11 @@ public class LoginAction implements Action {
 
     public void setPassword(String password) { user.setPassword(password); }
 
-    public boolean isSuccess() {
-        return success;
+    public User getUser() {
+        return user;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
