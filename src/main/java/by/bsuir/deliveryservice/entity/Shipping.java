@@ -29,4 +29,13 @@ public enum Shipping {
     public void setPricePerKm(Double pricePerKm) {
         this.pricePerKm = pricePerKm;
     }
+
+    public static Shipping getShippingByName(String name) {
+        for (Shipping shipping: Shipping.values()) {
+            if (shipping.getName().equals(name)) {
+                return shipping;
+            }
+        }
+        return null;
+    }
 }

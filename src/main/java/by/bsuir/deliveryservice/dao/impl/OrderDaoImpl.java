@@ -22,7 +22,7 @@ public class OrderDaoImpl implements OrderDao {
             "ord_to, ord_distance, ord_weight, ord_shipping, ord_deliveryDate, ord_total) " +
             "VALUES (?, now(),?,?,?,?,?,?,?,?,?)";
 
-    private static final String UPDATE_ORDER_STATUS = "UPDATE `order` SET ord_status=? WHERE order_id=?";
+    private static final String UPDATE_ORDER_STATUS = "UPDATE `order` SET ord_status=? WHERE ord_id=?";
 
     private static final String DELETE_ORDER = "DELETE FROM `order` WHERE ord_id=?";
 
@@ -70,7 +70,7 @@ public class OrderDaoImpl implements OrderDao {
             st.setString(5, order.getTo());
             st.setDouble(6, order.getDistance());
             st.setDouble(7, order.getWeight());
-            st.setLong(8, selectShippingIdByName(order.getShipping().toString()));
+            st.setLong(8, selectShippingIdByName(order.getShipping().getName()));
             st.setDate(9, new java.sql.Date(order.getDeliveryDate().getTime()));
             st.setDouble(10, order.getTotal());
             st.executeUpdate();
@@ -102,10 +102,9 @@ public class OrderDaoImpl implements OrderDao {
                 order.setDistance(resultSet.getDouble("distance"));
                 order.setWeight(resultSet.getDouble("weight"));
                 order.setTotal(resultSet.getDouble("total"));
-                order.setShipping(Shipping.valueOf(resultSet.getString("shp_name")));
+                order.setShipping(Shipping.getShippingByName(resultSet.getString("shp_name")));
                 order.setDate(resultSet.getDate("ord_date"));
                 order.setDeliveryDate(resultSet.getDate("ord_deliveryDate"));
-
             }
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
