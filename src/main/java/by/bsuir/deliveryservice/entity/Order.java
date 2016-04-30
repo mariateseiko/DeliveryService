@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Order extends Entity {
     private User partner;
-    private User employee;
+    private User courier;
     private Office office;
     private OrderStatus status;
     private Double weight;
@@ -74,12 +74,12 @@ public class Order extends Entity {
         this.total = total;
     }
 
-    public User getEmployee() {
-        return employee;
+    public User getCourier() {
+        return courier;
     }
 
-    public void setEmployee(User employee) {
-        this.employee = employee;
+    public void setCourier(User courier) {
+        this.courier = courier;
     }
 
     public Date getDate() {
