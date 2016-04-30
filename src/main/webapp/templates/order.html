@@ -11,10 +11,10 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        USER NAME
+                        {{user.name}}
                     </div>
                     <div class="profile-usertitle-job">
-                        USER
+                        {{user.role}}
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -37,15 +37,7 @@
                             Account Settings </a>
                         </li>
                         <li>
-                            <!--<a href="#" target="_blank">
-                            <i class="glyphicon glyphicon-ok"></i>
-                            Tasks </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                            <i class="glyphicon glyphicon-flag"></i>
-                            Help </a>
-                        </li> -->
+
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -73,7 +65,7 @@
      <p>
      </p>
     </div>
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" ng-controller="orderCtrl">
      <div class="form-group ">
       <label class="control-label col-sm-3 col-md-3 requiredField" for="email">
        Email Sender
@@ -84,46 +76,57 @@
       </div>
      </div>
      <div class="form-group ">
-      <label class="control-label col-sm-2 col-md-3 requiredField" for="email1">
-       Email Receiver
-      
+      <label class="control-label col-sm-2 col-md-3 requiredField" for="from">
+       Address From
       </label>
       <div class="col-sm-9">
-       <input class="form-control" id="email1" name="email1" type="text"/>
+       <input class="form-control" id="from" name="from" type="text" ng-model="application.from"/>
       </div>
      </div>
      <div class="form-group ">
-      <label class="control-label col-sm-2 col-md-3" for="name1">
-       Name
+      <label class="control-label col-sm-2 col-md-3" for="to">
+       Address To
       </label>
       <div class="col-sm-9">
-       <input class="form-control" id="name1" name="name1" placeholder="please enter name" type="text"/>
+       <input class="form-control" id="to" name="to" type="text" ng-nodel="application.to"/>
       </div>
      </div>
      <div class="form-group ">
-      <label class="control-label col-sm-2 col-md-3" for="name2">
-       Surname
+      <label class="control-label col-sm-2 col-md-3" for="distance">
+       Distance
       </label>
       <div class="col-sm-9">
-       <input class="form-control" id="name2" name="name2" placeholder="please enter surname" type="text"/>
-       <span class="help-block" id="hint_name2">
-       </span>
+       <input class="form-control" id="distance" name="distance" type="text" ng-model="application.distance"/>
       </div>
      </div>
      <div class="form-group ">
-      <label class="control-label col-sm-2 col-md-3" for="text">
-       Delivery Weight
+      <label class="control-label col-sm-2 col-md-3" for="weight">
+       Weight
       </label>
       <div class="col-sm-9">
-       <input class="form-control" id="text" name="text" type="text"/>
+       <input class="form-control" id="weight" name="weight" type="text" ng-model="application.weight"/>
       </div>
      </div>
+    <div class="form-group ">
+        <label class="control-label col-sm-2 col-md-3" for="typeShipping">
+            Type Shipping
+        </label>
+        <div class="col-sm-9">
+            <input class="form-control" id="typeShipping" name="typeShipping" type="text" ng-model="application.typeShipping"/>
+        </div>
+    </div>
      <div class="form-group">
       <div class="col-sm-9 col-sm-offset-8 ">
-       <button class="btn btn-custom " name="submit" type="submit">
+       <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
         SAVE
        </button>
       </div>
+     </div>
+     <div ng-if="errorMessage!=''">
+         <div class="error-message">{{errorMessage}}</div>
+     </div>
+     <div ng-if="successMessage!=''" >
+         <div class="success-message">{{successMessage}}</div>
      </div>
     </form>
    </div>

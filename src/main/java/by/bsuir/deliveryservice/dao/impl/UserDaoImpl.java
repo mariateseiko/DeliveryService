@@ -15,8 +15,8 @@ public class UserDaoImpl implements UserDao {
 
     private final static String SELECT_USER_BY_LOGIN_PASSWORD = "SELECT * FROM user "
             +"JOIN user_role on user.role_id = user_role.role_id "
-            +"WHERE email=? AND password=?";
-    private final static String INSERT_USER = "INSERT INTO user (login, `password`, email, role_id) VALUES(?, ?, ?, ?)";
+            +"WHERE login=? AND password=?";
+    private final static String INSERT_USER = "INSERT INTO user (login, `password`, login, role_id) VALUES(?, ?, ?, ?)";
     private final static String SELECT_ROLE_ID_BY_NAME = "SELECT role_id FROM user_role WHERE name=?";
 
     public static UserDao getInstance() {
