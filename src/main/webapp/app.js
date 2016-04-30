@@ -21,7 +21,8 @@ app.config(['$routeProvider', function($routeProvide){
         templateUrl: 'templates/profile.html'
     })
     .when('/order', {
-        templateUrl: 'templates/order.html'
+        templateUrl: 'templates/order.html',
+        controller: 'orderCtrl'
     })
     .when('/accountsettings', {
         templateUrl: 'templates/accset.html'

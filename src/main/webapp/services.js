@@ -20,7 +20,7 @@ app.factory('loginService', function($http, $location, sessionService) {
     }
 });
 
-app.factory('sessionService', ['$http', function($http){
+app.factory('sessionService', function(){
     return{
         set: function(key, value){
             return sessionStorage.setItem(key, value);
@@ -32,7 +32,7 @@ app.factory('sessionService', ['$http', function($http){
             return sessionStorage.removeItem(key);
         }
     }
-}]);
+});
 
 app.factory('registerService', function($http){
     return{
@@ -54,9 +54,41 @@ app.factory('registerService', function($http){
                 phone: credentials.phone
             };
             $http.post("register", dataToSend).then(function(response) {
-                console.log(response.data);
-                $scope.successMessage = "You are registered";
+                if (response.status == 'ok')
+                    $scope.successMessage = "You are registered";
             });
         }
     }
 });
+
+app.factory('orderService', ['$http', 'sessionService', function ($http, sessionService) {
+   return{
+       sendApplication: function (data, $scope) {
+           $http.post('sendOrder', data).then(function (response) {
+                if (response.status == 'ok') {
+                    $scope.successMessage = "Your application is sent."
+                } else $scope.errorMessage = "Error";
+           })
+       },
+       getApplications: function () {
+           $http.get('getApplications').then(function (response){
+                if (response.status == 'ok') {
+                    $scope.applications = response.data;
+                } else $scope.errorMessage = "Error";
+           })
+       },
+       getOrders: function () {
+           $http.get('getOrders').then(function (response) {
+               if (response.status == 'ok') {
+                   $scope.orders = response.data;
+               }else $scope.errorMessage = "Error";
+           })
+       },
+       getCountApplications: function () {
+           return this.getApplications().length();
+       },
+       getCountOrders: function () {
+           return this.getOrders().length();
+       }
+   } 
+}]);

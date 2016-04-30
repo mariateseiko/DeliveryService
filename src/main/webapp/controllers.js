@@ -33,13 +33,40 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
 }]);
 
 
-app.controller('loginCtrl', ['$scope','$http', 'loginService', function($scope, $http, loginService) {
+app.controller('loginCtrl', ['$scope', 'loginService', 'sessionService', 'orderService',function($scope, loginService, sessionService, orderService) {
     $scope.credentials = {
         name: null,
         password: null
     };
-
-    $scope.login = function () {
+    $scope.user = null;
+        $scope.login = function () {
         loginService.login($scope.credentials, $scope);
     };
+    $scope.user = {
+        name:  sessionService.get('user').name,
+        login:  sessionService.get('user').login,
+        phone:  sessionService.get('user').phone,
+        passport:  sessionService.get('user').passport,
+        countOrders: orderService.getCountOrders(),
+        countApplications: orderService.getCountOrders()
+    }
+   
+    
+}]);
+
+app.controller('orderCtrl', ['$scope', 'orderService', 'sessionService',function ($scope, orderService, sessionService){
+    $scope.errorMessage="";
+    $scope.successMessage="";
+    
+    //CHANGE FIELDS FOR SENDING APPLICATION
+    $scope.application = {
+        id: sessionService.get('user').id,
+        from: null,
+        to: null,
+        distance: null,
+        weight: null,
+        typeShipping: null
+    };
+    $scope.sendApplication = orderService.sendApplication($scope.application, $scope);
+    
 }]);
