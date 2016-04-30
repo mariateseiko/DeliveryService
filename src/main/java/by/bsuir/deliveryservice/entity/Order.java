@@ -7,16 +7,16 @@ public class Order extends Entity {
     private User employee;
     private Office office;
     private OrderStatus status;
-    private Float weight;
-    private Float distance;
+    private Double weight;
+    private Double distance;
     private String from;
     private String to;
     private Boolean approved;
-    private Integer price;
+    private Double total;
     private Date date;
     private Date deliveryDate;
     private Shipping shipping;
-    private Float total;
+
 
     public User getPartner() {
         return partner;
@@ -26,19 +26,19 @@ public class Order extends Entity {
         this.partner = partner;
     }
 
-    public Float getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Float weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public Float getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Float distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
@@ -66,12 +66,12 @@ public class Order extends Entity {
         this.approved = approved;
     }
 
-    public Integer getPrice() {
-        return price;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public User getEmployee() {
@@ -120,13 +120,5 @@ public class Order extends Entity {
 
     public void setShipping(Shipping shipping) {
         this.shipping = shipping;
-    }
-
-    public Float getTotal() {
-        return total;
-    }
-
-    public void setTotal(Float total) {
-        this.total = total;
     }
 }
