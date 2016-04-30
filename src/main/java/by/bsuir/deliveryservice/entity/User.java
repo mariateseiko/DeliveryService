@@ -5,7 +5,8 @@ public class User extends Entity {
     private String password;
     private String phone;
     private UserRole role;
-    private String email;
+    private String fullName;
+    private String passport;
 
     public User() {}
 
@@ -65,12 +66,20 @@ public class User extends Entity {
         this.role = role;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
     }
 
     @Override
@@ -81,18 +90,18 @@ public class User extends Entity {
         User user = (User) o;
 
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
-        return !(email != null ? !email.equals(user.email) : user.email != null);
+        if (fullName != null ? !fullName.equals(user.fullName) : user.fullName != null) return false;
+        return !(passport != null ? !passport.equals(user.passport) : user.passport != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = login != null ? login.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (passport != null ? passport.hashCode() : 0);
         return result;
     }
 }
