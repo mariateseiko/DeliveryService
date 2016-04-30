@@ -41,7 +41,9 @@ public class RegisterAction implements Action {
         user.setPassword(password);
     }
 
-    public void setEmail(String email) {
-        user.setEmail(email);
-    }
+    public void setPhone(String phone) { user.setPhone(phone); }
+
+    public void setPassport(String passport) { user.setPassport(passport); }
+
+    public void setFullName(String fullName) { user.setFullName(fullName); }
 }

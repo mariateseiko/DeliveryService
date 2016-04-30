@@ -28,8 +28,8 @@ public class LoginAction implements Action {
         return SUCCESS;
     }
 
-    public void setEmail(String email) {
-        user.setEmail(email);
+    public void setLogin(String login) {
+        user.setLogin(login);
     }
 
     public void setPassword(String password) { user.setPassword(password); }
