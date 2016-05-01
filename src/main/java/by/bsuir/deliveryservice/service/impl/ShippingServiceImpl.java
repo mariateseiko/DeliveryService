@@ -16,7 +16,7 @@ public class ShippingServiceImpl implements ShippingService {
     public static ShippingService getInstance() { return instance; }
     private ShippingServiceImpl() { }
     @Override
-    public void updateShipping(Integer shippingId, Shipping shipping) throws ServiceException {
+    public void updateShipping(Long shippingId, Shipping shipping) throws ServiceException {
         try {
             shippingDao.update(shippingId, shipping);
         } catch (DaoException e) {

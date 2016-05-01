@@ -27,7 +27,7 @@ public class ShippingDaoImpl implements ShippingDao {
     private static final String SELECT_SHIPPING_ID_BY_NAME = "SELECT shp_id FROM `shipping` WHERE shp_Name = ?";
     private static final String SELECT_ALL_SHIPPINGS = "SELECT * FROM `shipping`";
     @Override
-    public Integer insert(Shipping shipping) throws DaoException {
+    public Long insert(Shipping shipping) throws DaoException {
         Integer result = null;
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(INSERT_SHIPPING, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -42,15 +42,15 @@ public class ShippingDaoImpl implements ShippingDao {
         } catch (SQLException |NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
-        return result;
+        return Long.valueOf(result);
     }
 
     @Override
-    public Shipping selectById(Integer shippingId) throws DaoException {
+    public Shipping selectById(Long shippingId) throws DaoException {
         Shipping shipping = null;
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_BY_ID)) {
-            st.setInt(1, shippingId);
+            st.setLong(1, shippingId);
             ResultSet resultSet = st.executeQuery();
             if (resultSet.next()) {
                 shipping = new Shipping();
@@ -65,7 +65,7 @@ public class ShippingDaoImpl implements ShippingDao {
     }
 
     @Override
-    public void update(Integer shippingId, Shipping shipping) throws DaoException {
+    public void update(Long shippingId, Shipping shipping) throws DaoException {
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_SHIPPING)) {
             st.setString(1, shipping.getName());
@@ -79,18 +79,18 @@ public class ShippingDaoImpl implements ShippingDao {
     }
 
     @Override
-    public void delete(Integer id) throws DaoException {
+    public void delete(Long id) throws DaoException {
         throw new DaoException("DELETE shipping is not supported");
     }
 
     @Override
-    public Integer selectShippingIdByName(String name) throws DaoException {
+    public Long selectShippingIdByName(String name) throws DaoException {
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_SHIPPING_ID_BY_NAME)) {
             st.setString(1, name);
             ResultSet resultSet = st.executeQuery();
             resultSet.next();
-            return resultSet.getInt("shp_id");
+            return resultSet.getLong("shp_id");
         } catch (SQLException | NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
@@ -100,7 +100,7 @@ public class ShippingDaoImpl implements ShippingDao {
     public List<Shipping> selectAllShippings() throws DaoException {
         List<Shipping> shippings = new ArrayList<>();
         try (Connection cn = provideConnection();
-             PreparedStatement st = cn.prepareStatement(SELECT_BY_ID)) {
+             PreparedStatement st = cn.prepareStatement(SELECT_ALL_SHIPPINGS)) {
             ResultSet resultSet = st.executeQuery();
             while (resultSet.next()) {
                 Shipping shipping = new Shipping();
