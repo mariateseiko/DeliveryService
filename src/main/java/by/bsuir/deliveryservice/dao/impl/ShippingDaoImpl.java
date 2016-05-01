@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShippingDaoImpl implements ShippingDao {
     private static ShippingDao instance = new ShippingDaoImpl();
@@ -23,7 +25,7 @@ public class ShippingDaoImpl implements ShippingDao {
     private static final String SELECT_BY_ID = "SELECT * FROM `shipping` WHERE shp_id = ?";
     private static final String UPDATE_SHIPPING = "UPDATE `shipping` SET shp_name=?, shp_pricePerKg=?, shp_pricePerKm=? WHERE shp_id=?";
     private static final String SELECT_SHIPPING_ID_BY_NAME = "SELECT shp_id FROM `shipping` WHERE shp_Name = ?";
-
+    private static final String SELECT_ALL_SHIPPINGS = "SELECT * FROM `shipping`";
     @Override
     public Integer insert(Shipping shipping) throws DaoException {
         Integer result = null;
@@ -92,5 +94,25 @@ public class ShippingDaoImpl implements ShippingDao {
         } catch (SQLException | NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
+    }
+
+    @Override
+    public List<Shipping> selectAllShippings() throws DaoException {
+        List<Shipping> shippings = new ArrayList<>();
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_BY_ID)) {
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                Shipping shipping = new Shipping();
+                shipping.setId(resultSet.getInt("shp_id"));
+                shipping.setName(resultSet.getString("shp_name"));
+                shipping.setPricePerKg(resultSet.getDouble("shp_pricePerKg"));
+                shipping.setPricePerKm(resultSet.getDouble("shp_pricePerKm"));
+                shippings.add(shipping);
+            }
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return shippings;
     }
 }
