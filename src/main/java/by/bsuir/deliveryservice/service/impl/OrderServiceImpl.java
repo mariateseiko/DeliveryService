@@ -4,9 +4,11 @@ import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.OrderDao;
 import by.bsuir.deliveryservice.dao.impl.OrderDaoImpl;
 import by.bsuir.deliveryservice.entity.Order;
+import by.bsuir.deliveryservice.entity.OrderStatus;
 import by.bsuir.deliveryservice.service.OrderService;
 import by.bsuir.deliveryservice.service.ServiceException;
 
+//TODO stub impl, not working, don't use
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao;
     private static OrderService instance = new OrderServiceImpl();
@@ -43,20 +45,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void approveOrder(Long orderId) throws ServiceException {
+    public void updateOrderStatus(Long orderId, OrderStatus status) throws ServiceException {
         try {
-            orderDao.updateApprovedStatus(true, orderId);
+            orderDao.updateStatus(status, orderId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
 
-    @Override
-    public void declineOrder(Long orderId) throws ServiceException {
-        try {
-            orderDao.updateApprovedStatus(false, orderId);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
+
 }
