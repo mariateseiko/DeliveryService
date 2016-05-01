@@ -23,6 +23,7 @@ public class OrderDaoImpl implements OrderDao {
             "VALUES (?, now(),?,?,?,?,?,?,?,?,?)";
 
     private static final String UPDATE_ORDER_STATUS = "UPDATE `order` SET ord_status=? WHERE ord_id=?";
+    private static final String UPDATE_ORDER_COURIER = "UPDATE `order` SET ord_courier=? WHERE ord_id=?";
 
     private static final String DELETE_ORDER = "DELETE FROM `order` WHERE ord_id=?";
 
@@ -122,6 +123,18 @@ public class OrderDaoImpl implements OrderDao {
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_ORDER_STATUS)) {
             st.setInt(1, selectStatusIdByName(status.toString()));
+            st.setLong(2, orderId);
+            st.executeUpdate();
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+    }
+
+    @Override
+    public void updateCourier(Long courierId, Long orderId) throws DaoException {
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(UPDATE_ORDER_COURIER)) {
+            st.setLong(1, courierId);
             st.setLong(2, orderId);
             st.executeUpdate();
         } catch (SQLException|NamingException e) {
