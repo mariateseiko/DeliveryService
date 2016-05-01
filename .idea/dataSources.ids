@@ -7,35 +7,75 @@
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="delivery"/>
+    <table name="office" schema="" catalog="delivery" type="TABLE">
+      <column name="off_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="off_Name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="off_Credentials" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="off_ID"/>
+      <exported-key name="FK_ORDER_OFFICE" table="order" schema="" catalog="delivery" columns="ord_Office"/>
+    </table>
     <table name="order" schema="" catalog="delivery" type="TABLE">
-      <column name="order_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="distance" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="price" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="from" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="to" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="approved" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
-      <primary-key name="PRIMARY" columns="order_id"/>
-      <foreign-key name="fk_order_user1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="delivery" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="fk_order_user1_idx" unique="false" columns="user_id"/>
+      <column name="ord_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ord_Date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="ord_Partner" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ord_Employee" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ord_Office" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ord_Status" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ord_From" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ord_To" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ord_Distance" sqlType="DECIMAL UNSIGNED" precision="10" scale="2" nullable="true" jdbcType="3"/>
+      <column name="ord_Weight" sqlType="DECIMAL UNSIGNED" precision="10" scale="2" nullable="false" jdbcType="3"/>
+      <column name="ord_Shipping" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ord_Courier" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ord_DeliveryDate" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="ord_Total" sqlType="DECIMAL UNSIGNED" precision="10" scale="2" nullable="true" jdbcType="3"/>
+      <column name="ord_Notes" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ord_ID"/>
+      <foreign-key name="FK_ORDER_OFFICE" columns="ord_Office" ref-table="office" ref-schema="" ref-catalog="delivery" ref-columns="off_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ORDER_SHIPPING" columns="ord_Shipping" ref-table="shipping" ref-schema="" ref-catalog="delivery" ref-columns="shp_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ORDER_STATUS" columns="ord_Status" ref-table="status" ref-schema="" ref-catalog="delivery" ref-columns="ost_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ORDER_USER" columns="ord_Partner" ref-table="user" ref-schema="" ref-catalog="delivery" ref-columns="usr_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_ORDER_USER_02" columns="ord_Employee" ref-table="user" ref-schema="" ref-catalog="delivery" ref-columns="usr_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="IXFK_ORDER_OFFICE" unique="false" columns="ord_Office"/>
+      <index name="IXFK_ORDER_SHIPPING" unique="false" columns="ord_Shipping"/>
+      <index name="IXFK_ORDER_STATUS" unique="false" columns="ord_Status"/>
+      <index name="IXFK_ORDER_USER" unique="false" columns="ord_Partner"/>
+      <index name="IXFK_ORDER_USER_02" unique="false" columns="ord_Employee"/>
+    </table>
+    <table name="role" schema="" catalog="delivery" type="TABLE">
+      <column name="rol_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="rol_Name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="rol_ID"/>
+      <exported-key name="FK_USER_ROLE" table="user" schema="" catalog="delivery" columns="usr_Role"/>
+    </table>
+    <table name="shipping" schema="" catalog="delivery" type="TABLE">
+      <column name="shp_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="shp_Name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="shp_PricePerKG" sqlType="DECIMAL UNSIGNED" precision="10" scale="2" nullable="false" jdbcType="3"/>
+      <column name="shp_PricePerKM" sqlType="DECIMAL UNSIGNED" precision="10" scale="2" nullable="false" jdbcType="3"/>
+      <primary-key name="PRIMARY" columns="shp_ID"/>
+      <exported-key name="FK_ORDER_SHIPPING" table="order" schema="" catalog="delivery" columns="ord_Shipping"/>
+    </table>
+    <table name="status" schema="" catalog="delivery" type="TABLE">
+      <column name="ost_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ost_Name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ost_ID"/>
+      <exported-key name="FK_ORDER_STATUS" table="order" schema="" catalog="delivery" columns="ord_Status"/>
     </table>
     <table name="user" schema="" catalog="delivery" type="TABLE">
-      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
-      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="phone" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="user_id"/>
-      <foreign-key name="fk_user_user_role" columns="role_id" ref-table="user_role" ref-schema="" ref-catalog="delivery" ref-columns="role_id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="fk_order_user1" table="order" schema="" catalog="delivery" columns="user_id"/>
-      <index name="fk_user_user_role_idx" unique="false" columns="role_id"/>
-    </table>
-    <table name="user_role" schema="" catalog="delivery" type="TABLE">
-      <column name="role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="role_id"/>
-      <exported-key name="fk_user_user_role" table="user" schema="" catalog="delivery" columns="role_id"/>
+      <column name="usr_ID" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="usr_Login" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="usr_Password" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="usr_FullName" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="usr_MobileNo" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="usr_Passport" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="usr_Role" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="usr_ID"/>
+      <foreign-key name="FK_USER_ROLE" columns="usr_Role" ref-table="role" ref-schema="" ref-catalog="delivery" ref-columns="rol_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_ORDER_USER" table="order" schema="" catalog="delivery" columns="ord_Partner"/>
+      <exported-key name="FK_ORDER_USER_02" table="order" schema="" catalog="delivery" columns="ord_Employee"/>
+      <index name="IX_LOGIN" unique="false" columns="usr_Login"/>
+      <index name="IXFK_USER_ROLE" unique="false" columns="usr_Role"/>
     </table>
   </data-source>
 </component>
