@@ -61,7 +61,7 @@ app.factory('registerService', function($http){
     }
 });
 
-app.factory('orderService', ['$http', 'sessionService', function ($http, sessionService) {
+app.factory('orderService', ['$http', function ($http) {
    return{
        sendApplication: function (data, $scope) {
            $http.post('sendOrder', data).then(function (response) {
@@ -91,4 +91,15 @@ app.factory('orderService', ['$http', 'sessionService', function ($http, session
            return this.getOrders().length();
        }
    } 
+}]);
+app.factory('userService', ['$http', 'sessionService', function($http, sessionService){
+    return {
+        saveAccSettings: function (data, $scope) {
+            $http.post('changeAccSettings').then(function(response){
+                if (response.status == 'ok'){
+                    $scope.successMessage = "Settings have changed"
+                } else $scope.errorMessage = "Error";
+            })
+        }
+    }
 }]);

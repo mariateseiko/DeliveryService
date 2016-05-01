@@ -26,24 +26,28 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
-                            <a href="#">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Overview </a>
+                            <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
+                        </li>
+                        <li ng-if="user.role == 'client'">
+                            <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
+                            <a href="#"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
+                        </li>
+                        <li ng-if="user.role == 'client'">
+                            <a href="#" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">
-                                <i class="glyphicon glyphicon-ok"></i>
-                                Orders </a>
+                            <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="glyphicon glyphicon-flag"></i>
-                                Application </a>
+                        <li ng-if="user.role == 'courier'">
+                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                        </li>
+                        <li ng-if="user.role == 'accountant'">
+                            <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
+                        </li>
+                        <li ng-if="user.role == 'manager'">
+                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
                         </li>
                     </ul>
                 </div>
@@ -66,27 +70,18 @@
                         </figure>
                     </div>
                 </div>
-                <div class="col-xs-12 divider text-center">
-                    <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong>{{user.countOrders}}</strong></h2>
-                        <p><small>Orders</small></p>
-                        <button class="btn btn-success btn-block"><span ></span>View orders</button>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong>{{user.countApplication}}</strong></h2>
-                        <p><small>Application</small></p>
-                        <button class="btn btn-info btn-block"><span></span>View applications</button>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 emphasis">
-                        <span class="sr-only">Toggle Dropdown</span>
-                        <ul class="dropdown-menu text-left" role="menu">
-                            <li><a href="#"><span class="fa fa-envelope pull-right"></span> Отправить email </a></li>
-                            <li><a href="#"><span class="fa fa-list pull-right"></span> Редактировать список</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><span class="fa fa-warning pull-right"></span>Сообщить о спаме</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#" class="btn disabled" role="button"> Отписатся </a></li>
-                        </ul>
+                <div ng-if="user.role == 'client'">
+                    <div class="col-xs-12 divider text-center">
+                        <div class="col-xs-12 col-sm-4 emphasis">
+                            <h2><strong>{{user.countOrders}}</strong></h2>
+                            <p><small>Orders</small></p>
+                            <button class="btn btn-success btn-block"><span ></span>View orders</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 emphasis">
+                            <h2><strong>{{user.countApplication}}</strong></h2>
+                            <p><small>Application</small></p>
+                            <button class="btn btn-info btn-block"><span></span>View applications</button>
+                        </div>
                     </div>
                 </div>
             </div>

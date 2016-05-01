@@ -70,3 +70,9 @@ app.controller('orderCtrl', ['$scope', 'orderService', 'sessionService',function
     $scope.sendApplication = orderService.sendApplication($scope.application, $scope);
     
 }]);
+//SESSION STORE ONLY ID AND LOGIN OF USER
+app.controller('accSettingsCtrl', ['$scope', 'sessionService', function ($scope, sessionService) {
+    $scope.errorMessage = "";
+    $scope.successMessage = "";
+    
+}]);

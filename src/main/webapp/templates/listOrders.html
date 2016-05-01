@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="assets/images/team1.jpg" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{user.login}}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        {{user.role}}
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
+                        </li>
+                        <li ng-if="user.role == 'client'">
+                            <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
+                        </li>
+                        <li ng-if="user.role == 'client'">
+                            <a href="#" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
+                        </li>
+                        <li ng-if="user.role == 'courier'">
+                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                        </li>
+                        <li ng-if="user.role == 'accountant'">
+                            <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
+                        </li>
+                        <li ng-if="user.role == 'manager'">
+                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+            <div class="container">
+                <h2>Application list</h2>
+
+                <p>The .table-hover class enables a hover state on table rows:</p>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td class="actions">
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td class="actions">
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                        <td class="actions">
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="col-sm-10 col-sm-offset-10">
+                    <button class="btn btn-primary " name="submit" type="submit" data-ng-click="sendApplication()">Save</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
