@@ -28,7 +28,6 @@ public class OrderDaoImpl implements OrderDao {
     private static final String DELETE_ORDER = "DELETE FROM `order` WHERE ord_id=?";
 
     private static final String SELECT_STATUS_ID_BY_NAME = "SELECT ost_id FROM `status` WHERE ost_Name = ?";
-    private static final String SELECT_SHIPPING_ID_BY_NAME = "SELECT shp_id FROM `shipping` WHERE shp_Name = ?";
 
     private static OrderDao instance = new OrderDaoImpl();
     private OrderDaoImpl() {}
@@ -48,17 +47,6 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
-    private Integer selectShippingIdByName(String name) throws DaoException {
-        try (Connection cn = provideConnection();
-             PreparedStatement st = cn.prepareStatement(SELECT_SHIPPING_ID_BY_NAME)) {
-            st.setString(1, name);
-            ResultSet resultSet = st.executeQuery();
-            resultSet.next();
-            return resultSet.getInt("shp_id");
-        } catch (SQLException | NamingException e) {
-            throw new DaoException("Request to database failed", e);
-        }
-    }
     @Override
     public Long insert(Order order) throws DaoException {
         Long result = null;
@@ -71,7 +59,7 @@ public class OrderDaoImpl implements OrderDao {
             st.setString(5, order.getTo());
             st.setDouble(6, order.getDistance());
             st.setDouble(7, order.getWeight());
-            st.setLong(8, selectShippingIdByName(order.getShipping().getName()));
+            st.setLong(8, order.getShipping().getId());
             st.setDate(9, new java.sql.Date(order.getDeliveryDate().getTime()));
             st.setDouble(10, order.getTotal());
             st.executeUpdate();
