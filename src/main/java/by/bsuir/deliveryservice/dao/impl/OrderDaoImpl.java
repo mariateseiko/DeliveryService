@@ -104,7 +104,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-      public void update(Order order) throws DaoException {
+      public void update(Long orderId, Order order) throws DaoException {
         throw new DaoException("Full UPDATE not supported");
     }
 

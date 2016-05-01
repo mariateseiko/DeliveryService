@@ -65,13 +65,13 @@ public class ShippingDaoImpl implements ShippingDao {
     }
 
     @Override
-    public void update(Shipping shipping) throws DaoException {
+    public void update(Integer shippingId, Shipping shipping) throws DaoException {
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(UPDATE_SHIPPING)) {
             st.setString(1, shipping.getName());
             st.setDouble(2, shipping.getPricePerKg());
             st.setDouble(3, shipping.getPricePerKm());
-            st.setLong(4, shipping.getId());
+            st.setLong(4, shippingId);
             st.executeUpdate();
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);

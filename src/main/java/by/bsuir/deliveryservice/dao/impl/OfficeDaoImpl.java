@@ -74,7 +74,7 @@ public class OfficeDaoImpl implements OfficeDao
     }
 
     @Override
-    public void update(Office entity) throws DaoException
+    public void update(Long id, Office entity) throws DaoException
     {
         throw new DaoException("UPDATE not supported");
     }

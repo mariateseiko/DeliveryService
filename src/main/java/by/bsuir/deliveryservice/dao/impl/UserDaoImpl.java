@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User entity) throws DaoException {
+    public void update(Long id, User entity) throws DaoException {
         // TODO
     }
 
