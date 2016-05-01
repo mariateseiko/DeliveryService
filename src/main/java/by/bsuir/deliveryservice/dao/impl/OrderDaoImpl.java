@@ -103,7 +103,9 @@ public class OrderDaoImpl implements OrderDao {
                 order.setDistance(resultSet.getDouble("distance"));
                 order.setWeight(resultSet.getDouble("weight"));
                 order.setTotal(resultSet.getDouble("total"));
-                order.setShipping(Shipping.getShippingByName(resultSet.getString("shp_name")));
+                order.setShipping(new Shipping(resultSet.getString("shp_name"),
+                        resultSet.getDouble("shp_pricePerKg"),
+                        resultSet.getDouble("shp_pricePerKm")));
                 order.setDate(resultSet.getDate("ord_date"));
                 order.setDeliveryDate(resultSet.getDate("ord_deliveryDate"));
             }

@@ -1,10 +1,15 @@
 package by.bsuir.deliveryservice.entity;
 
-public enum Shipping {
-    ;
+public class Shipping extends Entity{
     private String name;
     private Double pricePerKg;
     private Double pricePerKm;
+
+    public Shipping(String name, Double pricePerKg, Double pricePerKm) {
+        this.name = name;
+        this.pricePerKg = pricePerKg;
+        this.pricePerKm = pricePerKm;
+    }
 
     public String getName() {
         return name;
@@ -28,14 +33,5 @@ public enum Shipping {
 
     public void setPricePerKm(Double pricePerKm) {
         this.pricePerKm = pricePerKm;
-    }
-
-    public static Shipping getShippingByName(String name) {
-        for (Shipping shipping: Shipping.values()) {
-            if (shipping.getName().equals(name)) {
-                return shipping;
-            }
-        }
-        return null;
     }
 }
