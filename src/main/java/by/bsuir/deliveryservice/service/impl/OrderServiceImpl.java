@@ -37,11 +37,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void cancelOrder(Long orderId) throws ServiceException {
-        try {
-            orderDao.delete(orderId);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
+        updateOrderStatus(orderId, OrderStatus.CANCELED);
+    }
+
+    @Override
+    public void approveOrder(Long orderId) throws ServiceException {
+        updateOrderStatus(orderId, OrderStatus.DELIVERY);
     }
 
     @Override
@@ -81,5 +82,15 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
         return total;
+    }
+
+    @Override
+    public void declineOrder(Long orderId) throws ServiceException {
+        updateOrderStatus(orderId, OrderStatus.DECLINED);
+    }
+
+    @Override
+    public void deliverOrder(Long orderId) throws ServiceException {
+        updateOrderStatus(orderId, OrderStatus.DELIVERED);
     }
 }
