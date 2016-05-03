@@ -40,22 +40,22 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
 
 app.controller('loginCtrl', ['$scope', 'loginService', 'sessionService', 'orderService',function($scope, loginService, sessionService, orderService) {
     $scope.credentials = {
-        name: null,
+        login: null,
         password: null
     };
     $scope.user = null;
 
     $scope.login = function () {
         loginService.login($scope.credentials, $scope);
+        $scope.user = {
+            name:  sessionService.get('user').name,
+            login:  sessionService.get('user').login,
+            phone:  sessionService.get('user').phone,
+            passport:  sessionService.get('user').passport,
+          //  countOrders: orderService.getCountOrders(),
+           // countApplications: orderService.getCountOrders()
+        }
     };
-    $scope.user = {
-        name:  sessionService.get('user').name,
-        login:  sessionService.get('user').login,
-        phone:  sessionService.get('user').phone,
-        passport:  sessionService.get('user').passport,
-        countOrders: orderService.getCountOrders(),
-        countApplications: orderService.getCountOrders()
-    }
    
     
 }]);
