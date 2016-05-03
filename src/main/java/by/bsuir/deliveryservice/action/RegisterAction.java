@@ -5,8 +5,10 @@ import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.UserService;
 import by.bsuir.deliveryservice.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.Action;
+import org.apache.log4j.Logger;
 
 public class RegisterAction implements Action {
+    public static final Logger LOG = Logger.getLogger(RegisterAction.class);
     private User user = new User();
     private boolean success;
     private static UserService userService = UserServiceImpl.getInstance();
@@ -20,6 +22,7 @@ public class RegisterAction implements Action {
                 success = false;
             }
         } catch (ServiceException e) {
+            LOG.error(e.getStackTrace());
             return ERROR;
         }
         return SUCCESS;

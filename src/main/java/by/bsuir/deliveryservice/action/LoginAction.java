@@ -5,12 +5,14 @@ import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.UserService;
 import by.bsuir.deliveryservice.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.Action;
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginAction implements Action {
+    public static final Logger LOG =Logger.getLogger(LoginAction.class);
     private User user;
     private static UserService userService = UserServiceImpl.getInstance();
     private static final String USER = "user";
@@ -23,6 +25,7 @@ public class LoginAction implements Action {
                 session.setAttribute(USER, user);
             }
         } catch (ServiceException e) {
+            LOG.error(e.getStackTrace().toString());
             return ERROR;
         }
         return SUCCESS;

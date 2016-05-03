@@ -65,5 +65,6 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat:servlet-api:6.0.45" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:juli:6.0.45" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:annotations-api:6.0.45" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.9" level="project" />
   </component>
 </module>
