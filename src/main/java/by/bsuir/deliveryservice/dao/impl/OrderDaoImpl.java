@@ -9,12 +9,15 @@ import by.bsuir.deliveryservice.entity.User;
 
 import javax.naming.NamingException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDER_BY_ID = "SELECT * " +
             "FROM `order` " +
             "JOIN `user` ON `order`.ord_partner = `user`.usr_id " +
-            "LEFT JOIN `user` ON `order`.ord_employee = `user`.usr_id " +
+            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "WHERE `order`.ord_id=?";
 
@@ -28,6 +31,15 @@ public class OrderDaoImpl implements OrderDao {
     private static final String DELETE_ORDER = "DELETE FROM `order` WHERE ord_id=?";
 
     private static final String SELECT_STATUS_ID_BY_NAME = "SELECT ost_id FROM `status` WHERE ost_Name = ?";
+    private static final String SELECT_ORDER_BY_USER_AND_STATUSES = "SELECT * FROM `order` " +
+            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "WHERE ord_partner=? AND ord_status IN (?,?)";
+
+    private static final String SELECT_ORDER_BY_STATUSES = "SELECT * FROM `order` " +
+            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "WHERE ord_status IN (?,?)";
 
     private static OrderDao instance = new OrderDaoImpl();
     private OrderDaoImpl() {}
@@ -75,28 +87,13 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order selectById(Long orderId) throws DaoException {
-        Order order = null;
+        Order order;
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_ORDER_BY_ID)) {
             st.setLong(1, orderId);
             ResultSet resultSet = st.executeQuery();
-            if (resultSet.next()) {
-                order = new Order();
-                order.setId(orderId);
-                order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("usr_login")));
-                order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("usr_fullName")));
-                order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
-                order.setFrom(resultSet.getString("ord_from"));
-                order.setTo(resultSet.getString("ord_to"));
-                order.setDistance(resultSet.getDouble("distance"));
-                order.setWeight(resultSet.getDouble("weight"));
-                order.setTotal(resultSet.getDouble("total"));
-                order.setShipping(new Shipping(resultSet.getString("shp_name"),
-                        resultSet.getDouble("shp_pricePerKg"),
-                        resultSet.getDouble("shp_pricePerKm")));
-                order.setDate(resultSet.getDate("ord_date"));
-                order.setDeliveryDate(resultSet.getDate("ord_deliveryDate"));
-            }
+            resultSet.next();
+            order = retrieveOrderFromResultSet(resultSet);
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
@@ -133,6 +130,30 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public List<Order> selectUserOrders(Long userId) throws DaoException {
+        return selectOrdersByUserAndStatuses(userId, new ArrayList<>(
+                Arrays.asList(OrderStatus.DELIVERY, OrderStatus.DELIVERED)));
+    }
+
+    @Override
+    public List<Order> selectUserApplications(Long userId) throws DaoException {
+        return selectOrdersByUserAndStatuses(userId, new ArrayList<>(
+                Arrays.asList(OrderStatus.AWAITING, OrderStatus.DECLINED)));
+    }
+
+    @Override
+    public List<Order> selectOrders() throws DaoException {
+        return selectOrdersByStatuses(new ArrayList<>(
+                Arrays.asList(OrderStatus.DELIVERY, OrderStatus.DELIVERED)));
+    }
+
+    @Override
+    public List<Order> selectApplications() throws DaoException {
+        return selectOrdersByStatuses(new ArrayList<>(
+                Arrays.asList(OrderStatus.AWAITING, OrderStatus.DECLINED)));
+    }
+
+    @Override
     public void delete(Long id) throws DaoException {
         try (Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(DELETE_ORDER)) {
@@ -141,5 +162,57 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
+    }
+
+    private Order retrieveOrderFromResultSet(ResultSet resultSet) throws SQLException {
+        Order order = new Order();
+        order.setId(resultSet.getLong("usr_id"));
+        order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("usr_login")));
+        order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("usr_fullName")));
+        order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
+        order.setFrom(resultSet.getString("ord_from"));
+        order.setTo(resultSet.getString("ord_to"));
+        order.setDistance(resultSet.getDouble("distance"));
+        order.setWeight(resultSet.getDouble("weight"));
+        order.setTotal(resultSet.getDouble("total"));
+        order.setShipping(new Shipping(resultSet.getString("shp_name"),
+                resultSet.getDouble("shp_pricePerKg"),
+                resultSet.getDouble("shp_pricePerKm")));
+        order.setDate(resultSet.getDate("ord_date"));
+        order.setDeliveryDate(resultSet.getDate("ord_deliveryDate"));
+        return order;
+    }
+
+    private List<Order> selectOrdersByStatuses(List<OrderStatus> statuses) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_ORDER_BY_STATUSES)) {
+            st.setString(1, statuses.get(0).toString());
+            st.setString(2, statuses.get(1).toString());
+            ResultSet resultSet = st.executeQuery();
+            while(resultSet.next()) {
+                orders.add(retrieveOrderFromResultSet(resultSet));
+            }
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return orders;
+    }
+
+    private List<Order> selectOrdersByUserAndStatuses(Long userId, List<OrderStatus> statuses) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_ORDER_BY_USER_AND_STATUSES)) {
+            st.setLong(1, userId);
+            st.setString(2, statuses.get(0).toString());
+            st.setString(3, statuses.get(1).toString());
+            ResultSet resultSet = st.executeQuery();
+            while(resultSet.next()) {
+                orders.add(retrieveOrderFromResultSet(resultSet));
+            }
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return orders;
     }
 }

@@ -11,12 +11,10 @@ public class Order extends Entity {
     private Double distance;
     private String from;
     private String to;
-    private Boolean approved;
     private Double total;
     private Date date;
     private Date deliveryDate;
     private Shipping shipping;
-
 
     public User getPartner() {
         return partner;
@@ -56,14 +54,6 @@ public class Order extends Entity {
 
     public void setTo(String to) {
         this.to = to;
-    }
-
-    public Boolean getApproved() {
-        return approved;
-    }
-
-    public void setApproved(Boolean approved) {
-        this.approved = approved;
     }
 
     public Double getTotal() {
