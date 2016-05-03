@@ -22,14 +22,18 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
 app.controller('registerCtrl', ['$scope', 'registerService',function($scope, registerService) {
     $scope.errorMessage="";
     $scope.successMessage="";
+    
     $scope.credentials = {
         name: null,
         password: null,
         login: null,
-        passwordRepeat: null
+        passwordRepeat: null,
+        phone: null,
     };
 
-    $scope.register = registerService.register();
+    $scope.register = function() {
+        registerService.register($scope.credentials, $scope);
+    }
 }]);
 
 
@@ -39,7 +43,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', 'sessionService', 'orderS
         password: null
     };
     $scope.user = null;
-        $scope.login = function () {
+
+    $scope.login = function () {
         loginService.login($scope.credentials, $scope);
     };
     $scope.user = {
