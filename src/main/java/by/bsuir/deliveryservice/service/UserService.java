@@ -33,4 +33,5 @@ public interface UserService {
      */
     User selectUser(long userId) throws ServiceException;
 
+    void updateUser(User user) throws ServiceException;
 }

@@ -53,4 +53,13 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public void updateUser(User user) throws ServiceException {
+        try {
+            userDao.update(user.getId(), user);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 }

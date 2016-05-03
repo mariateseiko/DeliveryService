@@ -17,8 +17,9 @@ public class UserDaoImpl implements UserDao {
             +"JOIN `role` on `user`.usr_role = `role`.rol_id "
             +"WHERE usr_login=? AND usr_password=?";
     private final static String INSERT_USER = "INSERT INTO `user` (usr_login, usr_password, usr_fullname, " +
-            "usr_mobileno, usr_role) VALUES(?, ?, ?, ?, ?)";
+            "usr_mobileno, usr_role, usr_passport) VALUES(?, ?, ?, ?, ?, ?)";
     private final static String SELECT_ROLE_ID_BY_NAME = "SELECT rol_id FROM `role` WHERE rol_name=?";
+    private final static String UPDATE_USER = "UPDATE `user` SET usr_fullname=?, usr_mobileno=?, usr_passport=? WHERE usr_id=?";
 
     public static UserDao getInstance() {
         return instance;
@@ -36,6 +37,7 @@ public class UserDaoImpl implements UserDao {
             st.setString(3, user.getFullName());
             st.setString(4, user.getPhone());
             st.setInt(5, selectRoleIdByName(user.getRole().toString().toUpperCase()));
+            st.setString(6, user.getPassport());
             st.executeUpdate();
             ResultSet resultSet = st.getGeneratedKeys();
             if (resultSet.next()){
@@ -70,8 +72,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(Long id, User entity) throws DaoException {
-        // TODO
+    public void update(Long id, User user) throws DaoException {
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(UPDATE_USER)) {
+            st.setString(1, user.getFullName());
+            st.setString(2, user.getPhone());
+            st.setString(3, user.getPassport());
+            st.setLong(4, id);
+            st.executeUpdate();
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
     }
 
     @Override
@@ -82,10 +93,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User selectByLoginPassword(String login, String password) throws DaoException {
         User user = null;
-        try(Connection cn = provideConnection();
+        try (Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(SELECT_USER_BY_LOGIN_PASSWORD)) {
             st.setString(1, login);
-            st.setString(2, String.valueOf(password));
+            st.setString(2, password);
             ResultSet resultSet = st.executeQuery();
             if(resultSet.next()) {
                 user = new User();
