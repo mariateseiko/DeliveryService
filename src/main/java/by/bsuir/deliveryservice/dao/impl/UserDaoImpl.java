@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
             user.setPhone(resultSet.getString("usr_mobileno"));
             user.setFullName(resultSet.getString("usr_fullname"));
             user.setPassport(resultSet.getString("usr_passport"));
-            user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
+            user.setRole(UserRole.valueOf(resultSet.getString("rol_name").toUpperCase()));
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
@@ -104,7 +104,7 @@ public class UserDaoImpl implements UserDao {
                 user.setPhone(resultSet.getString("usr_mobileno"));
                 user.setFullName(resultSet.getString("usr_fullname"));
                 user.setPassport(resultSet.getString("usr_passport"));
-                user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
+                user.setRole(UserRole.valueOf(resultSet.getString("rol_name").toUpperCase()));
             }
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
@@ -137,7 +137,7 @@ public class UserDaoImpl implements UserDao {
                 user.setPhone(resultSet.getString("usr_mobileno"));
                 user.setFullName(resultSet.getString("usr_fullname"));
                 user.setPassport(resultSet.getString("usr_passport"));
-                user.setRole(UserRole.valueOf(resultSet.getString("user_role.name").toUpperCase()));
+                user.setRole(UserRole.valueOf(resultSet.getString("rol_name").toUpperCase()));
             }
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);

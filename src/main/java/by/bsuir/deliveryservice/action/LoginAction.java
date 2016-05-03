@@ -16,6 +16,7 @@ public class LoginAction implements Action {
     private User user = new User();
     private static UserService userService = UserServiceImpl.getInstance();
     private static final String USER = "user";
+    
     @Override
     public String execute() throws Exception {
         try {
