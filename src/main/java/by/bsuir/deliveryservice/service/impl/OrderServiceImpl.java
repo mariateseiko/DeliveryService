@@ -31,6 +31,8 @@ public class OrderServiceImpl implements OrderService {
             order.setStatus(OrderStatus.AWAITING);
             order.setOffice(officeDao.getPrimary());
             order.setTotal(calculatePrice(order.getWeight(), order.getDistance(), order.getShipping().getId()));
+            long shippingId = shippingDao.selectShippingIdByName(order.getShipping().getName());
+            order.getShipping().setId(shippingId);
             return orderDao.insert(order);
         } catch (DaoException e) {
             throw new ServiceException(e);

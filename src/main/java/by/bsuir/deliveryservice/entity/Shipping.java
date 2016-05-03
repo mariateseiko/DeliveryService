@@ -6,6 +6,9 @@ public class Shipping extends Entity{
     private Double pricePerKm;
 
     public Shipping() {}
+    public Shipping(String name) {
+        this.name = name;
+    }
     public Shipping(String name, Double pricePerKg, Double pricePerKm) {
         this.name = name;
         this.pricePerKg = pricePerKg;
