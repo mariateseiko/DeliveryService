@@ -48,5 +48,5 @@ public class RegisterAction implements Action {
 
     public void setPassport(String passport) { user.setPassport(passport); }
 
-    public void setFullName(String fullName) { user.setFullName(fullName); }
+    public void setName(String fullName) { user.setFullName(fullName); }
 }
