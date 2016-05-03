@@ -13,6 +13,8 @@ import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.service.OrderService;
 import by.bsuir.deliveryservice.service.ServiceException;
 
+import java.util.List;
+
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private final OfficeDao officeDao = OfficeDaoImpl.getSingleton();
@@ -49,6 +51,51 @@ public class OrderServiceImpl implements OrderService {
     public Order viewOrder(Long orderId) throws ServiceException {
         try {
             return orderDao.selectById(orderId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> viewUserApplications(Long userId) throws ServiceException {
+        try {
+            return orderDao.selectUserApplications(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> viewAwaitingApplications() throws ServiceException {
+        try {
+            return orderDao.selectApplications();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> viewCourierOrders(Long courierId) throws ServiceException {
+        try {
+            return orderDao.selectCourierOrders(courierId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> viewOrders() throws ServiceException {
+        try {
+            return orderDao.selectOrders();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Order> viewUserOrders(Long userId) throws ServiceException {
+        try {
+            return orderDao.selectUserOrders(userId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

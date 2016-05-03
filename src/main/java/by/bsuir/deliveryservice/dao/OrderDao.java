@@ -13,4 +13,5 @@ public interface OrderDao extends GenericDao<Long, Order> {
     List<Order> selectUserApplications(Long userId) throws DaoException;
     List<Order> selectOrders() throws DaoException;
     List<Order> selectApplications() throws DaoException;
+    List<Order> selectCourierOrders(Long courierId) throws DaoException;
 }

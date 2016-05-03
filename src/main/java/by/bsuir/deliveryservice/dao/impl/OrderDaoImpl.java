@@ -41,6 +41,12 @@ public class OrderDaoImpl implements OrderDao {
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "WHERE ord_status IN (?,?)";
 
+    private static final String SELECT_COURIER_ORDERS = "SELECT * FROM `order` " +
+            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "WHERE ord_courier=? AND ord_status = 'DELIVERY' " +
+            "ORDER BY ord_deliverydate ASC";
+
     private static OrderDao instance = new OrderDaoImpl();
     private OrderDaoImpl() {}
     public static OrderDao getInstance() {
@@ -151,6 +157,22 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> selectApplications() throws DaoException {
         return selectOrdersByStatuses(new ArrayList<>(
                 Arrays.asList(OrderStatus.AWAITING, OrderStatus.DECLINED)));
+    }
+
+    @Override
+    public List<Order> selectCourierOrders(Long courierId) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_COURIER_ORDERS)) {
+            st.setLong(1, courierId);
+            ResultSet resultSet = st.executeQuery();
+            while(resultSet.next()) {
+                orders.add(retrieveOrderFromResultSet(resultSet));
+            }
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return orders;
     }
 
     @Override
