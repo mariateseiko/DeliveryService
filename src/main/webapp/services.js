@@ -2,8 +2,8 @@ app.factory('loginService', function($http, $location, sessionService) {
     return{
         login: function(data, scope){
             scope.errorMessage="";
-            var $promise=$http.post('login', data);
-            $promise.then(function(msg){
+            
+            $http.post('login', data).then(function(msg){
                 var uid = msg.data;
                 if(uid){
                     sessionService.set('user', uid);
