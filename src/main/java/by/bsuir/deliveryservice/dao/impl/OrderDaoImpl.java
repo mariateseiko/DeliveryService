@@ -175,17 +175,6 @@ public class OrderDaoImpl implements OrderDao {
         return orders;
     }
 
-    @Override
-    public void delete(Long id) throws DaoException {
-        try (Connection cn = provideConnection();
-            PreparedStatement st = cn.prepareStatement(DELETE_ORDER)) {
-            st.setLong(1, id);
-            st.executeUpdate();
-        } catch (SQLException|NamingException e) {
-            throw new DaoException("Request to database failed", e);
-        }
-    }
-
     private Order retrieveOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getLong("usr_id"));

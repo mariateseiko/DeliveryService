@@ -79,12 +79,6 @@ public class OfficeDaoImpl implements OfficeDao
         throw new DaoException("UPDATE not supported");
     }
 
-    @Override
-    public void delete(Long id) throws DaoException
-    {
-        throw new DaoException("DELETE not supported");
-    }
-
     // -----------------------------------------------------------------------
 
     private OfficeDaoImpl() {}

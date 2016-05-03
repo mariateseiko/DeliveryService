@@ -79,11 +79,6 @@ public class ShippingDaoImpl implements ShippingDao {
     }
 
     @Override
-    public void delete(Long id) throws DaoException {
-        throw new DaoException("DELETE shipping is not supported");
-    }
-
-    @Override
     public Long selectShippingIdByName(String name) throws DaoException {
         try (Connection cn = provideConnection();
              PreparedStatement st = cn.prepareStatement(SELECT_SHIPPING_ID_BY_NAME)) {

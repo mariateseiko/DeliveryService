@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
             "usr_mobileno, usr_role, usr_passport) VALUES(?, ?, ?, ?, ?, ?)";
     private final static String SELECT_ROLE_ID_BY_NAME = "SELECT rol_id FROM `role` WHERE rol_name=?";
     private final static String UPDATE_USER = "UPDATE `user` SET usr_fullname=?, usr_mobileno=?, usr_passport=? WHERE usr_id=?";
+    private final static String UPDATE_ROLE = "UPDATE `user` SET usr_role=? WHERE usr_id=?";
 
     public static UserDao getInstance() {
         return instance;
@@ -86,11 +87,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(Long id) throws DaoException {
-        //TODO
-    }
-
-    @Override
     public User selectByLoginPassword(String login, String password) throws DaoException {
         User user = null;
         try (Connection cn = provideConnection();
@@ -111,6 +107,18 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Request to database failed", e);
         }
         return user;
+    }
+
+    @Override
+    public void updateRole(Long userId, UserRole role) throws DaoException {
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(UPDATE_ROLE)) {
+            st.setInt(1, selectRoleIdByName(role.toString()));
+            st.setLong(2, userId);
+            st.executeUpdate();
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
     }
 
     private int selectRoleIdByName(String name) throws DaoException {
