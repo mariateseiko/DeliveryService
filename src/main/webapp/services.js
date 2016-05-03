@@ -1,7 +1,7 @@
 app.factory('loginService', function($http, $location, sessionService) {
     return{
         login: function(data, scope){
-            $scope.errorMessage="";
+            scope.errorMessage="";
             var $promise=$http.post('login', data);
             $promise.then(function(msg){
                 var uid = msg.data;
@@ -37,6 +37,7 @@ app.factory('sessionService', function(){
 app.factory('registerService', function($http){
     return{
         register: function (credentials, $scope) {
+            console.log('why i here?');
             $scope.errorMessage="";
             $scope.successMessage="";
 
@@ -44,7 +45,7 @@ app.factory('registerService', function($http){
             if (credentials.password != credentials.passwordRepeat) {
                 $scope.errorMessage="Passwords don't match";
 
-            } else if (!pattern.exec($scope.credentials.password)){
+            } else if (!pattern.exec(credentials.password)){
                 $scope.errorMessage="Password should only consist of letters and numbers, be at least 6 and no longer than 10 characters";
             }
             var dataToSend = {
@@ -56,6 +57,8 @@ app.factory('registerService', function($http){
             $http.post("register", dataToSend).then(function(response) {
                 if (response.status == 'ok')
                     $scope.successMessage = "You are registered";
+                else if (response.data == 0)
+                    $scope.errorMessage = "This user is already exist.";
             });
         }
     }
