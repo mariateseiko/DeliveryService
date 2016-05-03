@@ -2,6 +2,7 @@ package by.bsuir.deliveryservice.service;
 
 
 import by.bsuir.deliveryservice.entity.User;
+import by.bsuir.deliveryservice.entity.UserRole;
 
 import java.util.List;
 
@@ -31,7 +32,11 @@ public interface UserService {
      * @return a user with the specified id or null if such doesn't exist
      * @throws ServiceException if DaoException occurred
      */
-    User selectUser(long userId) throws ServiceException;
+    User viewUser(long userId) throws ServiceException;
 
     void updateUser(User user) throws ServiceException;
+
+    void updateRole(Long userId, UserRole role) throws ServiceException;
+
+    List<User> viewAllUsers() throws ServiceException;
 }

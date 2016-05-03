@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class LoginAction implements Action {
     public static final Logger LOG =Logger.getLogger(LoginAction.class);
-    private User user;
+    private User user = new User();
     private static UserService userService = UserServiceImpl.getInstance();
     private static final String USER = "user";
     @Override
@@ -25,7 +25,7 @@ public class LoginAction implements Action {
                 session.setAttribute(USER, user);
             }
         } catch (ServiceException e) {
-            LOG.error(e.getStackTrace().toString());
+            LOG.error(e.getStackTrace());
             return ERROR;
         }
         return SUCCESS;
