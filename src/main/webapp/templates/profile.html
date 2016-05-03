@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="profileCtrl">
     <div class="row profile">
         <div class="col-md-3">
             <div class="profile-sidebar">
@@ -9,6 +9,7 @@
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
+                    {{default}}
                     <div class="profile-usertitle-name">
                         {{user.login}}
                     </div>
@@ -28,25 +29,25 @@
                         <li class="active">
                             <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
                         </li>
-                        <li ng-if="user.role == 'client'">
+                        <li ng-if="user.role == 'CLIENT'">
                             <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
                         </li>
-                        <li ng-if="user.role == 'client'">
+                        <li ng-if="user.role == 'CLIENT'">
                             <a href="#" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
-                        <li ng-if="user.role == 'courier'">
+                        <li ng-if="user.role == 'COURIER'">
                             <a href="#"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
                         </li>
-                        <li ng-if="user.role == 'accountant'">
+                        <li ng-if="user.role == 'ACCOUTANT'">
                             <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
                         </li>
-                        <li ng-if="user.role == 'manager'">
+                        <li ng-if="user.role == 'MANAGER'">
                             <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
                         </li>
                     </ul>

@@ -1,15 +1,25 @@
 app.factory('loginService', function($http, $location, sessionService) {
     return{
-        login: function(data, scope){
-            scope.errorMessage="";
+        login: function(data, $scope, $rootScope){
+            $scope.errorMessage="";
             
-            $http.post('login', data).then(function(msg){
-                var uid = msg.data;
-                if(uid){
-                    sessionService.set('user', uid);
+            $http.post('login', data).then(function(response){
+                if(response.data !== null){
+                    if (!sessionService.set('user', response.data.login))
+                        console.log('Error set session');
                     $location.path('/profile');
+
+                    $rootScope.user = {
+                        name: response.data.fullName,
+                        login: sessionService.get('user'),
+                        phone: response.data.phone,
+                        passport: response.data.passport,
+                        role: response.data.role
+                        //  countOrders: orderService.getCountOrders(),
+                        // countApplications: orderService.getCountOrders()
+                    }
                 } else {
-                    scope.errorMessage = "Wrong login or password";
+                    $scope.errorMessage = "Wrong login or password";
                 }
             });
         },
@@ -56,8 +66,9 @@ app.factory('registerService', function($http){
                 passport: credentials.passport
             };
             $http.post("register", dataToSend).then(function(response) {
-                if (response.status == 'ok')
+                if (response.status == 'ok') {
                     $scope.successMessage = "You are registered";
+                }
                 else if (response.data == 0)
                     $scope.errorMessage = "This user is already exist.";
             });

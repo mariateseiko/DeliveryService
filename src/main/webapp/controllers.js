@@ -17,6 +17,14 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
     $http.get('price.json').success(function(data) {
         $scope.prices = data;
     });
+
+    $scope.user = {
+        name: null,
+        login: null,
+        phone: null,
+        passport: null,
+        role: null
+    };
 }]);
 
 app.controller('registerCtrl', ['$scope', 'registerService',function($scope, registerService) {
@@ -38,68 +46,71 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
 }]);
 
 
-app.controller('loginCtrl', ['$scope', 'loginService', 'sessionService', 'orderService',function($scope, loginService, sessionService, orderService) {
+app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope',function($scope, loginService, $rootScope) {
     $scope.credentials = {
         login: null,
         password: null
     };
-    $scope.user = null;
+
+    $scope.errorMessage="";
 
     $scope.login = function () {
-        loginService.login($scope.credentials, $scope);
-        $scope.user = {
-            name:  sessionService.get('user').name,
-            login:  sessionService.get('user').login,
-            phone:  sessionService.get('user').phone,
-            passport:  sessionService.get('user').passport,
-          //  countOrders: orderService.getCountOrders(),
-           // countApplications: orderService.getCountOrders()
+        loginService.login($scope.credentials, $scope, $rootScope);
+    };
+}]);
+
+app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 
+    function ($scope, sessionService, $rootScope, $location) {
+        if ($rootScope.user == null)
+            $location.path('/');
+        else    
+            $scope.user = $rootScope.user;
+}]);
+app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location',
+    function ($scope, orderService, $rootScope, $location){
+        if ($rootScope.user == null)
+            $location.path('/');
+        else {
+            $scope.errorMessage = "";
+            $scope.successMessage = "";
+
+            //CHANGE FIELDS FOR SENDING APPLICATION
+            $scope.application = {
+                from: null,
+                to: null,
+                distance: null,
+                weight: null,
+                shipping: null
+            };
+
+            $scope.order = {
+                ord_id: null,
+                ord_date: null,
+                usr_login: null,
+                usr_name: null,
+                usr_passport: null,
+                usr_phone: null,
+                ord_status: null,
+                ord_from: null,
+                ord_to: null,
+                ord_distance: null,
+                ord_weight: null,
+                shp_name: null,
+                shp_pricePerKG: null,
+                shp_pricePerKM: null,
+                ord_total: null
+            }
+            $scope.sendApplication = function () {
+                orderService.sendApplication($scope.application, $scope);
+            }
         }
-    };
-   
-    
 }]);
 
-app.controller('orderCtrl', ['$scope', 'orderService', 'sessionService',function ($scope, orderService, sessionService){
-    $scope.errorMessage="";
-    $scope.successMessage="";
-    
-    //CHANGE FIELDS FOR SENDING APPLICATION
-    $scope.application = {
-        id_client: sessionService.get('user').id,
-        from: null,
-        to: null,
-        distance: null,
-        weight: null,
-        typeShipping: null
-    };
-
-    $scope.order = {
-        ord_id: null,
-        ord_date: null,
-        usr_login: null,
-        usr_name: null,
-        usr_passport: null,
-        usr_phone: null,
-        ord_status: null,
-        ord_from: null,
-        ord_to: null,
-        ord_distance: null,
-        ord_weight: null,
-        shp_name: null,
-        shp_pricePerKG: null,
-        shp_pricePerKM: null,
-        ord_total: null
+app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
+    if ($rootScope.user == null)
+        $location.path('/');
+    else {
+        $scope.errorMessage = "";
+        $scope.successMessage = "";
     }
-    $scope.sendApplication = function() {
-        orderService.sendApplication($scope.application, $scope);
-    }
-    
-}]);
-
-//SESSION STORE ONLY ID AND LOGIN OF USER
-app.controller('accSettingsCtrl', ['$scope', 'sessionService', function ($scope, sessionService) {
-    $scope.errorMessage = "";
-    $scope.successMessage = "";
-    
 }]);

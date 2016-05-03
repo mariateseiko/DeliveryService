@@ -18,7 +18,8 @@ app.config(['$routeProvider', function($routeProvide){
         controller:  'loginCtrl'
     })
     .when('/profile', {
-        templateUrl: 'templates/profile.html'
+        templateUrl: 'templates/profile.html',
+        controller: 'profileCtrl'
     })
     .when('/order', {
         templateUrl: 'templates/order.html',
@@ -39,5 +40,6 @@ app.config(['$routeProvider', function($routeProvide){
         redirectTo :'/'
     })
 }]);
+
 
 
