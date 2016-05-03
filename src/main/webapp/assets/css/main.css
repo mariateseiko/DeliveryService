@@ -909,6 +909,7 @@ z-index: 10;
    font-weight: bold;
    font-size: 26px;
  }
+
 .form-group{
   padding: 10px;
 }
@@ -922,4 +923,15 @@ z-index: 10;
 }
 .table-hover{
   margin-top: 5%;
+}
+.order{
+  display: block;
+  margin: 50px auto;
+  width: 500px;
+}
+.order tr td:first-child{
+   float:left;
+ }
+.order tr td:last-child{
+  float:right;
 }

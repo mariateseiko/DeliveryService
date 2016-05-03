@@ -1,0 +1,128 @@
+<div class="container" ng-controller="orderCtrl">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div class="profile-sidebar">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img src="assets/images/team1.jpg" class="img-responsive" alt="">
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{user.name}}
+                    </div>
+                    <div class="profile-usertitle-job">
+                        {{user.role}}
+                    </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li>
+                            <a href="#/profile">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Overview </a>
+                        </li>
+                        <li>
+                            <a href="#/accountsettings">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Account Settings </a>
+                        </li>
+                        <li>
+
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="col-sm-12">
+                    <div class="col-xs-12 col-sm-10">
+                        <div class="bootstrap-iso">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6 col-xs-12 ">
+                                        <div class="formden_header col-sm-offset-6">
+                                            <h2>Application info</h2>
+                                        </div>
+                                        <div class="container col-sm-offset-2">
+                                            <table class="order">
+                                                <tbody>
+                                                <tr>
+                                                    <td>Order ID: </td>
+                                                    <td>{{order.ord_id}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date: </td>
+                                                    <td>{{order.ord_date}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Client login: </td>
+                                                    <td>{{order.usr_login}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Client name: </td>
+                                                    <td>{{order.usr_name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Client passport: </td>
+                                                    <td>{{order.usr_passport}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Client phone: </td>
+                                                    <td>{{order.usr_phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status: </td>
+                                                    <td>{{order.ord_status}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>From: </td>
+                                                    <td>{{order.ord_from}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>To: </td>
+                                                    <td>{{order.ord_to}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Distance: </td>
+                                                    <td>{{order.ord_distance}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type of shipping: </td>
+                                                    <td>{{order.shp_name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Price per 1km: </td>
+                                                    <td>{{order.shp_pricePerKM}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Price per 1kg: </td>
+                                                    <td>{{order.shp_pricePerKG}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total: </td>
+                                                    <td>{{order.ord_total}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
