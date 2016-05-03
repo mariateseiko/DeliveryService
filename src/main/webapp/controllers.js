@@ -29,6 +29,7 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
         login: null,
         passwordRepeat: null,
         phone: null,
+        passport: null,
     };
 
     $scope.register = function() {
@@ -65,16 +66,37 @@ app.controller('orderCtrl', ['$scope', 'orderService', 'sessionService',function
     
     //CHANGE FIELDS FOR SENDING APPLICATION
     $scope.application = {
-        id: sessionService.get('user').id,
+        id_client: sessionService.get('user').id,
         from: null,
         to: null,
         distance: null,
         weight: null,
         typeShipping: null
     };
-    $scope.sendApplication = orderService.sendApplication($scope.application, $scope);
+
+    $scope.order = {
+        ord_id: null,
+        ord_date: null,
+        usr_login: null,
+        usr_name: null,
+        usr_passport: null,
+        usr_phone: null,
+        ord_status: null,
+        ord_from: null,
+        ord_to: null,
+        ord_distance: null,
+        ord_weight: null,
+        shp_name: null,
+        shp_pricePerKG: null,
+        shp_pricePerKM: null,
+        ord_total: null
+    }
+    $scope.sendApplication = function() {
+        orderService.sendApplication($scope.application, $scope);
+    }
     
 }]);
+
 //SESSION STORE ONLY ID AND LOGIN OF USER
 app.controller('accSettingsCtrl', ['$scope', 'sessionService', function ($scope, sessionService) {
     $scope.errorMessage = "";

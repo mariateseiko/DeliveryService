@@ -52,7 +52,8 @@ app.factory('registerService', function($http){
                 name: credentials.name,
                 password: credentials.password,
                 login: credentials.login,
-                phone: credentials.phone
+                phone: credentials.phone,
+                passport: credentials.passport
             };
             $http.post("register", dataToSend).then(function(response) {
                 if (response.status == 'ok')

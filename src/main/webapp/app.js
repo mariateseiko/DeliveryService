@@ -28,6 +28,10 @@ app.config(['$routeProvider', function($routeProvide){
         templateUrl: 'templates/listOrders.html',
         controller: 'orderCtrl'
     })
+    .when('/orderinfo', {
+        templateUrl: 'templates/orderinfo.html',
+        controller: 'orderCtrl'
+    })
     .when('/accountsettings', {
         templateUrl: 'templates/accset.html'
     })
