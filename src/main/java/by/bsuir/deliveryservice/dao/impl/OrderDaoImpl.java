@@ -78,11 +78,7 @@ public class OrderDaoImpl implements OrderDao {
             st.setDouble(6, order.getDistance());
             st.setDouble(7, order.getWeight());
             st.setLong(8, order.getShipping().getId());
-            //TODO uncomment when delivery date added or remove forever
-            //no date field yet
-            // st.setDate(9, new java.sql.Date(order.getDeliveryDate().getTime()));
-            //just a stupid stub
-            st.setDate(9, new java.sql.Date(12345678910l));
+            st.setDate(9, new java.sql.Date(order.getDeliveryDate().getTime()));
             st.setDouble(10, order.getTotal());
             st.executeUpdate();
             ResultSet resultSet = st.getGeneratedKeys();

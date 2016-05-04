@@ -3,7 +3,7 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <constant name="struts.devMode" value="true" />
+    <!--<constant name="struts.devMode" value="true" />-->
     <package name="guest" extends="json-default" >
         <interceptors>
             <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
@@ -47,7 +47,7 @@
             </result>
         </action>
     </package>
-    <package name="docgen">
+    <!--<package name="docgen">
         <action name="exportAgreement"
                 class="by.bsuir.deliveryservice.action.ExportAgreementAction">
             <result name="success" type="stream">
@@ -93,5 +93,5 @@
                 <param name="statusCode">500</param>
             </result>
         </action>
-    </package>
+    </package>-->
 </struts>

@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 public class PlaceOrderAction implements Action {
     private Order order = new Order();
@@ -50,8 +51,10 @@ public class PlaceOrderAction implements Action {
     }
 
     public void setShipping(String shipping) {
-        order.setShipping(new Shipping(shipping));
+        order.setShipping(new Shipping(shipping.toUpperCase()));
     }
+
+    public void setData(Date deliveryDate) { order.setDeliveryDate(deliveryDate); }
 
     public Boolean getSuccess() {
         return success;
