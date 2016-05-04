@@ -22,13 +22,11 @@ public class OrderDaoImpl implements OrderDao {
             "WHERE `order`.ord_id=?";
 
     private static final String INSERT_ORDER = "INSERT INTO `order` (ord_partner, ord_date, ord_office, ord_status, ord_from, " +
-            "ord_to, ord_distance, ord_weight, ord_shipping, ord_deliveryDate, ord_total) " +
-            "VALUES (?, now(),?,?,?,?,?,?,?,?,?)";
+            "ord_to, ord_distance, ord_weight, ord_shipping, ord_total) " +
+            "VALUES (?, now(),?,?,?,?,?,?,?,?)";
 
     private static final String UPDATE_ORDER_STATUS = "UPDATE `order` SET ord_status=? WHERE ord_id=?";
     private static final String UPDATE_ORDER_COURIER = "UPDATE `order` SET ord_courier=? WHERE ord_id=?";
-
-    private static final String DELETE_ORDER = "DELETE FROM `order` WHERE ord_id=?";
 
     private static final String SELECT_STATUS_ID_BY_NAME = "SELECT ost_id FROM `status` WHERE ost_Name = ?";
     private static final String SELECT_ORDER_BY_USER_AND_STATUSES = "SELECT * FROM `order` " +
@@ -78,8 +76,7 @@ public class OrderDaoImpl implements OrderDao {
             st.setDouble(6, order.getDistance());
             st.setDouble(7, order.getWeight());
             st.setLong(8, order.getShipping().getId());
-            st.setDate(9, new java.sql.Date(order.getDeliveryDate().getTime()));
-            st.setDouble(10, order.getTotal());
+            st.setDouble(9, order.getTotal());
             st.executeUpdate();
             ResultSet resultSet = st.getGeneratedKeys();
             if (resultSet.next()){
