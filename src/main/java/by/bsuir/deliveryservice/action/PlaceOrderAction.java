@@ -23,7 +23,7 @@ public class PlaceOrderAction implements Action {
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(USER);
-        order.setId(user.getId());
+        order.setPartner(new User(user.getId()));
         try {
             orderService.placeOrder(order);
             success = true;
