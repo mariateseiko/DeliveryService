@@ -1,5 +1,6 @@
 
-app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', function($scope, $http, $location, sessionService) {
+app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'userService',
+    function($scope, $http, $location, sessionService, userService) {
     $scope.go = function (path) {
         $location.path(path);
     };
@@ -37,24 +38,26 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', fu
 
 app.controller('registerCtrl', ['$scope', 'registerService', 'sessionService', '$location',
     function($scope, registerService, sessionService, $location) {
-   // if (sessionService.get('user'))
-     //   $location.path('/profile');
-
-    $scope.errorMessage="";
-    $scope.successMessage="";
+        if (sessionService.get('user')) {
+            $location.path('/profile');
+        }
+        else {
+            $scope.errorMessage = "";
+            $scope.successMessage = "";
     
-    $scope.credentials = {
-        name: null,
-        password: null,
-        login: null,
-        passwordRepeat: null,
-        phone: null,
-        passport: null,
-    };
-
-    $scope.register = function() {
-        registerService.register($scope.credentials, $scope);
-    }
+            $scope.credentials = {
+                name: null,
+                password: null,
+                login: null,
+                passwordRepeat: null,
+                phone: null,
+                passport: null,
+            };
+    
+            $scope.register = function () {
+                registerService.register($scope.credentials, $scope);
+            }
+        }
 }]);
 
 
@@ -65,35 +68,42 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
             password: null
         };
 
-      //  if (sessionService.get('user'))
-       //     $location.path('/profile');
+        if (sessionService.get('user')) {
+            $location.path('/profile');
+        } else {
+            $scope.errorMessage = "";
 
-        $scope.errorMessage="";
-
-        $scope.login = function () {
-            loginService.login($scope.credentials, $scope, $rootScope);
-        };
+            $scope.login = function () {
+                loginService.login($scope.credentials, $scope, $rootScope);
+            };
+        }
 }]);
 
-app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService',
-    function ($scope, sessionService, $rootScope, $location, orderService) {
+app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService', 'userService',
+    function ($scope, sessionService, $rootScope, $location, orderService, userService) {
         if (!sessionService.get('user'))
            $location.path('/');
         else {
+            if (!$rootScope.user) {
+                userService.viewProfile($scope, $rootScope);
+            } else {
+                orderService.getCountOrders($scope, $rootScope);
+                orderService.getCountApplications($scope, $rootScope);
+            }
             $scope.user = $rootScope.user;
-
-            orderService.getCountOrders($scope, $rootScope);
-            orderService.getCountApplications($scope, $rootScope);
         }
 }]);
-app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location',
-    function ($scope, orderService, $rootScope, $location){
+app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
+    function ($scope, orderService, $rootScope, $location, sessionService, userService){
         $scope.errorMessage = "";
         $scope.successMessage = "";
         
-      //  if ($rootScope.user == null)
-       //     $location.path('/');
-       // else {
+        if (!sessionService.get('user'))
+            $location.path('/');
+        else {
+            if (!$rootScope.user) {
+                userService.viewProfile($scope, $rootScope);
+            }
             //CHANGE FIELDS FOR SENDING APPLICATION
             $scope.application = {
                 from: null,
@@ -126,14 +136,18 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                     orderService.sendApplication($scope.application, $scope);
                 }
             }
-        //}
+        }
 }]);
 
-app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
-//    if ($rootScope.user == null)
-  //      $location.path('/');
-   // else {
-        $scope.errorMessage = "";
-        $scope.successMessage = "";
-   // }
+app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'sessionService', 'userService',
+    function ($scope, $rootScope, $location, sessionService, userService) {
+        if (!sessionService.get('user'))
+            $location.path('/');
+        else {
+            if (!$rootScope.user) {
+                userService.viewProfile($scope, $rootScope);
+            }
+            $scope.errorMessage = "";
+            $scope.successMessage = "";
+         }
 }]);
