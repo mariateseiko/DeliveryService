@@ -127,10 +127,18 @@ app.factory('orderService', ['$http', function ($http) {
            })
        },
        getCountApplications: function () {
-           return this.getApplications().length();
+           $http.get('viewApplications').then(function (response){
+               if (response.status == 200 && response.data) {
+                   return response.data.length();
+               } else $scope.errorMessage = "Error";
+           });
        },
        getCountOrders: function () {
-           return this.getOrders().length();
+           $http.get('viewOrders').then(function (response){
+               if (response.status == 200 && response.data) {
+                   return response.data.length();
+               } else $scope.errorMessage = "Error";
+           });
        }
    } 
 }]);
