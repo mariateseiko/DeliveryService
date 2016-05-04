@@ -13,19 +13,17 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ViewCourierOrdersActions implements Action {
-    private Long courierId;
     private static final String USER = "user";
     private List<Order> orders;
     private static OrderService orderService = OrderServiceImpl.getInstance();
 
     @Override
     public String execute() throws Exception {
-        Long courierId;
+        long courierId;
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(USER);
         courierId = user.getId();
-
         try {
             orders = orderService.viewCourierOrders(courierId);
         } catch(ServiceException e) {
