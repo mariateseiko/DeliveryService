@@ -57,6 +57,17 @@
                 <param name="root">applications</param>
             </result>
         </action>
+        <action name="viewUserOrders" class="by.bsuir.deliveryservice.action.ViewUserOrdersAction">
+            <interceptor-ref name="json"/>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">orders</param>
+            </result>
+        </action>
     </package>
     <!--<package name="docgen">
         <action name="exportAgreement"
