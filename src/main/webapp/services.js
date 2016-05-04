@@ -70,7 +70,7 @@ app.factory('registerService', function($http){
                 passport: credentials.passport
             };
             $http.post("register", dataToSend).then(function(response) {
-                if (response.status == 'ok') {
+                if (response.status == 200) {
                     $scope.successMessage = "You are registered";
                 }
                 else if (response.data == 0)
@@ -107,21 +107,21 @@ app.factory('orderService', ['$http', function ($http) {
            console.log(strDateTime);
            data.data = strDateTime;
            $http.post('sendOrder', data).then(function (response) {
-                if (response.status == 'ok' && response.data) {
+                if (response.status == 200 && response.data) {
                     $scope.successMessage = "Your application is sent."
                 } else $scope.errorMessage = "Error";
            })
        },
        getApplications: function () {
-           $http.get('getApplications').then(function (response){
-                if (response.status == 'ok' && response.data) {
+           $http.get('viewApplications').then(function (response){
+                if (response.status == 200 && response.data) {
                     $scope.applications = response.data;
                 } else $scope.errorMessage = "Error";
            })
        },
        getOrders: function () {
-           $http.get('getOrders').then(function (response) {
-               if (response.status == 'ok' && response.data) {
+           $http.get('viewOrders').then(function (response) {
+               if (response.status == 200 && response.data) {
                    $scope.orders = response.data;
                }else $scope.errorMessage = "Error";
            })

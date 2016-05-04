@@ -23,7 +23,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
         login: null,
         phone: null,
         passport: null,
-        role: null
+        role: null,
+        countApplication: null,
+        countOrders: null
     };
 }]);
 
@@ -46,7 +48,8 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
 }]);
 
 
-app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope',function($scope, loginService, $rootScope) {
+app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderService', 
+    function($scope, loginService, $rootScope, orderService) {
     $scope.credentials = {
         login: null,
         password: null
@@ -56,6 +59,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope',function($sc
 
     $scope.login = function () {
         loginService.login($scope.credentials, $scope, $rootScope);
+        $rootScope.user.countOrders = orderService.getCountApplications();
+        $rootScope.user.countApplication = orderService.getCountOrders();         
     };
 }]);
 
