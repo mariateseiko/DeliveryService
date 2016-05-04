@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> viewAwaitingApplications() throws ServiceException {
+    public List<Order> viewApplications() throws ServiceException {
         try {
             return orderDao.selectApplications();
         } catch (DaoException e) {

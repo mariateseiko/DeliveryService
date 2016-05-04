@@ -19,7 +19,7 @@ public interface OrderService {
 
     Order viewOrder(Long orderId) throws ServiceException;
     List<Order> viewUserApplications(Long userId) throws ServiceException;
-    List<Order> viewAwaitingApplications() throws ServiceException;
+    List<Order> viewApplications() throws ServiceException;
     List<Order> viewCourierOrders(Long courierId) throws ServiceException;
     List<Order> viewOrders() throws ServiceException;
     List<Order> viewUserOrders(Long userId) throws ServiceException;
