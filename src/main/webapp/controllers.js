@@ -68,19 +68,20 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
 }]);
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location',
     function ($scope, orderService, $rootScope, $location){
+        $scope.errorMessage = "";
+        $scope.successMessage = "";
+        
         if ($rootScope.user == null)
             $location.path('/');
         else {
-            $scope.errorMessage = "";
-            $scope.successMessage = "";
-
             //CHANGE FIELDS FOR SENDING APPLICATION
             $scope.application = {
                 from: null,
                 to: null,
                 distance: null,
                 weight: null,
-                shipping: null
+                shipping: null,
+                data: null
             };
 
             $scope.order = {
@@ -101,7 +102,9 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                 ord_total: null
             }
             $scope.sendApplication = function () {
-                orderService.sendApplication($scope.application, $scope);
+                if (orderService.checkApplication($scope.application, $scope)) {
+                    orderService.sendApplication($scope.application, $scope);
+                }
             }
         }
 }]);
