@@ -1,4 +1,4 @@
-app.factory('loginService', function($http, $location, sessionService) {
+app.factory('loginService', function($http, $location, sessionService, orderService) {
     return{
         login: function(data, $scope, $rootScope){
             $scope.errorMessage="";
@@ -15,10 +15,12 @@ app.factory('loginService', function($http, $location, sessionService) {
                         login: sessionService.get('user'),
                         phone: response.data.phone,
                         passport: response.data.passport,
-                        role: response.data.role
-                        //  countOrders: orderService.getCountOrders(),
-                        // countApplications: orderService.getCountOrders()
+                        role: response.data.role,
+                        countOrders: 0,
+                        countApplications: 0,
                     }
+                   
+
                 } else {
                     $scope.errorMessage = "Wrong login or password";
                 }
@@ -113,30 +115,34 @@ app.factory('orderService', ['$http', function ($http) {
            })
        },
        getApplications: function ($scope) {
-           $http.get('viewApplications').then(function (response){
+           $http.get('viewUserApplications').then(function (response){
                 if (response.status == 200 && response.data) {
                     $scope.applications = response.data;
                 } else $scope.errorMessage = "Error";
            })
        },
        getOrders: function ($scope) {
-           $http.get('viewOrders').then(function (response) {
+           $http.get('viewUserOrders').then(function (response) {
                if (response.status == 200 && response.data) {
                    $scope.orders = response.data;
                }else $scope.errorMessage = "Error";
            })
        },
-       getCountApplications: function () {
-           $http.get('viewApplications').then(function (response){
+       getCountApplications: function ($scope, $rootScope) {
+           $http.get('viewUserApplications').then(function (response){
                if (response.status == 200 && response.data) {
-                   return response.data.length();
+                   $rootScope.user.countApplications = response.data.length;
+                   $scope.user.countApplications = response.data.length;
+                   return response.data.length;
                } else $scope.errorMessage = "Error";
            });
        },
-       getCountOrders: function () {
-           $http.get('viewOrders').then(function (response){
+       getCountOrders: function ($scope, $rootScope) {
+           $http.get('viewUserOrders').then(function (response){
                if (response.status == 200 && response.data) {
-                   return response.data.length();
+                   $rootScope.user.countOrders = response.data.length;
+                   $scope.user.countOrders = response.data.length;
+                   return response.data.length;
                } else $scope.errorMessage = "Error";
            });
        }

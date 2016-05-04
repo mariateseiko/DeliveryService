@@ -1,8 +1,12 @@
 
-app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', function($scope, $http, $location, sessionService) {
     $scope.go = function (path) {
         $location.path(path);
     };
+   if (sessionService.get('user')) {
+       $location.path('/profile');
+       return;
+   }
 
     $scope.users = [
         {'name' : 'Grivachevsky Andrey',
@@ -17,19 +21,25 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', function($scope, $ht
     $http.get('price.json').success(function(data) {
         $scope.prices = data;
     });
-
-    $scope.user = {
-        name: null,
-        login: null,
-        phone: null,
-        passport: null,
-        role: null,
-        countApplication: null,
-        countOrders: null
-    };
+    
+    if (!sessionService.get('user')) {
+        $scope.user = {
+            name: null,
+            login: null,
+            phone: null,
+            passport: null,
+            role: null,
+            countOrders: null,
+            countApplications: null,
+        };
+    }
 }]);
 
-app.controller('registerCtrl', ['$scope', 'registerService',function($scope, registerService) {
+app.controller('registerCtrl', ['$scope', 'registerService', 'sessionService', '$location',
+    function($scope, registerService, sessionService, $location) {
+   // if (sessionService.get('user'))
+     //   $location.path('/profile');
+
     $scope.errorMessage="";
     $scope.successMessage="";
     
@@ -48,38 +58,42 @@ app.controller('registerCtrl', ['$scope', 'registerService',function($scope, reg
 }]);
 
 
-app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderService', 
-    function($scope, loginService, $rootScope, orderService) {
-    $scope.credentials = {
-        login: null,
-        password: null
-    };
+app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderService', '$location', 'sessionService',
+    function($scope, loginService, $rootScope, orderService, $location, sessionService) {
+        $scope.credentials = {
+            login: null,
+            password: null
+        };
 
-    $scope.errorMessage="";
+      //  if (sessionService.get('user'))
+       //     $location.path('/profile');
 
-    $scope.login = function () {
-        loginService.login($scope.credentials, $scope, $rootScope);
+        $scope.errorMessage="";
 
-        $rootScope.user.countOrders = orderService.getCountApplications($scope);
-        $rootScope.user.countApplication = orderService.getCountOrders($scope);
-    };
+        $scope.login = function () {
+            loginService.login($scope.credentials, $scope, $rootScope);
+        };
 }]);
 
-app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 
-    function ($scope, sessionService, $rootScope, $location) {
-        if ($rootScope.user == null)
-            $location.path('/');
-        else    
+app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService',
+    function ($scope, sessionService, $rootScope, $location, orderService) {
+        if (!sessionService.get('user'))
+           $location.path('/');
+        else {
             $scope.user = $rootScope.user;
+
+            orderService.getCountOrders($scope, $rootScope);
+            orderService.getCountApplications($scope, $rootScope);
+        }
 }]);
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location',
     function ($scope, orderService, $rootScope, $location){
         $scope.errorMessage = "";
         $scope.successMessage = "";
         
-        if ($rootScope.user == null)
-            $location.path('/');
-        else {
+      //  if ($rootScope.user == null)
+       //     $location.path('/');
+       // else {
             //CHANGE FIELDS FOR SENDING APPLICATION
             $scope.application = {
                 from: null,
@@ -112,14 +126,14 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                     orderService.sendApplication($scope.application, $scope);
                 }
             }
-        }
+        //}
 }]);
 
 app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
-    if ($rootScope.user == null)
-        $location.path('/');
-    else {
+//    if ($rootScope.user == null)
+  //      $location.path('/');
+   // else {
         $scope.errorMessage = "";
         $scope.successMessage = "";
-    }
+   // }
 }]);

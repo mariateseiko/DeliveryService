@@ -42,7 +42,7 @@
                             <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
                         <li ng-if="user.role == 'COURIER'">
-                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                            <a href="#/orderlist"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
                         </li>
                         <li ng-if="user.role == 'ACCOUTANT'">
                             <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
@@ -79,7 +79,7 @@
                             <button class="btn btn-success btn-block"><span ></span>View orders</button>
                         </div>
                         <div class="col-xs-12 col-sm-4 emphasis">
-                            <h2><strong>{{user.countApplication}}</strong></h2>
+                            <h2><strong>{{user.countApplications}}</strong></h2>
                             <p><small>Applications</small></p>
                             <button class="btn btn-info btn-block"><span></span>View applications</button>
                         </div>
