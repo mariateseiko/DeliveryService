@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ViewCourierOrdersActions implements Action {
+public class ViewCourierOrdersAction implements Action {
     private static final String USER = "user";
     private List<Order> orders;
     private static OrderService orderService = OrderServiceImpl.getInstance();
