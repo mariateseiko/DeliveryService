@@ -59,8 +59,9 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
 
     $scope.login = function () {
         loginService.login($scope.credentials, $scope, $rootScope);
-        $rootScope.user.countOrders = orderService.getCountApplications();
-        $rootScope.user.countApplication = orderService.getCountOrders();         
+
+        $rootScope.user.countOrders = orderService.getCountApplications($scope);
+        $rootScope.user.countApplication = orderService.getCountOrders($scope);
     };
 }]);
 

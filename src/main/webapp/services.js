@@ -112,14 +112,14 @@ app.factory('orderService', ['$http', function ($http) {
                 } else $scope.errorMessage = "Error";
            })
        },
-       getApplications: function () {
+       getApplications: function ($scope) {
            $http.get('viewApplications').then(function (response){
                 if (response.status == 200 && response.data) {
                     $scope.applications = response.data;
                 } else $scope.errorMessage = "Error";
            })
        },
-       getOrders: function () {
+       getOrders: function ($scope) {
            $http.get('viewOrders').then(function (response) {
                if (response.status == 200 && response.data) {
                    $scope.orders = response.data;

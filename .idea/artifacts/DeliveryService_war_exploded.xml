@@ -35,14 +35,7 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-csv:1.2" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi:3.14" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
-          <element id="library" level="project" name="Maven: org.apache.commons:commons-dbcp2:2.1.1" />
-          <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.4.2" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:8.5.0" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:catalina:6.0.45" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:coyote:6.0.45" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:servlet-api:6.0.45" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:juli:6.0.45" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:annotations-api:6.0.45" />
+          <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.9" />
         </element>
       </element>
       <element id="directory" name="META-INF">
