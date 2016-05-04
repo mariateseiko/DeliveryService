@@ -19,6 +19,7 @@ public class OrderDaoImpl implements OrderDao {
             "JOIN `user` ON `order`.ord_partner = `user`.usr_id " +
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "WHERE `order`.ord_id=?";
 
     private static final String INSERT_ORDER = "INSERT INTO `order` (ord_partner, ord_date, ord_office, ord_status, ord_from, " +
@@ -32,17 +33,20 @@ public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDER_BY_USER_AND_STATUSES = "SELECT * FROM `order` " +
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
-            "WHERE ord_partner=? AND ord_status IN (?,?)";
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "WHERE ord_partner=? AND ost_name IN (?,?)";
 
     private static final String SELECT_ORDER_BY_STATUSES = "SELECT * FROM `order` " +
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
-            "WHERE ord_status IN (?,?)";
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "WHERE ord_partner=? AND ost_name IN (?,?)";
 
     private static final String SELECT_COURIER_ORDERS = "SELECT * FROM `order` " +
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
-            "WHERE ord_courier=? AND ord_status = 'DELIVERY' " +
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
             "ORDER BY ord_deliverydate ASC";
 
     private static OrderDao instance = new OrderDaoImpl();
