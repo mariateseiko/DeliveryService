@@ -40,7 +40,7 @@ public class OrderDaoImpl implements OrderDao {
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
-            "WHERE ord_partner=? AND ost_name IN (?,?)";
+            "WHERE ost_name IN (?,?)";
 
     private static final String SELECT_COURIER_ORDERS = "SELECT * FROM `order` " +
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
@@ -184,9 +184,9 @@ public class OrderDaoImpl implements OrderDao {
         order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
         order.setFrom(resultSet.getString("ord_from"));
         order.setTo(resultSet.getString("ord_to"));
-        order.setDistance(resultSet.getDouble("distance"));
-        order.setWeight(resultSet.getDouble("weight"));
-        order.setTotal(resultSet.getDouble("total"));
+        order.setDistance(resultSet.getDouble("ord_distance"));
+        order.setWeight(resultSet.getDouble("ord_weight"));
+        order.setTotal(resultSet.getDouble("ord_total"));
         order.setShipping(new Shipping(resultSet.getString("shp_name"),
                 resultSet.getDouble("shp_pricePerKg"),
                 resultSet.getDouble("shp_pricePerKm")));
