@@ -11,6 +11,9 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PlaceOrderAction implements Action {
@@ -54,7 +57,11 @@ public class PlaceOrderAction implements Action {
         order.setShipping(new Shipping(shipping.toUpperCase()));
     }
 
-    public void setData(Date deliveryDate) { order.setDeliveryDate(deliveryDate); }
+    public void setData(String data) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date deliveryDate =  dateFormat.parse(data);
+        order.setDeliveryDate(deliveryDate);
+    }
 
     public Boolean getSuccess() {
         return success;
