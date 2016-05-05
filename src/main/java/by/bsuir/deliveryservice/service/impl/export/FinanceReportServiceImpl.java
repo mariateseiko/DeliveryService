@@ -225,7 +225,8 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
                 /* Print header */
 
-                csv.printRecord("Тип", "Цена/км", "Цена/кг");
+                csv.printRecord("Дата", "Договор", "Сумма", "Наименование",
+                        "Паспорт");
 
                 /* Print record list */
 
