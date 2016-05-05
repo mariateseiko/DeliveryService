@@ -9,9 +9,8 @@ import by.bsuir.deliveryservice.entity.User;
 
 import javax.naming.NamingException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.Date;
 
 public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDER_BY_ID = "SELECT * " +
@@ -48,6 +47,17 @@ public class OrderDaoImpl implements OrderDao {
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
             "ORDER BY ord_deliverydate ASC";
+
+    /*
+     * This has not been tested yet. Remove if done.
+     */
+    private static final String SQL_SELECT_BETWEEN = "SELECT * " +
+            "FROM `order` " +
+            "JOIN `user` ON `order`.ord_partner = `user`.usr_id " +
+            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "WHERE DATE(`order`.ord_Date) BETWEEN ? AND ?";
 
     private static OrderDao instance = new OrderDaoImpl();
     private OrderDaoImpl() {}
@@ -225,6 +235,33 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }
+        return orders;
+    }
+
+    @Override
+    public List<Order> selectOrdersSince(Date start) throws DaoException // ToDo: Please, test me! ^^
+    {
+        List<Order> orders = new ArrayList<>();
+
+        try (Connection c = provideConnection();
+             PreparedStatement stm =
+                     c.prepareStatement(SQL_SELECT_BETWEEN)) {
+
+            java.sql.Date sinceDate = new java.sql.Date(start.getTime());
+            java.sql.Date tillDate = new java.sql.Date((new Date()).getTime());
+
+            stm.setDate(1, sinceDate);
+            stm.setDate(2, tillDate);
+
+            ResultSet set = stm.executeQuery();
+
+            while(set.next())
+                orders.add(this.retrieveOrderFromResultSet(set));
+
+        } catch (Exception e) {
+            throw new DaoException("failed to execute a statement", e);
+        }
+
         return orders;
     }
 }

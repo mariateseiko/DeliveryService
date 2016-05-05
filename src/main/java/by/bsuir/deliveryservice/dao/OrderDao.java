@@ -4,6 +4,7 @@ import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.OrderStatus;
 import by.bsuir.deliveryservice.service.ServiceException;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderDao extends GenericDao<Long, Order> {
@@ -14,4 +15,5 @@ public interface OrderDao extends GenericDao<Long, Order> {
     List<Order> selectOrders() throws DaoException;
     List<Order> selectApplications() throws DaoException;
     List<Order> selectCourierOrders(Long courierId) throws DaoException;
+    List<Order> selectOrdersSince(Date start) throws DaoException;
 }
