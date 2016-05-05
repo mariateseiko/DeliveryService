@@ -100,6 +100,8 @@ app.factory('orderService', ['$http', function ($http) {
            return true;
        },
        sendApplication: function (data, $scope) {
+           $scope.successMessage = "";
+           $scope.errorMessage = "";
            var now = new Date();
            var strDateTime = [[now.getFullYear(),AddZero(now.getMonth() + 1), AddZero(now.getDate())].join("-"), [AddZero(now.getHours()), AddZero(now.getMinutes()), AddZero(now.getSeconds())].join(":")].join(" ");
            function AddZero(num) {
@@ -114,10 +116,11 @@ app.factory('orderService', ['$http', function ($http) {
                 } else $scope.errorMessage = "Error";
            })
        },
-       getApplications: function ($scope) {
+       getApplications: function ($scope, $rootScope) {
            $http.get('viewUserApplications').then(function (response){
                 if (response.status == 200 && response.data) {
                     $scope.applications = response.data;
+                    $rootScope.applications = response.data;
                 } else $scope.errorMessage = "Error";
            })
        },
@@ -161,7 +164,7 @@ app.factory('userService', ['$http', 'orderService', function($http, orderServic
             $http.get('viewProfile').then(function (response) {
                 if (response.status == 200 && response.data){
                     $scope.user = {
-                        name: response.data.name,
+                        name: response.data.fullName,
                         login: response.data.login,
                         phone: response.data.phone,
                         role: response.data.role,
@@ -179,3 +182,13 @@ app.factory('userService', ['$http', 'orderService', function($http, orderServic
         }
     }
 }]);
+
+app.factory('managerService', ['$http', function ($http) {
+    return {
+        getApplications: function ($scope) {
+            $http.get('viewApplicationActions').then(function (response) {
+                $scope.applications = response.data;
+            })
+        }
+    }
+}])

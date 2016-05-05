@@ -11,14 +11,13 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div data-ng-controller="loginCtrl" class="col-md-8 col-sm-12  col-md-offset-2 col-xs-12">
-                                    <form method="post">
-
+                                    <form method="post" class=" col-md-8 col-md-offset-2">
                                         <div class="form-group ">
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-envelope" aria-hidden="true"></i>
                                                 </div>
-                                                <input class="form-control" id="login" name="login" placeholder="Login" type="text" ng-model="credentials.login" required/>
+                                                <input type="text" class="form-control" name="login" id="login" placeholder="Login" ng-model="credentials.login" required/>
                                             </div>
                                         </div>
 
@@ -32,7 +31,9 @@
                                         </div>
 
                                         <div ng-if="errorMessage!=''">
-                                            <div class="error-message">{{errorMessage}}</div>
+                                            <div class="form-group">
+                                                <div class="error-message">{{errorMessage}}</div>
+                                            </div>
                                         </div>
                                         <div class="form-group ">
                                             <button class="btn btn-custom outline " name="submit" type="submit" data-ng-click="login()">Log in</button>

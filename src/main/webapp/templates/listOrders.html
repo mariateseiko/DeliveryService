@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controler="profileCtrl">
     <div class="row profile">
         <div class="col-md-3">
             <div class="profile-sidebar">
@@ -15,11 +15,6 @@
                     <div class="profile-usertitle-job">
                         {{user.role}}
                     </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -60,68 +55,40 @@
                 <h2>Application list</h2>
 
                 <p>The .table-hover class enables a hover state on table rows:</p>
-
-                <table class="table table-hover">
+{{test}}
+                <table class="table table-hover" ng-controller="orderlistCtrl">
                     <thead>
                     <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                        <th></th>
+                        <th>Date</th>
+                        <th>Distance</th>
+                        <th>From</th>
+                        <th>Shipping</th>
+                        <th>Status</th>
+                        <th>To</th>
+                        <th>Total</th>
+                        <th>Weight</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td class="actions">
+                    <tr ng-repeat="application in applications">
+                        <td>{{application.date}}</td>
+                        <td>{{application.distance}}</td>
+                        <td>{{application.from}}</td>
+                        <td>{{application.shipping.name}}</td>
+                        <td>{{application.status}}</td>
+                        <td>{{application.to}}</td>
+                        <td>{{application.total}}</td>
+                        <td>{{application.weight}}</td>
+                        <!--<td class="actions">
                             <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                             <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                             <i class="fa fa-minus" aria-hidden="true"></i>
                             </button>
-                        </td>
+                        </td>-->
                     </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td class="actions">
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td class="actions">
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
                 <div class="col-sm-10 col-sm-offset-10">

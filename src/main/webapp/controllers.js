@@ -22,7 +22,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
     $http.get('price.json').success(function(data) {
         $scope.prices = data;
     });
-    
+    $scope.applications = [];
     if (!sessionService.get('user')) {
         $scope.user = {
             name: null,
@@ -91,7 +91,36 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
                 orderService.getCountApplications($scope, $rootScope);
             }
             $scope.user = $rootScope.user;
+            $scope.applications = [];
+            $scope.applicationsClick = function () {
+                //$location.path("/order-list");
+                $scope.applications = orderService.getApplications($scope, $rootScope);
+                $scope.applications = $rootScope.applications;
+                /*
+                * courier Object id
+                 date
+                 distance
+                 from
+                 ??id
+                 partner Object id
+                 shipping - > id, name, pricePerKg, pricePerKg
+                 status "AWAITING"
+                 to
+                 total
+                 weight*/
+            }
+            $scope.ordersClick = function () {
+                //$location.path('/order-list');
+                orderService.getOrders($scope);
+            }
         }
+}]);
+app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
+    console.log('2'+ $location.path());
+    $scope.user = $rootScope.user;
+    $scope.applications = orderService.getApplications($scope, $rootScope);
+    $scope.applications = $rootScope.applications;
+    
 }]);
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
     function ($scope, orderService, $rootScope, $location, sessionService, userService){
@@ -104,6 +133,7 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);
             }
+            $scope.user = $rootScope.user;
             //CHANGE FIELDS FOR SENDING APPLICATION
             $scope.application = {
                 from: null,

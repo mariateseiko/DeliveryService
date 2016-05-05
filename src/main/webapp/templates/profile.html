@@ -9,7 +9,6 @@
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
-                    {{default}}
                     <div class="profile-usertitle-name">
                         {{user.login}}
                     </div>
@@ -33,16 +32,16 @@
                             <a href="#/order"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
+                            <a href="#order-list" ng-click="applicationsClick()"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
                         </li>
                         <li ng-if="user.role == 'CLIENT'">
-                            <a href="#" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
+                            <a href="#order-list" ng-click="ordersClick()" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
                         <li ng-if="user.role == 'COURIER'">
-                            <a href="#/orderlist"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                            <a href="#/order-list"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
                         </li>
                         <li ng-if="user.role == 'ACCOUTANT'">
                             <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>

@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row">
             <div data-ng-controller="registerCtrl" class="col-md-8 col-sm-12  col-md-offset-2 col-xs-12">
-                <form method="post">
+                <form method="post" class=" col-md-8 col-md-offset-2">
 
                     <div class="form-group ">
                         <div class="input-group">
@@ -65,10 +65,14 @@
                     </div>
 
                     <div ng-if="successMessage!=''">
-                        <div class="successMessage">{{successMessage}}</div>
+                        <div class="form-group">
+                            <div class="successMessage">{{successMessage}}</div>
+                        </div>
                     </div>
                     <div ng-if="errorMessage!=''">
-                        <div class="error-message">{{errorMessage}}</div>
+                        <div class="form-group">
+                            <div class="error-message">{{errorMessage}}</div>
+                        </div>
                     </div>
                     <div class="form-group ">
                         <button class="btn btn-custom outline " name="submit" type="submit" data-ng-click="register()">Register</button>
