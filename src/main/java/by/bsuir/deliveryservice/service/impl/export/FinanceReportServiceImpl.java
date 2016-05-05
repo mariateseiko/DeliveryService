@@ -1,5 +1,7 @@
 package by.bsuir.deliveryservice.service.impl.export;
 
+import by.bsuir.deliveryservice.dao.OrderDao;
+import by.bsuir.deliveryservice.dao.impl.OrderDaoImpl;
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.service.AbstractExportService;
 import by.bsuir.deliveryservice.service.DocFormat;
@@ -29,11 +31,49 @@ import java.util.List;
 public class FinanceReportServiceImpl extends AbstractExportService
         implements FinanceReportExportService
 {
+    FinanceReportServiceImpl() {}
+
+    // ----------------------------------------------------------------------
+
+    public static final String PREFIX = "finance";
+
+    // ----------------------------------------------------------------------
+
+    private static final OrderDao orderDao = OrderDaoImpl.getInstance();
+
+    // ----------------------------------------------------------------------
+
     @Override
     public File exportToFile(DocFormat format, Date from)
             throws ServiceException
     {
-        return null;
+        try {
+
+            switch (format) {
+                case PDF:
+                    throw new ServiceException(format.toString() + " is not " +
+                            "supported for this document");
+            }
+
+            File file = getTemporaryFile(PREFIX, format.toString());
+
+            List<Order> orders = orderDao.selectOrdersSince(from);
+
+            switch (format) {
+                case XLS:
+                    impl_exportToXls(file, from, orders);
+                    break;
+                case CSV:
+                    impl_exportToCsv(file, orders);
+                    break;
+            }
+
+            return file;
+
+        } catch (Exception e) {
+            throw new ServiceException("failed to export a " +
+                    "finance report", e);
+        }
     }
 
     // ----------------------------------------------------------------------
