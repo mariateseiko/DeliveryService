@@ -39,8 +39,8 @@ public class FinanceReportServiceImpl extends AbstractExportService
     // ----------------------------------------------------------------------
 
     public void impl_exportToXls(File file, Date from,
-                                 List<Order> ordersFromSpecifiedDate) throws
-            Exception
+                                 List<Order> ordersFromSpecifiedDate)
+            throws Exception
     {
         final int C_DATE = 0;
         final int C_AGREEMENT_NO = 1;
@@ -164,9 +164,7 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
             double totalEarning = 0f;
 
-            for (int i = 0; i < ordersFromSpecifiedDate.size(); i++) {
-
-                Order o = ordersFromSpecifiedDate.get(i);
+            for (Order o : ordersFromSpecifiedDate) {
 
                 row = sheet.createRow(rowIndex++);
 
