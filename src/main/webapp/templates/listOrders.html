@@ -24,21 +24,21 @@
                             <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
                         </li>
                         <li ng-if="user.role == 'CLIENT'">
-                            <a href="#"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
+                            <a href="#/order"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
+                            <a href="#/application-list"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
                         </li>
-                        <li ng-if="user.role == 'CLIENT'">
-                            <a href="#" target="_blank"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
+                        <li>
+                            <a href="#/order-list"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
                         <li ng-if="user.role == 'COURIER'">
-                            <a href="#"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                            <a href="#/order-list"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
                         </li>
-                        <li ng-if="user.role == 'ACCOUNTANT'">
+                        <li ng-if="user.role == 'ACCOUTANT'">
                             <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
                         </li>
                         <li ng-if="user.role == 'MANAGER'">
@@ -52,45 +52,84 @@
         <div class="col-md-9">
             <div class="profile-content">
             <div class="container">
-                <h2>Application list</h2>
+                <h2>{{type}} list</h2>
 
                 <p>The .table-hover class enables a hover state on table rows:</p>
-{{test}}
-                <table class="table table-hover" ng-controller="orderlistCtrl">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Distance</th>
-                        <th>From</th>
-                        <th>Shipping</th>
-                        <th>Status</th>
-                        <th>To</th>
-                        <th>Total</th>
-                        <th>Weight</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="application in applications">
-                        <td>{{application.date}}</td>
-                        <td>{{application.distance}}</td>
-                        <td>{{application.from}}</td>
-                        <td>{{application.shipping.name}}</td>
-                        <td>{{application.status}}</td>
-                        <td>{{application.to}}</td>
-                        <td>{{application.total}}</td>
-                        <td>{{application.weight}}</td>
-                        <!--<td class="actions">
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
-                            <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </td>-->
-                    </tr>
 
-                    </tbody>
-                </table>
+                <div ng-if="type=='Application'">
+                    <table class="table table-hover" ng-controller="applicationlistCtrl">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Distance</th>
+                            <th>From</th>
+                            <th>Shipping</th>
+                            <th>Status</th>
+                            <th>To</th>
+                            <th>Total</th>
+                            <th>Weight</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="application in applications">
+                            <td>{{application.date}}</td>
+                            <td>{{application.distance}}</td>
+                            <td>{{application.from}}</td>
+                            <td>{{application.shipping.name}}</td>
+                            <td>{{application.status}}</td>
+                            <td>{{application.to}}</td>
+                            <td>{{application.total}}</td>
+                            <td>{{application.weight}}</td>
+                            <!--<td class="actions">
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </td>-->
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="type=='Order' || type=='order'">
+                    <table class="table table-hover" ng-controller="orderlistCtrl">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Distance</th>
+                            <th>From</th>
+                            <th>Shipping</th>
+                            <th>Status</th>
+                            <th>To</th>
+                            <th>Total</th>
+                            <th>Weight</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="order in orders">
+                            <td>{{order.date}}</td>
+                            <td>{{order.distance}}</td>
+                            <td>{{order.from}}</td>
+                            <td>{{order.shipping.name}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.to}}</td>
+                            <td>{{order.total}}</td>
+                            <td>{{order.weight}}</td>
+                            <!--<td class="actions">
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </td>-->
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
                 <div class="col-sm-10 col-sm-offset-10">
                     <button class="btn btn-primary " name="submit" type="submit" data-ng-click="sendApplication()">Save</button>
                 </div>

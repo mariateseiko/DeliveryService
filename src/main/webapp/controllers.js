@@ -92,35 +92,25 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
             }
             $scope.user = $rootScope.user;
             $scope.applications = [];
-            $scope.applicationsClick = function () {
-                //$location.path("/order-list");
-                $scope.applications = orderService.getApplications($scope, $rootScope);
-                $scope.applications = $rootScope.applications;
-                /*
-                * courier Object id
-                 date
-                 distance
-                 from
-                 ??id
-                 partner Object id
-                 shipping - > id, name, pricePerKg, pricePerKg
-                 status "AWAITING"
-                 to
-                 total
-                 weight*/
-            }
-            $scope.ordersClick = function () {
-                //$location.path('/order-list');
-                orderService.getOrders($scope);
-            }
+            $scope.type = "";
+            
         }
 }]);
-app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
+app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
+    $scope.type = "Application";
     console.log('2'+ $location.path());
     $scope.user = $rootScope.user;
     $scope.applications = orderService.getApplications($scope, $rootScope);
     $scope.applications = $rootScope.applications;
     
+}]);
+app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
+    $scope.type = "Order";
+    console.log('3'+ $location.path());
+    $scope.user = $rootScope.user;
+    $scope.orders = orderService.getOrders($scope, $rootScope);
+    $scope.orders = $rootScope.orders;
+
 }]);
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
     function ($scope, orderService, $rootScope, $location, sessionService, userService){
@@ -135,7 +125,7 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
             }
             $scope.user = $rootScope.user;
             //CHANGE FIELDS FOR SENDING APPLICATION
-            $scope.application = {
+            /*$scope.application = {
                 from: null,
                 to: null,
                 distance: null,
@@ -160,7 +150,7 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                 shp_pricePerKG: null,
                 shp_pricePerKM: null,
                 ord_total: null
-            }
+            }*/
             $scope.sendApplication = function () {
                 if (orderService.checkApplication($scope.application, $scope)) {
                     orderService.sendApplication($scope.application, $scope);
