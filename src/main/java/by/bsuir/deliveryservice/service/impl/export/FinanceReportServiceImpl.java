@@ -5,6 +5,8 @@ import by.bsuir.deliveryservice.service.AbstractExportService;
 import by.bsuir.deliveryservice.service.DocFormat;
 import by.bsuir.deliveryservice.service.FinanceReportExportService;
 import by.bsuir.deliveryservice.service.ServiceException;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,6 +19,8 @@ import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -198,6 +202,53 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
         } finally {
             if (workbook != null) workbook.close();
+        }
+    }
+
+    // ----------------------------------------------------------------------
+
+    public void impl_exportToCsv(File file,
+                                 List<Order> ordersFromSpecifiedDate)
+            throws Exception
+    {
+        CSVFormat csvFormat = CSVFormat.DEFAULT.withDelimiter(';');
+
+        try (OutputStreamWriter osw = new OutputStreamWriter(
+                new FileOutputStream(file),
+                Charset.forName("cp1251").newEncoder()))
+        {
+            CSVPrinter csv = null;
+
+            try {
+
+                csv = new CSVPrinter(osw, csvFormat);
+
+                /* Print header */
+
+                csv.printRecord("Тип", "Цена/км", "Цена/кг");
+
+                /* Print record list */
+
+                DateFormat dateFormat = DateFormat.getDateInstance();
+
+                for (Order o : ordersFromSpecifiedDate) {
+                    csv.printRecord(dateFormat.format(o.getDate()),
+                            String.format("№%d от %s г.",
+                                    o.getId(),
+                                    dateFormat.format(o.getDate())),
+                            String.format("%.2f", o.getTotal()),
+                            o.getPartner().getFullName(),
+                            o.getPartner().getPassport());
+                }
+
+            } finally {
+
+                if (csv != null) {
+                    csv.flush();
+                    csv.close();
+                }
+
+            }
         }
     }
 }
