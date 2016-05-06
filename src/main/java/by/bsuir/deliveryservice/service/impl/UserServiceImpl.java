@@ -82,4 +82,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<User> viewCouriers() throws ServiceException {
+        try {
+            return userDao.selectCouriers();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

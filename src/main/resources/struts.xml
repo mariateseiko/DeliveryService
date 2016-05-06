@@ -34,8 +34,6 @@
     <package name="client" extends="json-default">
         <interceptors>
             <interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>
-            <interceptor name="stream"
-                         class="org.apache.struts2.result.StreamResult"/>
         </interceptors>
         <action name="sendOrder" class="by.bsuir.deliveryservice.action.PlaceOrderAction">
             <interceptor-ref name="json"/>
@@ -147,51 +145,64 @@
                 <param name="root">shippings</param>
             </result>
         </action>
+        <action name="viewCouriers" class="by.bsuir.deliveryservice.action.ViewCouriersAction">
+            <interceptor-ref name="json"/>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">couriers</param>
+            </result>
+        </action>
+    </package>
 
+    <!--<package name="docgen">
         <action name="exportAgreement"
                 class="by.bsuir.deliveryservice.action.ExportAgreementAction">
-            <result type="stream" name="success">
+            <result name="success" type="stream">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
                 <param name="inputName">fileInputStream</param>
                 <param name="bufferSize">4096</param>
+            </result>
+            <result name="file_not_supported" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
             </result>
         </action>
         <action name="exportAct"
                 class="by.bsuir.deliveryservice.action.ExportActAction">
-            <result type="stream" name="success">
+            <result name="success" type="stream">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
                 <param name="inputName">fileInputStream</param>
                 <param name="bufferSize">4096</param>
+            </result>
+            <result name="file_not_supported" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
             </result>
         </action>
         <action name="exportPriceList"
                 class="by.bsuir.deliveryservice.action.ExportPriceListAction">
-            <result type="stream" name="success">
+            <result name="success" type="stream">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
                 <param name="inputName">fileInputStream</param>
                 <param name="bufferSize">4096</param>
             </result>
-        </action>
-        <action name="exportFinanceReport"
-                class="by.bsuir.deliveryservice.action.ExportFinanceReportAction">
-            <result type="stream" name="success">
-                <param name="contentDisposition">attachment;filename=${fileName}</param>
-                <param name="contentType">application/octet-stream</param>
-                <param name="inputName">fileInputStream</param>
-                <param name="bufferSize">4096</param>
+            <result name="file_not_supported" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
             </result>
         </action>
-        <action name="exportOrderList"
-                class="by.bsuir.deliveryservice.action.ExportOrderListAction">
-            <result type="stream" name="success">
-                <param name="contentDisposition">attachment;filename=${fileName}</param>
-                <param name="contentType">application/octet-stream</param>
-                <param name="inputName">fileInputStream</param>
-                <param name="bufferSize">4096</param>
-            </result>
-        </action>
-    </package>
+    </package>-->
 </struts>
