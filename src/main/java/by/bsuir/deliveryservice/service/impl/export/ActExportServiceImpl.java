@@ -60,7 +60,11 @@ public class ActExportServiceImpl extends AbstractExportService
 
             /* Run an appropriate document generator */
 
-            return impl_exportToPdf(o);
+            File file = getTemporaryFile(PREFIX, DocFormat.PDF.toString());
+
+            impl_exportToPdf(file, o);
+
+            return file;
 
         } catch (Exception e) {
             throw new ServiceException("failed to export ACT", e);
@@ -69,14 +73,13 @@ public class ActExportServiceImpl extends AbstractExportService
 
     // ----------------------------------------------------------------------
 
-    protected File impl_exportToPdf(Order o) throws ServiceException
+    public void impl_exportToPdf(File file, Order o)
+            throws ServiceException
     {
         try {
 
-            File docFile = getTemporaryFile(PREFIX, DocFormat.PDF.toString());
-
             Document doc = new Document();
-            PdfWriter.getInstance(doc, new FileOutputStream(docFile));
+            PdfWriter.getInstance(doc, new FileOutputStream(file));
 
             try {
 
@@ -92,8 +95,6 @@ public class ActExportServiceImpl extends AbstractExportService
             } finally {
                 doc.close();
             }
-
-            return docFile;
 
         } catch (Exception e) {
             throw new ServiceException("failed to export", e);
