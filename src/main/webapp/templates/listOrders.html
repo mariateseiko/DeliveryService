@@ -71,6 +71,7 @@
                             <th>To</th>
                             <th>Total</th>
                             <th>Weight</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -86,14 +87,17 @@
                             <td>{{application.to}}</td>
                             <td>{{application.total}}</td>
                             <td>{{application.weight}}</td>
-                            <!--<td class="actions">
-                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                            <td class="actions">
+                                <a href="#" data-ng-click="openApp()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <!--<button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                                 <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </td>-->
+                                </button>-->
+                            </td>
                         </tr>
 
                         </tbody>
@@ -129,14 +133,17 @@
                             <td>{{order.to}}</td>
                             <td>{{order.total}}</td>
                             <td>{{order.weight}}</td>
-                            <!--<td class="actions">
-                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
+                            <td class="actions">
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="openApp(order)">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                                <!--<button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                                 <button class="btn btn-custom " name="submit" type="submit" data-ng-click="sendApplication()">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                            </td>-->
+                                </button>-->
+                            </td>
                         </tr>
 
                         </tbody>

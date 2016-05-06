@@ -54,8 +54,71 @@
                                         <div class="formden_header col-sm-offset-6">
                                             <h2>Application info</h2>
                                         </div>
-                                        <div class="container col-sm-offset-2">
-                                            <table class="order">
+                                        <div class="container col-md-12 col-md-offset-2">
+                                            <table class="table table-hover" ng-controller="orderinfoCtrl">
+
+                                                <tbody>
+                                                <tr>
+                                                    <td>Id client</td>
+                                                    <td>{{order.partner.id}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Login</td>
+                                                    <td>{{userData.login}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>{{userData.fullName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Passport</td>
+                                                    <td>{{userData.passport}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone</td>
+                                                    <td>{{userData.phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date</td>
+                                                    <td>{{order.date}}</td>
+                                                    </tr>
+                                                <tr>
+                                                    <td>Distance</td>
+                                                    <td>{{order.distance}}</td>
+                                                    </tr>
+                                                <tr>
+                                                    <td>From</td>
+                                                    <td>{{order.from}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shipping</td>
+                                                    <td>{{order.shipping.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>
+                                                        <select name="typeShipping" id="typeShipping" ng-model="order.status" required>
+                                                            <option value="normal" >Normal</option>
+                                                            <option value="fast">Fast</option>
+                                                            <option value="carefully">Carefully</option>
+                                                        </select>
+                                                        {{order.status}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>To</td>
+                                                    <td>{{order.to}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td>{{order.total}}</td>
+                                                <tr>
+                                                    <td>Weight</td>
+                                                    <td>{{order.weight}}</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <!--<table class="order">
                                                 <tbody>
                                                 <tr>
                                                     <td>Order ID: </td>
@@ -114,7 +177,7 @@
                                                     <td>{{order.ord_total}}</td>
                                                 </tr>
                                                 </tbody>
-                                            </table>
+                                            </table>-->
                                         </div>
                                     </div>
                                 </div>

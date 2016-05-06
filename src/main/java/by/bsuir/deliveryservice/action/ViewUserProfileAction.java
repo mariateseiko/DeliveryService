@@ -23,9 +23,14 @@ public class ViewUserProfileAction implements Action {
     public String execute() throws Exception {
         if (userId == null) {
             HttpServletRequest request = ServletActionContext.getRequest();
-            HttpSession session = request.getSession();
-            User user = (User)session.getAttribute(USER);
-            userId = user.getId();
+
+            userId =  Long.parseLong(request.getParameter("userId"));
+
+            if (userId == null) {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute(USER);
+                userId = user.getId();
+            }
         }
         try {
             user = userService.viewUser(userId);

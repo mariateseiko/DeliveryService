@@ -198,6 +198,13 @@ app.factory('managerService', ['$http', function ($http) {
                 $scope.orders = response.data;
                 $rootScope.orders = response.data;
             })
+        },
+        getUserData: function($scope, $rootScope, id) {
+            $http.get('viewProfile', {
+                params: {userId: id}
+            }).then(function (responce) {
+                $scope.userData = responce.data;
+            });
         }
     }
 }])

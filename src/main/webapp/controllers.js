@@ -115,6 +115,12 @@ app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderServ
     $scope.type = "Order";
     //console.log('3'+ $location.path());
     $scope.user = $rootScope.user;
+        $scope.chooseApp = "";
+        $scope.openApp = function(chooseApp) {
+            $scope.chooseApp = chooseApp;
+            $rootScope.chooseApp = chooseApp;
+            $location.path('/order-info');
+        }
 
     if ($scope.user.role == 'CLIENT') {
         $scope.orders = orderService.getOrders($scope, $rootScope);
@@ -124,6 +130,16 @@ app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderServ
     }
 
 }]);
+
+app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
+    function ($scope, $rootScope, $location, orderService, managerService) {
+        $scope.user = $rootScope.user;
+        $scope.order = $rootScope.chooseApp;
+        
+        $scope.userData = managerService.getUserData($scope, $rootScope, $rootScope.chooseApp.partner.id);
+        
+    }]);
+
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
     function ($scope, orderService, $rootScope, $location, sessionService, userService){
         $scope.errorMessage = "";
@@ -136,33 +152,7 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                 userService.viewProfile($scope, $rootScope);
             }
             $scope.user = $rootScope.user;
-            //CHANGE FIELDS FOR SENDING APPLICATION
-            /*$scope.application = {
-                from: null,
-                to: null,
-                distance: null,
-                weight: null,
-                shipping: null,
-                data: null
-            };
-
-            $scope.order = {
-                ord_id: null,
-                ord_date: null,
-                usr_login: null,
-                usr_name: null,
-                usr_passport: null,
-                usr_phone: null,
-                ord_status: null,
-                ord_from: null,
-                ord_to: null,
-                ord_distance: null,
-                ord_weight: null,
-                shp_name: null,
-                shp_pricePerKG: null,
-                shp_pricePerKM: null,
-                ord_total: null
-            }*/
+            
             $scope.sendApplication = function () {
                 if (orderService.checkApplication($scope.application, $scope)) {
                     orderService.sendApplication($scope.application, $scope);

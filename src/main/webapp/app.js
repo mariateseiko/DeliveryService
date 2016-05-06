@@ -33,9 +33,9 @@ app.config(['$routeProvider', function($routeProvide){
         templateUrl: 'templates/listOrders.html',
         controller: 'applicationlistCtrl'
     })
-    .when('/orderinfo', {
+    .when('/order-info', {
         templateUrl: 'templates/orderinfo.html',
-        controller: 'orderCtrl'
+        controller: 'orderinfoCtrl'
     })
     .when('/accountsettings', {
         templateUrl: 'templates/accset.html'
