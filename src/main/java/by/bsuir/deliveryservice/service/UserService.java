@@ -39,4 +39,6 @@ public interface UserService {
     void updateRole(Long userId, UserRole role) throws ServiceException;
 
     List<User> viewAllUsers() throws ServiceException;
+
+    List<User> viewCouriers() throws ServiceException;
 }

@@ -216,6 +216,12 @@ app.factory('managerService', ['$http', function ($http) {
                     $scope.successMessage = "Order was updated."
                 } else $scope.errorMessage = "Error";
             })
+        },
+        getCourierList: function ($scope) {
+            $http.get('viewCouriers').then(function (response) {
+                $scope.couriers = response.data;
+                //$rootScope.couriers = response.data;
+            })
         }
         //orderId, status);
     }

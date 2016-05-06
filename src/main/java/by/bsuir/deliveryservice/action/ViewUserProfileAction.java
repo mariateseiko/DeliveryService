@@ -31,6 +31,7 @@ public class ViewUserProfileAction implements Action {
                 User user = (User) session.getAttribute(USER);
                 userId = user.getId();
             }
+
         }
         try {
             user = userService.viewUser(userId);

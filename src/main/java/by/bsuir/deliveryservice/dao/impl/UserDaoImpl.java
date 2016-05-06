@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
     private final static String UPDATE_USER = "UPDATE `user` SET usr_fullname=?, usr_mobileno=?, usr_passport=? WHERE usr_id=?";
     private final static String UPDATE_ROLE = "UPDATE `user` SET usr_role=? WHERE usr_id=?";
     private final static String SELECT_USERS = "SELECT * FROM `user` JOIN `role` ON usr_role = rol_id";
+    private final static String SELECT_COURIERS = "SELECT * FROM `user` JOIN `role` r ON usr_role = rol_id WHERE r.rol_Name='COURIER'";
 
     public static UserDao getInstance() {
         return instance;
@@ -143,6 +144,28 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Request to database failed", e);
         }
         return users;
+    }
+
+    @Override
+    public List<User> selectCouriers() throws DaoException {
+        List<User> couriers = new ArrayList<>();
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_COURIERS)) {
+            ResultSet resultSet = st.executeQuery();
+            while(resultSet.next()) {
+                User courier = new User();
+                courier.setId(resultSet.getLong("usr_id"));
+                courier.setLogin(resultSet.getString("usr_login"));
+                courier.setPhone(resultSet.getString("usr_mobileno"));
+                courier.setFullName(resultSet.getString("usr_fullname"));
+                courier.setPassport(resultSet.getString("usr_passport"));
+                courier.setRole(UserRole.valueOf("COURIER"));
+                couriers.add(courier);
+            }
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return couriers;
     }
 
     private int selectRoleIdByName(String name) throws DaoException {

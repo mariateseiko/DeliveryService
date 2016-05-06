@@ -79,8 +79,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
         }
 }]);
 
-app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService', 'userService',
-    function ($scope, sessionService, $rootScope, $location, orderService, userService) {
+app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService', 'userService', 'managerService',
+    function ($scope, sessionService, $rootScope, $location, orderService, userService, managerService) {
         if (!sessionService.get('user'))
            $location.path('/');
         else {
@@ -93,7 +93,8 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
             $scope.user = $rootScope.user;
             $scope.applications = [];
             $scope.type = "";
-            
+
+            $scope.couriers = managerService.getCourierList($scope);
         }
 }]);
 app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',

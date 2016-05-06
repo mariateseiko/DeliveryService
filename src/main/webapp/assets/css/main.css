@@ -948,3 +948,6 @@ z-index: 10;
 .table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{
   width: 50%;
 }
+table .table-hover {
+  color: #93A3B5;
+}
