@@ -928,7 +928,7 @@ z-index: 10;
   display: table-cell;
 }
 .actions button{
-  padding: 0% 17%;
+  padding: 13% 32%;
   font-weight: 100;
 }
 .table-hover{
@@ -937,7 +937,6 @@ z-index: 10;
 .order{
   display: block;
   margin: 50px auto;
-  width: 500px;
 }
 .order tr td:first-child{
    float:left;
@@ -948,6 +947,19 @@ z-index: 10;
 .table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{
   width: 50%;
 }
-table .table-hover {
+.table{
+  width: 95%;
+  max-width: 95%;
+}
+table .table-hover .order{
   color: #93A3B5;
+  padding: 6px;
+}
+.login-name{
+  color: #52b6ec;
+  vertical-align: middle;
+  line-height: 78px;
+  padding-right: 80%;
+  font-size: large;
+  text-decoration: underline;
 }

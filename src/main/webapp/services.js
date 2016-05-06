@@ -120,6 +120,10 @@ app.factory('orderService', ['$http', function ($http) {
        },
        getApplications: function ($scope, $rootScope) {
            $http.get('viewUserApplications').then(function (response){
+               response.data.forEach(function (element) {
+                   element.date = parseData(element.date);
+               });
+               
                 if (response.status == 200 && response.data) {
                     $scope.applications = response.data;
                     $rootScope.applications = response.data;
@@ -128,6 +132,10 @@ app.factory('orderService', ['$http', function ($http) {
        },
        getOrders: function ($scope) {
            $http.get('viewUserOrders').then(function (response) {
+               response.data.forEach(function (element) {
+                   element.date = parseData(element.date);
+               });
+               
                if (response.status == 200 && response.data) {
                    $scope.orders = response.data;
                }else $scope.errorMessage = "Error";
@@ -189,12 +197,18 @@ app.factory('managerService', ['$http', function ($http) {
     return {
         getApplications: function ($scope, $rootScope) {
             $http.get('viewApplications').then(function (response) {
+                response.data.forEach(function (element) {
+                    element.date = parseData(element.date);
+                });
                 $scope.applications = response.data;
                 $rootScope.applications = response.data;
             })
         },
         getOrders: function ($scope, $rootScope) {
             $http.get('viewOrders').then(function (response) {
+                response.data.forEach(function (element) {
+                    element.date = parseData(element.date);
+                });
                 $scope.orders = response.data;
                 $rootScope.orders = response.data;
             })
@@ -223,6 +237,9 @@ app.factory('managerService', ['$http', function ($http) {
                 //$rootScope.couriers = response.data;
             })
         }
-        //orderId, status);
     }
-}])
+}]);
+
+function parseData(data) {
+    return data.substring(0, data.indexOf('T'));
+}
