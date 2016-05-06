@@ -102,6 +102,13 @@ app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'ord
         //console.log('2'+ $location.path());
         $scope.user = $rootScope.user;
 
+        $scope.chooseApp = "";
+        $scope.openApp = function(chooseApp) {
+            $scope.chooseApp = chooseApp;
+            $rootScope.chooseApp = chooseApp;
+            $location.path('/order-info');
+        }
+        
         if ($scope.user.role == 'CLIENT') {
             $scope.applications = orderService.getApplications($scope, $rootScope);
             $scope.applications = $rootScope.applications;
@@ -115,6 +122,7 @@ app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderServ
     $scope.type = "Order";
     //console.log('3'+ $location.path());
     $scope.user = $rootScope.user;
+        
         $scope.chooseApp = "";
         $scope.openApp = function(chooseApp) {
             $scope.chooseApp = chooseApp;
@@ -135,9 +143,22 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
     function ($scope, $rootScope, $location, orderService, managerService) {
         $scope.user = $rootScope.user;
         $scope.order = $rootScope.chooseApp;
+
+        $scope.errorMessage = "";
+        $scope.successMessage = "";
         
+        $scope.updates = [
+            {status: 'AWAITING'},
+            {status: 'DELIVERY'},
+            {status: 'DELIVERED'},
+            {status: 'CANCELED'},
+            {status: 'DECLINED'}
+        ];
+
         $scope.userData = managerService.getUserData($scope, $rootScope, $rootScope.chooseApp.partner.id);
-        
+        $scope.saveOrder = function () {
+            managerService.updateOrderStatus($scope, $rootScope, $scope.order);
+        }
     }]);
 
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',

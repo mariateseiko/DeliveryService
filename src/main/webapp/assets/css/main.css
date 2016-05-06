@@ -681,7 +681,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px;
-  min-height: 550px;
+  min-height: 600px;
   background: #f9f9f9;
 }
 
@@ -775,7 +775,7 @@ body {
 .profile-content {
   padding: 20px;
   background: #f9f9f9;
-  min-height: 550px;
+  min-height: 600px;
 }
 
 /*================================overview================*/

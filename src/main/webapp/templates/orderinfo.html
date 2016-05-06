@@ -25,18 +25,30 @@
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
                     <ul class="nav">
-                        <li>
-                            <a href="#/profile">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Overview </a>
+                        <li class="active">
+                            <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
+                        </li>
+                        <li ng-if="user.role == 'CLIENT'">
+                            <a href="#/order"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
                         </li>
                         <li>
-                            <a href="#/accountsettings">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
+                            <a href="#/application-list"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
                         </li>
                         <li>
-
+                            <a href="#/order-list"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
+                        </li>
+                        <li ng-if="user.role == 'COURIER'">
+                            <a href="#/order-list"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
+                        </li>
+                        <li ng-if="user.role == 'ACCOUTANT'">
+                            <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
+                        </li>
+                        <li ng-if="user.role == 'MANAGER'">
+                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -55,6 +67,7 @@
                                             <h2>Application info</h2>
                                         </div>
                                         <div class="container col-md-12 col-md-offset-2">
+                                            <form>
                                             <table class="table table-hover" ng-controller="orderinfoCtrl">
 
                                                 <tbody>
@@ -97,12 +110,17 @@
                                                 <tr>
                                                     <td>Status</td>
                                                     <td>
-                                                        <select name="typeShipping" id="typeShipping" ng-model="order.status" required>
-                                                            <option value="normal" >Normal</option>
-                                                            <option value="fast">Fast</option>
-                                                            <option value="carefully">Carefully</option>
+                                                        <select name="status" ng-switch on="order.status" ng-model="order.status">
+                                                        <div >
+                                                            <option value="AWAITING" selected>AWAITING</option>
+                                                            <option value="DELIVERY" >DELIVERY</option>
+                                                            <option value="DELIVERED" >DELIVERED</option>
+                                                            <option value="CANCELED" >CANCELED</option>
+                                                            <option value="DECLINED" >DECLINED</option>
+                                                        </div>
+
                                                         </select>
-                                                        {{order.status}}</td>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                     <td>To</td>
@@ -118,66 +136,18 @@
 
                                                 </tbody>
                                             </table>
-                                            <!--<table class="order">
-                                                <tbody>
-                                                <tr>
-                                                    <td>Order ID: </td>
-                                                    <td>{{order.ord_id}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date: </td>
-                                                    <td>{{order.ord_date}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Client login: </td>
-                                                    <td>{{order.usr_login}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Client name: </td>
-                                                    <td>{{order.usr_name}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Client passport: </td>
-                                                    <td>{{order.usr_passport}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Client phone: </td>
-                                                    <td>{{order.usr_phone}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status: </td>
-                                                    <td>{{order.ord_status}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>From: </td>
-                                                    <td>{{order.ord_from}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>To: </td>
-                                                    <td>{{order.ord_to}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Distance: </td>
-                                                    <td>{{order.ord_distance}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Type of shipping: </td>
-                                                    <td>{{order.shp_name}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Price per 1km: </td>
-                                                    <td>{{order.shp_pricePerKM}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Price per 1kg: </td>
-                                                    <td>{{order.shp_pricePerKG}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Total: </td>
-                                                    <td>{{order.ord_total}}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>-->
+                                                <div ng-if="successMessage!=''">
+                                                    <div class="form-group">
+                                                        <div class="success-message">{{successMessage}}</div>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="errorMessage!=''">
+                                                    <div class="form-group">
+                                                        <div class="error-message">{{errorMessage}}</div>
+                                                    </div>
+                                                </div>
+                                                <button data-ng-click="saveOrder()">Save</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

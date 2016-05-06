@@ -205,6 +205,18 @@ app.factory('managerService', ['$http', function ($http) {
             }).then(function (responce) {
                 $scope.userData = responce.data;
             });
+        },
+        updateOrderStatus: function ($scope, $rootScope, $order) {
+            var data = {
+                orderId: $order.id,
+                status: $order.status
+            }
+            $http.post('updateStatus', data).then(function (response) {
+                if (response.status == 200 && response.data){
+                    $scope.successMessage = "Order was updated."
+                } else $scope.errorMessage = "Error";
+            })
         }
+        //orderId, status);
     }
 }])
