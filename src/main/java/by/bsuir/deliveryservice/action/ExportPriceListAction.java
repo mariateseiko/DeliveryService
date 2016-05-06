@@ -26,8 +26,7 @@ public class ExportPriceListAction extends DocExportAction
     {
         String docType = this.getDocType();
 
-        if (!docType.equalsIgnoreCase(DocFormat.CSV.toString()) ||
-                !docType.equalsIgnoreCase(DocFormat.XLS.toString()))
+        if (docType.equalsIgnoreCase(DocFormat.PDF.toString()))
             return DocExportAction.FILE_NOT_SUPPORTED;
 
         File file = service.exportToFile(DocFormat.valueOf(docType));
