@@ -8,19 +8,14 @@ package by.bsuir.deliveryservice.service.impl.export;
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.entity.User;
-import by.bsuir.deliveryservice.service.AbstractExportService;
-import by.bsuir.deliveryservice.service.OrderListExportService;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import static org.junit.Assert.*;
 
 public class OrderListExportServiceTest
 {
@@ -31,7 +26,7 @@ public class OrderListExportServiceTest
     @Test
     public void basicTest() throws Exception
     {
-        File pdfFile = File.createTempFile("orderList", ".pdf"); // Hardcoded
+        File pdfFile = File.createTempFile("orderList-", ".pdf"); // Hardcoded
         System.out.println("File: " + pdfFile.getCanonicalPath());
 
         User courier = new User();
@@ -43,6 +38,7 @@ public class OrderListExportServiceTest
 
         partner.setFullName("%PARTNER_FULL_NAME%");
         partner.setPhone("+375 00 123 45 67");
+        partner.setPassport("%PASSPORT%");
 
         Shipping shipping = new Shipping("%SHIPPING%");
 
