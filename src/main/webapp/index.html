@@ -48,15 +48,20 @@
                         <li><a href="#about-us">About Us</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
+
                     <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav" ng-if="user.login==undefined">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
                                 <a href="" data-target="#reg">Registration</a>
                             </li>
-                        </ul>    
+                        </ul>
+                        <div ng-if="user.login!=undefined">
+                            <a href="#/profile" class="login-name">{{user.login}}</a></li>
+                        </div>
                     </div>
+
                             <!-- regForm -->
                 </div>
             </div>

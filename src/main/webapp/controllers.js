@@ -79,8 +79,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
         }
 }]);
 
-app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService', 'userService', 'managerService',
-    function ($scope, sessionService, $rootScope, $location, orderService, userService, managerService) {
+app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$location', 'orderService', 'userService',
+    function ($scope, sessionService, $rootScope, $location, orderService, userService) {
         if (!sessionService.get('user'))
            $location.path('/');
         else {
@@ -93,8 +93,7 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
             $scope.user = $rootScope.user;
             $scope.applications = [];
             $scope.type = "";
-
-            $scope.couriers = managerService.getCourierList($scope);
+            
         }
 }]);
 app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
@@ -118,6 +117,7 @@ app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'ord
         }
     
 }]);
+
 app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
     function ($scope, $rootScope, $location, orderService, managerService) {
     $scope.type = "Order";
@@ -160,6 +160,8 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
         $scope.saveOrder = function () {
             managerService.updateOrderStatus($scope, $rootScope, $scope.order);
         }
+
+        //$scope.couriers = managerService.getCourierList($scope);
     }]);
 
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
