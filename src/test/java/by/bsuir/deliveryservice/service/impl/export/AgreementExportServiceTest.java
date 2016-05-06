@@ -1,14 +1,9 @@
-/*
- * Copyright © 2016, Andrew Grivachevsky
- * All rights reserved.
- */
-
 package by.bsuir.deliveryservice.service.impl.export;
 
+import by.bsuir.deliveryservice.entity.Office;
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.entity.User;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,20 +12,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class OrderListExportServiceTest
+import static junit.framework.TestCase.assertTrue;
+
+public class AgreementExportServiceTest
 {
-    protected final OrderListExportServiceImpl serviceImpl =
-            (OrderListExportServiceImpl)
-                    OrderListExportServiceFactory.getService();
+    protected final AgreementExportServiceImpl serviceImpl =
+            (AgreementExportServiceImpl)
+                    AgreementExportServiceFactory.getService();
 
     @Test
     public void basicTest() throws Exception
     {
-        File pdfFile = File.createTempFile("orderList-", ".pdf"); // Hardcoded
+        File pdfFile = File.createTempFile("agreement-", ".pdf"); // Hardcoded
         System.out.println("File: " + pdfFile.getCanonicalPath());
 
         User courier = new User();
-        List<Order> orders = new ArrayList<>();
 
         courier.setFullName("%COURIER_FULL_NAME%");
 
@@ -42,6 +38,11 @@ public class OrderListExportServiceTest
 
         Shipping shipping = new Shipping("%SHIPPING%");
 
+        Office office = new Office();
+
+        office.setName("%OFFICE%");
+        office.setCredentials("%CREDENTIALS%");
+
         Order o = new Order();
 
         o.setDate(new Date());
@@ -52,16 +53,10 @@ public class OrderListExportServiceTest
         o.setShipping(shipping);
         o.setWeight(0.00);
         o.setTotal(1.00);
+        o.setOffice(office);
 
-        Random random = new Random();
-        int count = 5 + random.nextInt(10);
+        serviceImpl.impl_exportToPdf(pdfFile, o);
 
-        for (int i = 1; i < count; i++) {
-            orders.add(o);
-        }
-
-        serviceImpl.impl_exportToPdf(pdfFile, courier, orders);
-
-        Assert.assertTrue(pdfFile.exists() && pdfFile.length() > 0);
+        assertTrue(pdfFile.exists() && pdfFile.length() > 0);
     }
 }
