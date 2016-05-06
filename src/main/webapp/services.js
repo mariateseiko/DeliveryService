@@ -71,13 +71,15 @@ app.factory('registerService', function($http){
                 phone: credentials.phone,
                 passport: credentials.passport
             };
-            $http.post("register", dataToSend).then(function(response) {
-                if (response.status == 200) {
-                    $scope.successMessage = "You are registered";
-                }
-                else if (response.data == 0)
-                    $scope.errorMessage = "This user is already exist.";
-            });
+            if (!$scope.errorMessage) {
+                $http.post("register", dataToSend).then(function (response) {
+                    if (response.status == 200) {
+                        $scope.successMessage = "You are registered";
+                    }
+                    else if (response.data == 0)
+                        $scope.errorMessage = "This user is already exist.";
+                });
+            }
         }
     }
 });
@@ -185,9 +187,16 @@ app.factory('userService', ['$http', 'orderService', function($http, orderServic
 
 app.factory('managerService', ['$http', function ($http) {
     return {
-        getApplications: function ($scope) {
-            $http.get('viewApplicationActions').then(function (response) {
+        getApplications: function ($scope, $rootScope) {
+            $http.get('viewApplications').then(function (response) {
                 $scope.applications = response.data;
+                $rootScope.applications = response.data;
+            })
+        },
+        getOrders: function ($scope, $rootScope) {
+            $http.get('viewOrders').then(function (response) {
+                $scope.orders = response.data;
+                $rootScope.orders = response.data;
             })
         }
     }

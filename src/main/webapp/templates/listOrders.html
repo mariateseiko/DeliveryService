@@ -60,6 +60,9 @@
                     <table class="table table-hover" ng-controller="applicationlistCtrl">
                         <thead>
                         <tr>
+                            <div ng-if="user.role!=='CLIENT'">
+                                <th>Id client</th>
+                            </div>
                             <th>Date</th>
                             <th>Distance</th>
                             <th>From</th>
@@ -72,6 +75,9 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="application in applications">
+                            <div ng-if="user.role!=='CLIENT'">
+                                <td>{{application.partner.id}}</td>
+                            </div>
                             <td>{{application.date}}</td>
                             <td>{{application.distance}}</td>
                             <td>{{application.from}}</td>
@@ -97,6 +103,9 @@
                     <table class="table table-hover" ng-controller="orderlistCtrl">
                         <thead>
                         <tr>
+                            <div ng-if="user.role!=='CLIENT'">
+                                <th>Id client</th>
+                            </div>
                             <th>Date</th>
                             <th>Distance</th>
                             <th>From</th>
@@ -109,6 +118,9 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="order in orders">
+                            <div ng-if="user.role!=='CLIENT'">
+                                <td>{{order.partner.id}}</td>
+                            </div>
                             <td>{{order.date}}</td>
                             <td>{{order.distance}}</td>
                             <td>{{order.from}}</td>

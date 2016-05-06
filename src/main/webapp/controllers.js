@@ -96,20 +96,32 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
             
         }
 }]);
-app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
-    $scope.type = "Application";
-    console.log('2'+ $location.path());
-    $scope.user = $rootScope.user;
-    $scope.applications = orderService.getApplications($scope, $rootScope);
-    $scope.applications = $rootScope.applications;
+app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
+    function ($scope, $rootScope, $location, orderService, managerService) {
+        $scope.type = "Application";
+        //console.log('2'+ $location.path());
+        $scope.user = $rootScope.user;
+
+        if ($scope.user.role == 'CLIENT') {
+            $scope.applications = orderService.getApplications($scope, $rootScope);
+            $scope.applications = $rootScope.applications;
+        } else {
+            $scope.applications = managerService.getApplications($scope, $rootScope);
+        }
     
 }]);
-app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', function ($scope, $rootScope, $location, orderService) {
+app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
+    function ($scope, $rootScope, $location, orderService, managerService) {
     $scope.type = "Order";
-    console.log('3'+ $location.path());
+    //console.log('3'+ $location.path());
     $scope.user = $rootScope.user;
-    $scope.orders = orderService.getOrders($scope, $rootScope);
-    $scope.orders = $rootScope.orders;
+
+    if ($scope.user.role == 'CLIENT') {
+        $scope.orders = orderService.getOrders($scope, $rootScope);
+        $scope.orders = $rootScope.orders;
+    } else {
+        $scope.orders = managerService.getOrders($scope, $rootScope);
+    }
 
 }]);
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
