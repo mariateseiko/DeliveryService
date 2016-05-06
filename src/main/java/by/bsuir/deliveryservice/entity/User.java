@@ -34,6 +34,14 @@ public class User extends Entity {
         this.role = role;
     }
 
+    public User(String login, String password, String phone, String fullName, String passport) {
+        this.login = login;
+        this.password = password;
+        this.phone = phone;
+        this.fullName = fullName;
+        this.passport = passport;
+    }
+
     public String getLogin() {
         return login;
     }
