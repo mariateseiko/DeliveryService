@@ -165,6 +165,7 @@
         </action>
         <action name="exportAgreement"
                 class="by.bsuir.deliveryservice.action.ExportAgreementAction">
+            <interceptor-ref name="json"/>
             <result type="stream" name="success">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
@@ -174,6 +175,7 @@
         </action>
         <action name="exportAct"
                 class="by.bsuir.deliveryservice.action.ExportActAction">
+            <interceptor-ref name="json"/>
             <result type="stream" name="success">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
@@ -183,6 +185,7 @@
         </action>
         <action name="exportPriceList"
                 class="by.bsuir.deliveryservice.action.ExportPriceListAction">
+            <interceptor-ref name="json"/>
             <result type="stream" name="success">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
@@ -192,6 +195,7 @@
         </action>
         <action name="exportFinanceReport"
                 class="by.bsuir.deliveryservice.action.ExportFinanceReportAction">
+            <interceptor-ref name="json"/>
             <result type="stream" name="success">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
@@ -201,6 +205,7 @@
         </action>
         <action name="exportOrderList"
                 class="by.bsuir.deliveryservice.action.ExportOrderListAction">
+            <interceptor-ref name="json"/>
             <result type="stream" name="success">
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="contentType">application/octet-stream</param>
