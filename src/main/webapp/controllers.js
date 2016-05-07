@@ -185,6 +185,15 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
         }
 }]);
 
+app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'userService',
+    function ($scope, orderService, $rootScope, $location, managerService, userService){
+
+        $scope.user = $rootScope.user;
+
+        $scope.couriers = managerService.getCourierList($scope);
+        
+    }]);
+
 app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'sessionService', 'userService',
     function ($scope, $rootScope, $location, sessionService, userService) {
         if (!sessionService.get('user'))

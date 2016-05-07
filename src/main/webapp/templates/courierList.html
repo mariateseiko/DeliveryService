@@ -1,4 +1,4 @@
-<div class="container" ng-controller="profileCtrl">
+<div class="container" ng-controler="profileCtrl">
     <div class="row profile">
         <div class="col-md-3">
             <div class="profile-sidebar">
@@ -15,11 +15,6 @@
                     <div class="profile-usertitle-job">
                         {{user.role}}
                     </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
@@ -59,33 +54,32 @@
         </div>
         <div class="col-md-9">
             <div class="profile-content">
-                <div class="col-sm-12">
-                    <div class="col-xs-12 col-sm-8">
-                        <h2>{{user.login}}</h2>
-                        <p><strong>Name: {{user.name}}</strong></p>
-                        <p><strong>Phone: {{user.phone}}</strong></p>
-                        <p><strong>Passport: {{user.passport}}</strong>  </p>
-                    </div>
+                <div class="container">
+                    <h2>Courier list</h2>
 
-                    <div class="col-xs-12 col-sm-4 text-center">
-                        <figure>
-                            <img src="assets/images/team1.jpg" alt="user" class="img-circle img-responsive"><br>
-                        </figure>
-                    </div>
-                </div>
-                <div ng-if="user.role == 'CLIENT'">
-                    <div class="col-xs-12 divider text-center">
-                        <div class="col-xs-12 col-sm-4 emphasis">
-                            <h2><strong>{{user.countOrders}}</strong></h2>
-                            <p><small>Orders</small></p>
-                            <button class="btn btn-success btn-block"><span ></span>View orders</button>
-                        </div>
-                        <div class="col-xs-12 col-sm-4 emphasis">
-                            <h2><strong>{{user.countApplications}}</strong></h2>
-                            <p><small>Applications</small></p>
-                            <button class="btn btn-info btn-block"><span></span>View applications</button>
-                        </div>
-                    </div>
+                    <p>The .table-hover class enables a hover state on table rows:</p>
+                    <table class="table table-hover" ng-controller="couriersCtrl">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="courier in couriers">
+                            <td>{{courier.id}}</td>
+                            <td>{{courier.fullName}}</td>
+                            <td>{{courier.phone}}</td>
+                            <td class="actions">
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="openApp(application)">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

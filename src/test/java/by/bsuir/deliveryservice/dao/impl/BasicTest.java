@@ -1,6 +1,6 @@
 package by.bsuir.deliveryservice.dao.impl;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+//import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.BeforeClass;
 
 import javax.naming.Context;
@@ -9,7 +9,7 @@ import javax.naming.NamingException;
 
 public class BasicTest
 {
-    @BeforeClass
+   /* @BeforeClass
     public static void initContext() throws NamingException
     {
         BasicDataSource bds = new BasicDataSource();
@@ -17,7 +17,7 @@ public class BasicTest
         /*
          * Insert from META-INF/context.xml
          */
-
+/*
         bds.setDriverClassName("com.mysql.jdbc.Driver");
         // ToDo: Should we use another database for testing purposes?
         bds.setUrl("jdbc:mysql://localhost:3306/delivery");
@@ -36,5 +36,5 @@ public class BasicTest
         c.createSubcontext("java:/comp/env/jdbc");
 
         c.bind("java:/comp/env/jdbc/delivery", bds);
-    }
+    }*/
 }
