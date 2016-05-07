@@ -158,7 +158,7 @@
                 <param name="root">couriers</param>
             </result>
         </action>
-        <action name="viewCouriers" class="by.bsuir.deliveryservice.action.LogoutAction">
+        <action name="logout" class="by.bsuir.deliveryservice.action.LogoutAction">
             <interceptor-ref name="json"/>
             <result type="json" name="success">
             </result>
