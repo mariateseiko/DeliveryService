@@ -50,9 +50,13 @@ app.factory('documentService', ['$http', function ($http) {
             var data = {
                 docType: type
             };
+/*
             $http.get('exportPriceList ', {params: data}).then(function (response) {
                 console.log('Success exportPriceList  '+ response.data);
             });
+*/
+            window.open('exportPriceList?docType=' + data.docType);
+
             console.log('Error exportPriceList ');
         },
         //--------------- -order, + sinnceData 
