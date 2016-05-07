@@ -15,8 +15,8 @@ import java.util.Date;
 public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDER_BY_ID = "SELECT * " +
             "FROM `order` " +
-            "JOIN `user` ON `order`.ord_partner = `user`.usr_id " +
-            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
+            "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "WHERE `order`.ord_id=?";
@@ -189,8 +189,10 @@ public class OrderDaoImpl implements OrderDao {
     private Order retrieveOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getLong("ord_id"));
-        order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("usr_login")));
-        order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("usr_fullName")));
+        order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("partner.usr_login")));
+        if (resultSet.getLong("ord_courier") != 0) {
+            order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("courier.usr_login")));
+        }
         order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
         order.setFrom(resultSet.getString("ord_from"));
         order.setTo(resultSet.getString("ord_to"));
