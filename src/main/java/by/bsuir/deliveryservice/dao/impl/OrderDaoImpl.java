@@ -28,7 +28,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final String SELECT_STATUS_ID_BY_NAME = "SELECT ost_id FROM `status` WHERE ost_Name = ?";
     private static final String SELECT_ORDER_BY_USER_AND_STATUSES = "SELECT * FROM `order` " +
-            "JOIN `user` AS `partner` ON `order`.ord_courier = `partner`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "JOIN `office` ON `office`.off_id = `order`.ord_office " +
