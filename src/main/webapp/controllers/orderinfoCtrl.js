@@ -21,12 +21,23 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
             $scope.order = $rootScope.chooseApp;
 
             $scope.userData = managerService.getUserData($scope, $rootScope, $rootScope.chooseApp.partner.id);
+            
             $scope.saveOrder = function () {
                 managerService.updateOrderStatus($scope, $rootScope, $scope.order);
             };
+            $scope.couriers = managerService.getCourierList($scope);
+            
+            $scope.assignCourier = function() {
+                var data = {
+                    id_courier: $scope.selected,
+                    id_order: $scope.order.id
+                }
+                managerService.assignCourier($scope, data);
+            };
+            
             $scope.exit = function () {
                 loginService.logout($scope, $rootScope);
             }
-        
+            
         }
     }]);

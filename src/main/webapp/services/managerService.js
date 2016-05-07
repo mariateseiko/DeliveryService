@@ -43,6 +43,17 @@ app.factory('managerService', ['$http', function ($http) {
                 $scope.couriers = response.data;
                 //$rootScope.couriers = response.data;
             })
+        },
+        assignCourier: function ($scope, data) {
+            var dataToSend = {
+                cid: data.id_courier,
+                oid: data.id_order
+            };
+            $http.post('assignCourier', dataToSend).then(function (response) {
+                if (response.status == 200 && response.data){
+                    $scope.successMessage = "Order was updated."
+                } else $scope.errorMessage = "Error";
+            });
         }
     }
 }]);

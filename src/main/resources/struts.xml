@@ -77,7 +77,6 @@
             </result>
             <result type="json" name="success">
                 <param name="noCache">true</param>
-                <param name="excludeNullProperties">true</param>
                 <param name="root">applications</param>
             </result>
         </action>
@@ -88,7 +87,6 @@
             </result>
             <result type="json" name="success">
                 <param name="noCache">true</param>
-                <param name="excludeNullProperties">true</param>
                 <param name="root">orders</param>
             </result>
         </action>
