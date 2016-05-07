@@ -26,8 +26,8 @@ public class ViewUserProfileAction implements Action {
             userId = Long.parseLong(request.getParameter("userId"));
         }
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(USER);
-        userId = user.getId();
+        User sessionUser = (User) session.getAttribute(USER);
+        userId = sessionUser.getId();
 
         try {
             user = userService.viewUser(userId);
