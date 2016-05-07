@@ -15,7 +15,7 @@ app.factory('documentService', ['$http', function ($http) {
                         element.date = parseDate(element.date);
                         $scope.apps.push(element);
                     });
-                })
+                });
             })
         },
         exportAgreement: function (order) {
@@ -23,9 +23,9 @@ app.factory('documentService', ['$http', function ($http) {
                 orderId: order,
                 docType: "PDF"
             };
-            
             $http.get('exportAgreement', {params: data}).then(function (response) {
                 console.log('Success exportAgreement' + response.data);
+                
             });
             console.log('Error exportAgreement ');
         },
