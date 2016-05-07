@@ -36,6 +36,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final String SELECT_ORDER_BY_STATUSES = "SELECT * FROM `order` " +
             "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
+            "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "JOIN `office` ON `office`.off_id = `order`.ord_office " +

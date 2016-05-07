@@ -28,7 +28,6 @@ public class ViewUserProfileAction implements Action {
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute(USER);
         userId = sessionUser.getId();
-
         try {
             user = userService.viewUser(userId);
         } catch (ServiceException e) {
