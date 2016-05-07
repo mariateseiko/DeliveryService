@@ -193,6 +193,8 @@ public class OrderDaoImpl implements OrderDao {
         Order order = new Order();
         order.setId(resultSet.getLong("ord_id"));
         order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("partner.usr_login")));
+        order.getPartner().setFullName(resultSet.getString("partner.usr_fullname"));
+        order.getPartner().setPassport(resultSet.getString("partner.usr_passport"));
         if (resultSet.getLong("ord_courier") != 0) {
             order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("courier.usr_login")));
         }
