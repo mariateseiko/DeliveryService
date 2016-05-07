@@ -8,6 +8,8 @@ import by.bsuir.deliveryservice.service.util.Hasher;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class UserServiceImplTest extends ServiceTest {
@@ -45,5 +47,9 @@ public class UserServiceImplTest extends ServiceTest {
         assertNull(user);
     }
 
-
+    @Test
+    public void selectUsers() throws ServiceException {
+        List<User> users = userService.viewCouriers();
+        assertNotNull(users);
+    }
 }
