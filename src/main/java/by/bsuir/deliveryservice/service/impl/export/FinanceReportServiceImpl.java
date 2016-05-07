@@ -224,7 +224,7 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
                 c = row.createCell(C_PARTNER);
                 c.setCellValue(o.getPartner().getFullName() + "\n" +
-                        o.getPartner().getPassword());
+                        o.getPartner().getPassport());
                 c.setCellStyle(cellStyles.get("C_PARTNER"));
 
                 totalEarning += o.getTotal();
