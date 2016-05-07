@@ -86,9 +86,15 @@ app.factory('documentService', ['$http', function ($http) {
                 courierId: courier,
                 docType: 'PDF'
             };
+/*
             $http.get('exportOrderList  ', {params: data}).then(function (response) {
                 console.log('Success exportOrderList   '+ response.data);
             });
+*/
+
+            window.open('exportOrderList?docType=' + data.docType +
+                '&courierId=' + data.courierId);
+
             console.log('Error exportOrderList  ');
         }
     }
