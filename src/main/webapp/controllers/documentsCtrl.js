@@ -33,9 +33,9 @@ app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'docu
                 $scope.exportFinanceReport = function (type) {
                     documentService.exportFinanceReport(type);
                 };
-                $scope.exportOrderList = function () {
-
-                }
+                $scope.exportOrderList = function (courierId) {
+                  documentService.exportOrderList(courierId)
+                };
                 $scope.exit = function () {
                     loginService.logout($scope, $rootScope);
                 }
