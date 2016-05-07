@@ -23,6 +23,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
+import java.util.Date;
 
 public class ActExportServiceImpl extends AbstractExportService
     implements ActExportService
@@ -125,7 +126,10 @@ public class ActExportServiceImpl extends AbstractExportService
 
         DateFormat dateFormat = DateFormat.getDateInstance();
 
-        String s = dateFormat.format(o.getDeliveryDate()) + "\n\n";
+        String deliveryDate = o.getDeliveryDate() != null ? dateFormat.format
+                (o.getDeliveryDate()) : "___ . ___ . ______";
+
+        String s = deliveryDate + "\n\n";
 
         Paragraph p = new Paragraph(s, font);
         p.setAlignment(Element.ALIGN_RIGHT);
