@@ -5,10 +5,14 @@
 
 package by.bsuir.deliveryservice.action;
 
+import by.bsuir.deliveryservice.entity.User;
 import by.bsuir.deliveryservice.service.DocFormat;
 import by.bsuir.deliveryservice.service.OrderListExportService;
 import by.bsuir.deliveryservice.service.impl.export.OrderListExportServiceFactory;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 
 public class ExportOrderListAction extends DocExportAction
@@ -31,8 +35,12 @@ public class ExportOrderListAction extends DocExportAction
     {
         String docType = this.getDocType();
 
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+
         File file = service.exportToFile(DocFormat.valueOf(docType),
-                courierId);
+                u.getId());
         setFileToDownload(file);
 
         return super.execute();
