@@ -21,18 +21,14 @@ public class ViewUserProfileAction implements Action {
 
     @Override
     public String execute() throws Exception {
-        if (userId == null) {
-            HttpServletRequest request = ServletActionContext.getRequest();
-
-            //userId =  Long.parseLong(request.getParameter("userId"));
-
-           // /if (userId == null) {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute(USER);
-                userId = user.getId();
-          //  }
-
+        HttpServletRequest request = ServletActionContext.getRequest();
+        if (request.getParameter("userId") != null) {
+            userId = Long.parseLong(request.getParameter("userId"));
         }
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(USER);
+        userId = user.getId();
+
         try {
             user = userService.viewUser(userId);
         } catch (ServiceException e) {
@@ -48,5 +44,9 @@ public class ViewUserProfileAction implements Action {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = Long.parseLong(userId);
     }
 }
