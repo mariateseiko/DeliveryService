@@ -72,7 +72,7 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
         } catch (Exception e) {
             throw new ServiceException("failed to export a " +
-                    "finance report", e);
+                    "finance report | from=" + from.toString(), e);
         }
     }
 
