@@ -22,9 +22,11 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
             }
         ];
 
-        $http.get('price.json').success(function(data) {
-            $scope.prices = data;
+        $http.get('viewPricelist').then(function(response) {
+            $scope.prices = response.data;
+            
         });
+        
         $scope.applications = [];
         if (!sessionService.get('user')) {
             $scope.user = {

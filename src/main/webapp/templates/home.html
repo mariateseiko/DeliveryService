@@ -3,8 +3,15 @@
         <div class="item active">
             <div class="container">
                 <div class="carousel-content">
-                    <h1>Free Onepage Theme {{8+9}}</h1>
-                    <p class="lead">Xeon is the best free onepage responsive theme available arround the globe<br>Download it right now for free</p>
+                    <h1>Fast super blabla courier service</h1>
+                    <p class="lead">
+                        Couriers are distinguished from ordinary mail services by features such as speed, security,
+                        <br>tracking, signature, specialization and individualization of express services,
+                        <br>and swift delivery times, which are optional for most everyday mail services.
+                        <br>As a premium service, couriers are usually more expensive than standard mail services,
+                        <br>and their use is normally limited to packages where one or more of these features are
+                        <br>considered important enough to warrant the cost.
+                </p>
                 </div>
             </div>
         </div>
@@ -22,13 +29,9 @@
                 <div class="col-sm-4" ng-repeat="price in prices">
                     <ul class="plan">
                         <li class="plan-name">{{price.name}}</li>
-                        <li class="plan-price">{{price.price | currency}}</li>
-                        <li>{{price.storage}}</li>
-                        <li>{{price.ram}}</li>
-                        <li>400GB Bandwidth</li>
-                        <li>10 Email Address</li>
-                        <li>Forum Support</li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
+                        <li class="plan-price">Price per Kg{{price.pricePerKg | currency}}</li>
+                        <li class="plan-price">Price per Km{{price.pricePerKm | currency}}</li>
+
                     </ul>
                 </div><!--/.col-sm-4-->
             </div>

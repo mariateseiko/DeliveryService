@@ -5,6 +5,8 @@ app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$locati
         if (!sessionService.get('user'))
             $location.path('/');
         else {
+            $scope.errorMessage="";
+            $scope.successMessage="";
             $rootScope.login = sessionService.get('user');
             $scope.login = sessionService.get('user');
 
