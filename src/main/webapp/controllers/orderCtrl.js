@@ -5,6 +5,8 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
         if (!sessionService.get('user'))
             $location.path('/');
         else {
+            $scope.errorMessage="";
+            $scope.successMessage="";
             $rootScope.loginUser = sessionService.get('user');
             $scope.loginUser = sessionService.get('user');
 

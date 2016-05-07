@@ -5,6 +5,9 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
         if (!sessionService.get('user'))
             $location.path('/');
         else {
+            $scope.errorMessage="";
+            $scope.successMessage="";
+            
             $rootScope.loginUser = sessionService.get('user');
             $scope.loginUser = sessionService.get('user');
             
