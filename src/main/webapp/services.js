@@ -121,7 +121,7 @@ app.factory('orderService', ['$http', function ($http) {
        getApplications: function ($scope, $rootScope) {
            $http.get('viewUserApplications').then(function (response){
                response.data.forEach(function (element) {
-                   element.date = parseData(element.date);
+                   element.date = parseDate(element.date);
                });
                
                 if (response.status == 200 && response.data) {
@@ -133,7 +133,7 @@ app.factory('orderService', ['$http', function ($http) {
        getOrders: function ($scope) {
            $http.get('viewUserOrders').then(function (response) {
                response.data.forEach(function (element) {
-                   element.date = parseData(element.date);
+                   element.date = parseDate(element.date);
                });
                
                if (response.status == 200 && response.data) {
@@ -198,7 +198,7 @@ app.factory('managerService', ['$http', function ($http) {
         getApplications: function ($scope, $rootScope) {
             $http.get('viewApplications').then(function (response) {
                 response.data.forEach(function (element) {
-                    element.date = parseData(element.date);
+                    element.date = parseDate(element.date);
                 });
                 $scope.applications = response.data;
                 $rootScope.applications = response.data;
@@ -207,7 +207,7 @@ app.factory('managerService', ['$http', function ($http) {
         getOrders: function ($scope, $rootScope) {
             $http.get('viewOrders').then(function (response) {
                 response.data.forEach(function (element) {
-                    element.date = parseData(element.date);
+                    element.date = parseDate(element.date);
                 });
                 $scope.orders = response.data;
                 $rootScope.orders = response.data;
@@ -236,13 +236,50 @@ app.factory('managerService', ['$http', function ($http) {
                 $scope.couriers = response.data;
                 //$rootScope.couriers = response.data;
             })
-        },
-        exportAgreement: function () {
-            
         }
     }
 }]);
 
-function parseData(data) {
+app.factory('documentService', ['$http', function ($http) {
+    return {
+        getAllApp: function ($scope) {
+            $http.get('viewApplications').then(function (response) {
+                response.data.forEach(function (element) {
+                    element.date = parseDate(element.date);
+                });
+                $scope.apps = response.data;
+
+                $http.get('viewOrders').then(function (response) {
+                    response.data.forEach(function (element) {
+                        element.date = parseDate(element.date);
+                    });
+                    $scope.apps.push(response.data);
+
+                })
+            })
+        },
+        exportAgreement: function (order) {
+            var data = {
+                orderId: order,
+                docType: "PDF"
+            };
+            $http.post('exportAgreement', data).then(function (response) {
+                console.log('Success exportAgreement');
+            });
+            console.log('Error exportAgreement '+ response.data);
+        },
+        exportAct: function (order) {
+            var data = {
+                orderId: order,
+                docType: "PDF"
+            };
+            $http.post('actAgreement', data).then(function (response) {
+                console.log('Success exportAgreement '+ response.data);
+            });
+            console.log('Error exportAgreement');
+        }
+    }
+}]);
+function parseDate(data) {
     return data.substring(0, data.indexOf('T'));
 }

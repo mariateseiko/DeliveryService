@@ -8,7 +8,7 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
        $location.path('/profile');
        return;
    }
-
+    $scope.login = sessionService.get('user');
     $scope.users = [
         {'name' : 'Grivachevsky Andrey',
             'img' : 'assets/images/team1.jpg'},
@@ -189,8 +189,23 @@ app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$locati
         $scope.user = $rootScope.user;
 
         $scope.couriers = managerService.getCourierList($scope);
-        
     }]);
+
+app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'documentService',
+    function ($scope, managerService, $rootScope, documentService){
+        
+        $scope.user = $rootScope.user;
+        $scope.apps = documentService.getAllApp($scope);
+        
+        $scope.exportAgreement = function (order) {
+            documentService.exportAgreement(order.id);
+        }
+
+        $scope.exportAct = function (order) {
+            documentService.exportAct(order.id);
+        }
+    }]);
+
 
 app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'sessionService', 'userService',
     function ($scope, $rootScope, $location, sessionService, userService) {
