@@ -158,6 +158,11 @@
                 <param name="root">couriers</param>
             </result>
         </action>
+        <action name="viewCouriers" class="by.bsuir.deliveryservice.action.LogoutAction">
+            <interceptor-ref name="json"/>
+            <result type="json" name="success">
+            </result>
+        </action>
         <action name="exportAgreement"
                 class="by.bsuir.deliveryservice.action.ExportAgreementAction">
             <result type="stream" name="success">
