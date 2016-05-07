@@ -23,10 +23,10 @@ app.factory('documentService', ['$http', function ($http) {
                 orderId: order,
                 docType: "PDF"
             };
-            
-            $http.get('exportAgreement', {params: data}).then(function (response) {
-                console.log('Success exportAgreement' + response.data);
-            });
+
+            window.open('exportAgreement?docType=' + data.docType +
+                '&orderId=' + data.orderId);
+
             console.log('Error exportAgreement ');
         },
         exportAct: function (order) {
