@@ -49,16 +49,18 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
 
-                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
-                        <ul class="nav navbar-nav" ng-if="login==undefined">
+                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12" ng-switch="login">
+                        <ul class="nav navbar-nav" ng-switch-when="undefined">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
                                 <a href="" data-target="#reg">Registration</a>
                             </li>
                         </ul>
-                        <div ng-if="login!=undefined"><a href="#/profile" class="login-name">{{login}}</a></li>
-                        </div>
+                        <ul class="nav navbar-nav" ng-switch-default>
+                            <li type="button"><a href="#/profile" class="login-name">{{login}}</a></li>
+                        </ul>
+
                     </div>
                 </div>
             </div>

@@ -944,7 +944,7 @@ z-index: 10;
 .order tr td:last-child{
   float:right;
 }
-.table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{
+.order >.table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{
   width: 50%;
 }
 .table{

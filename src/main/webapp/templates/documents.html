@@ -47,6 +47,9 @@
                         <li ng-if="user.role == 'MANAGER'">
                             <a href="#/courier-list"><i class="fa fa-list-ul" aria-hidden="true"></i>Couriers list</a>
                         </li>
+                        <li>
+                            <a href="#/documents"><i class="fa fa-list-ul" aria-hidden="true"></i>Documents</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -63,27 +66,68 @@
                         <tr>
                             <th>Id</th>
                             <th>Status</th>
+                            <div ng-if="user.role=='MANAGER'"><th></th><th></th></div>
+                            <div ng-if="user.role=='ACCOUNTANT' || user.role=='COURIER'"><th></th></div>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="app in apps">
-                            <td>{{app.id}}</td>
-                            <td>{{app.status}}</td>
-                            <div ng-if="user,role=='MANAGER'">
-                                <td class="actions">
+                            <td width="5%">{{app.id}}</td>
+                            <td width="10%">{{app.status}}</td>
+                            <div ng-if="user.role=='MANAGER'">
+                                <td>
                                     <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportAgreement(app)">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Agreement(PDF)
+                                    Agreement (PDF)
                                 </td>
 
-                                <td class="actions">
-                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="actAgreement(app)">
+                                <td >
+                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportAct(app)">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Act(PDF)
+                                    Act (PDF)
                                 </td>
                             </div>
+                            <div ng-if="user.role=='ACCOUNTANT'">
+                                <td>
+                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport(app, 'CSV')">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Finance Report (CSV)
+                                </td>
+                                <td >
+                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport(app, 'XLS')">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Finance Report (XLS)
+                                </td>
+                            </div>
+                            <div ng-if="user.role=='COURIER'">
+                                <td>
+                                    <!-- **********************************app.courier.id****************************************************-->
+                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportOrderList(app.courier.id)">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Order List (PDF)
+                                </td>
+                            </div>
+                            <!-- DOCUMENTS FOR ALL USERS-->
+                            <td >
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportPriceList(app, 'CSV')">
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                </button>
+                                Price-list (CSV)
+                            </td>
+                            <td >
+                                <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportPriceList(app, 'XLS')">
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                </button>
+                                Price-list (XLS)
+                            </td>
+
                         </tr>
 
                         </tbody>

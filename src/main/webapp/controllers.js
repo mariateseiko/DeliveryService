@@ -40,6 +40,7 @@ app.controller('registerCtrl', ['$scope', 'registerService', 'sessionService', '
     function($scope, registerService, sessionService, $location) {
         if (sessionService.get('user')) {
             $location.path('/profile');
+            
         }
         else {
             $scope.errorMessage = "";
@@ -75,6 +76,7 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
 
             $scope.login = function () {
                 loginService.login($scope.credentials, $scope, $rootScope);
+                $rootScope.login = $scope.user.login;
             };
         }
 }]);
@@ -84,6 +86,8 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
         if (!sessionService.get('user'))
            $location.path('/');
         else {
+            $rootScope.login = sessionService.get('user');
+            $scope.login = sessionService.get('user');
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);
             } else {
@@ -98,6 +102,9 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
 }]);
 app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
     function ($scope, $rootScope, $location, orderService, managerService) {
+        $rootScope.login = sessionService.get('user');
+        $scope.login = sessionService.get('user');
+        
         $scope.type = "Application";
         //console.log('2'+ $location.path());
         $scope.user = $rootScope.user;
@@ -120,8 +127,10 @@ app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'ord
 
 app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
     function ($scope, $rootScope, $location, orderService, managerService) {
+    $rootScope.login = sessionService.get('user');
+    $scope.login = sessionService.get('user');
+    
     $scope.type = "Order";
-    //console.log('3'+ $location.path());
     $scope.user = $rootScope.user;
         
         $scope.chooseApp = "";
@@ -129,7 +138,7 @@ app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderServ
             $scope.chooseApp = chooseApp;
             $rootScope.chooseApp = chooseApp;
             $location.path('/order-info');
-        }
+        };
 
     if ($scope.user.role == 'CLIENT') {
         $scope.orders = orderService.getOrders($scope, $rootScope);
@@ -140,8 +149,11 @@ app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderServ
 
 }]);
 
-app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
-    function ($scope, $rootScope, $location, orderService, managerService) {
+app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService', 'sessionService',
+    function ($scope, $rootScope, $location, orderService, managerService, sessionService) {
+        $rootScope.login = sessionService.get('user');
+        $scope.login = sessionService.get('user');
+        
         $scope.user = $rootScope.user;
         $scope.order = $rootScope.chooseApp;
 
@@ -164,6 +176,9 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
 
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
     function ($scope, orderService, $rootScope, $location, sessionService, userService){
+        $rootScope.login = sessionService.get('user');
+        $scope.login = sessionService.get('user');
+        
         $scope.errorMessage = "";
         $scope.successMessage = "";
         
@@ -183,26 +198,40 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
         }
 }]);
 
-app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'userService',
-    function ($scope, orderService, $rootScope, $location, managerService, userService){
-
+app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'sessionService',
+    function ($scope, orderService, $rootScope, $location, managerService, sessionService){
+        $rootScope.login = sessionService.get('user');
+        $scope.login = sessionService.get('user');
+        
         $scope.user = $rootScope.user;
 
         $scope.couriers = managerService.getCourierList($scope);
     }]);
 
-app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'documentService',
-    function ($scope, managerService, $rootScope, documentService){
+app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'documentService', 'sessionService',
+    function ($scope, managerService, $rootScope, documentService, sessionService){
+        $rootScope.login = sessionService.get('user');
+        $scope.login = sessionService.get('user');
         
         $scope.user = $rootScope.user;
         $scope.apps = documentService.getAllApp($scope);
         
         $scope.exportAgreement = function (order) {
             documentService.exportAgreement(order.id);
-        }
+        };
 
         $scope.exportAct = function (order) {
             documentService.exportAct(order.id);
+        };
+
+        $scope.exportPriceList = function (order, type) {
+            documentService.exportPriceList(order.id, type);
+        };
+        $scope.exportFinanceReport = function (order, type) {
+            documentService.exportFinanceReport(order.id, type);
+        };
+        $scope.exportOrderList = function () {
+            
         }
     }]);
 

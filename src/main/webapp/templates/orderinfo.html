@@ -52,6 +52,9 @@
                         <li ng-if="user.role == 'MANAGER'">
                             <a href="#/courier-list"><i class="fa fa-pencil" aria-hidden="true"></i>Couriers list</a>
                         </li>
+                        <li>
+                            <a href="#/documents"><i class="fa fa-list-ul" aria-hidden="true" data-ng-click="exportAgreement()"></i>Documents</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- END MENU -->
@@ -70,8 +73,8 @@
                                             <h2>Application info</h2>
                                         </div>
                                         <div class="container col-md-12 col-md-offset-2">
-                                            <form>
-                                            <table class="table table-hover order" ng-controller="orderinfoCtrl">
+                                            <form class="order">
+                                            <table class="table table-hover" ng-controller="orderinfoCtrl">
 
                                                 <tbody>
                                                 <tr>
