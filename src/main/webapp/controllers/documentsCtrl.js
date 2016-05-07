@@ -27,8 +27,8 @@ app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'docu
                     documentService.exportAct(order.id);
                 };
 
-                $scope.exportPriceList = function (order, type) {
-                    documentService.exportPriceList(order.id, type);
+                $scope.exportPriceList = function (type) {
+                    documentService.exportPriceList(type);
                 };
                 $scope.exportFinanceReport = function (order, type) {
                     documentService.exportFinanceReport(order.id, type);
