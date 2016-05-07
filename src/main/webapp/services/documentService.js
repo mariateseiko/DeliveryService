@@ -23,7 +23,7 @@ app.factory('documentService', ['$http', function ($http) {
                 orderId: order,
                 docType: "PDF"
             };
-            $http.post('exportAgreement', data).then(function (response) {
+            $http.get('exportAgreement', {params: data}).then(function (response) {
                 console.log('Success exportAgreement' + response.data);
             });
             console.log('Error exportAgreement ');
@@ -33,37 +33,44 @@ app.factory('documentService', ['$http', function ($http) {
                 orderId: order,
                 docType: "PDF"
             };
-            $http.post('actAgreement', data).then(function (response) {
+            $http.get('actAgreement', {params: data}).then(function (response) {
                 console.log('Success actAgreement '+ response.data);
             });
             console.log('Error actAgreement');
         },
-        exportPriceList: function (order, type) {
+        //------------- -order
+        exportPriceList: function (type) {
             var data = {
-                orderId: order,
                 docType: type
             };
-            $http.post('exportPriceList ', data).then(function (response) {
+            $http.get('exportPriceList ', {params: data}).then(function (response) {
                 console.log('Success exportPriceList  '+ response.data);
             });
             console.log('Error exportPriceList ');
         },
-        exportFinanceReport: function (order, type) {
+        //--------------- -order, + sinnceData 
+        exportFinanceReport: function (type) {
+            var now = new Date();
+            var strDateTime = [now.getFullYear(),AddZero(now.getMonth() + 1), AddZero(now.getDate())].join("-");
+            function AddZero(num) {
+                return (num >= 0 && num < 10) ? "0" + num : num + "";
+            }
             var data = {
-                orderId: order,
+                sinceData: strDateTime,
                 docType: type
             };
-            $http.post('exportFinanceReport ', data).then(function (response) {
+            $http.get('exportFinanceReport ', {params: data}).then(function (response) {
                 console.log('Success exportFinanceReport  '+ response.data);
             });
             console.log('Error exportFinanceReport ');
         },
+        //-------
         exportOrderList: function (courier) {
             var data = {
                 courierId: courier,
                 docType: 'PDF'
             };
-            $http.post('exportOrderList  ', data).then(function (response) {
+            $http.get('exportOrderList  ', {params: data}).then(function (response) {
                 console.log('Success exportOrderList   '+ response.data);
             });
             console.log('Error exportOrderList  ');

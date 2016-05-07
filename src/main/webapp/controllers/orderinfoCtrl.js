@@ -19,15 +19,16 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
 
             $scope.errorMessage = "";
             $scope.successMessage = "";
-
-            $scope.updates = [
-                {status: 'AWAITING'},
-                {status: 'DELIVERY'},
-                {status: 'DELIVERED'},
-                {status: 'CANCELED'},
-                {status: 'DECLINED'}
-            ];
-
+            $scope.updates = [{status: 'AWAITING'}];
+            
+            if ($scope.user.role == 'MANAGER') {
+                $scope.updates.push({status: 'DELIVERY'});
+                $scope.updates.push({status: 'DECLINED'});
+            } else if ($scope.user.role == 'COURIER') {
+                $scope.updates.push({status: 'DELIVERED'});
+            } else if ($scope.user.role == 'CLIENT') {
+                $scope.updates.push({status: 'CANCELED'});
+            }
             $scope.userData = managerService.getUserData($scope, $rootScope, $rootScope.chooseApp.partner.id);
             $scope.saveOrder = function () {
                 managerService.updateOrderStatus($scope, $rootScope, $scope.order);

@@ -14,7 +14,8 @@ app.controller('loginCtrl', ['$scope', 'loginService', '$rootScope', 'orderServi
 
             $scope.login = function () {
                 loginService.login($scope.credentials, $scope, $rootScope);
-                $rootScope.login = $scope.user.login;
+                $rootScope.loginUser = sessionService.get('user');
+                $scope.loginUser = sessionService.get('user');
             };
         }
     }]);

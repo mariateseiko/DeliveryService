@@ -25,7 +25,7 @@
 </head><!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0" ng-controller="homeCtrl">
-<div ng-init="login=''"></div>
+<div ng-init="loginUser=''"></div>
 
                <!-- header -->
     <header id="header" role="banner">
@@ -48,16 +48,16 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
 
-                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12" ng-switch="login">
-                        <ul class="nav navbar-nav" ng-switch-when="''">
+                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12" ng-if="loginUser==''">
+                        <ul class="nav navbar-nav">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
                                 <a href="" data-target="#reg">Registration</a>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav" ng-switch-default>
-                            <li type="button"><a href="#/profile" class="login-name">{{login}}</a></li>
+                        <ul class="nav navbar-nav" ng-if="loginUser!=''">
+                            <li type="button"><a href="#/profile" class="login-name">{{loginUser}}</a></li>
                         </ul>
 
                     </div>
