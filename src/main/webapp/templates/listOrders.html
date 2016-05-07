@@ -30,6 +30,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="application in applications">
+
                             <div ng-if="user.role!=='CLIENT'">
                                 <td>{{application.partner.id}}</td>
                             </div>

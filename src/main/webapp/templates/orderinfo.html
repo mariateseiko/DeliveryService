@@ -59,9 +59,24 @@
                                                 <tr>
                                                     <td>Status</td>
                                                     <td>
-                                                        <select name="status" ng-option="status as order.status for update in updates" ng-model="order.status">
-
-                                                        </select>
+                                                        <div ng-if="order.status=='DELIVERED' || order.status=='CANCELED'">
+                                                            {{order.status}}
+                                                        </div>
+                                                        <div ng-if="order.status!='DELIVERED' && order.status!='CANCELED'">
+                                                            <select ng-model="order.status" ng-if="user.role=='CLIENT'">
+                                                            <option value="AWAITING">AWAITING</option>
+                                                                <option value="AWAITING">CANCELED</option>
+                                                            </select>
+                                                            <select ng-model="order.status" ng-if="user.role=='MANAGER'">
+                                                                <option value="AWAITING">AWAITING</option>
+                                                                <option value="DELIVERY">DELIVERY</option>
+                                                                <option value="DECLINED">DECLINED</option>
+                                                            </select>
+                                                            <select ng-model="order.status" ng-if="user.role=='COURIER'">
+                                                                <option value="AWAITING">AWAITING</option>
+                                                                <option value="AWAITING">CANCELED</option>
+                                                            </select>
+                                                            </div>
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -78,11 +93,11 @@
 
                                                 </tbody>
                                             </table>
-                                                <div ng-if="successMessage!=''">
+
                                                     <div class="form-group">
                                                         <div class="success-message">{{successMessage}}</div>
                                                     </div>
-                                                </div>
+
                                                 <div ng-if="errorMessage!=''">
                                                     <div class="form-group">
                                                         <div class="error-message">{{errorMessage}}</div>
