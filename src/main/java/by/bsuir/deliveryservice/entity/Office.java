@@ -5,6 +5,11 @@ public class Office extends Entity
     private String name;
     private String credentials;
 
+    public Office() {}
+    public Office(String name, String credentials) {
+        this.name = name;
+        this.credentials = credentials;
+    }
     // -----------------------------------------------------------------------
 
     public String getName()

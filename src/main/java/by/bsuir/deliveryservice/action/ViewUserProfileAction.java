@@ -24,13 +24,13 @@ public class ViewUserProfileAction implements Action {
         if (userId == null) {
             HttpServletRequest request = ServletActionContext.getRequest();
 
-            userId =  Long.parseLong(request.getParameter("userId"));
+            //userId =  Long.parseLong(request.getParameter("userId"));
 
-            if (userId == null) {
+           // /if (userId == null) {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute(USER);
                 userId = user.getId();
-            }
+          //  }
 
         }
         try {
@@ -46,7 +46,7 @@ public class ViewUserProfileAction implements Action {
         return user;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 }

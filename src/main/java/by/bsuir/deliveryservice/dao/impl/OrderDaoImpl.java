@@ -2,10 +2,7 @@ package by.bsuir.deliveryservice.dao.impl;
 
 import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.OrderDao;
-import by.bsuir.deliveryservice.entity.Order;
-import by.bsuir.deliveryservice.entity.OrderStatus;
-import by.bsuir.deliveryservice.entity.Shipping;
-import by.bsuir.deliveryservice.entity.User;
+import by.bsuir.deliveryservice.entity.*;
 
 import javax.naming.NamingException;
 import java.sql.*;
@@ -19,6 +16,7 @@ public class OrderDaoImpl implements OrderDao {
             "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
             "WHERE `order`.ord_id=?";
 
     private static final String INSERT_ORDER = "INSERT INTO `order` (ord_partner, ord_date, ord_office, ord_status, ord_from, " +
@@ -30,21 +28,25 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final String SELECT_STATUS_ID_BY_NAME = "SELECT ost_id FROM `status` WHERE ost_Name = ?";
     private static final String SELECT_ORDER_BY_USER_AND_STATUSES = "SELECT * FROM `order` " +
-            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_courier = `partner`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
             "WHERE ord_partner=? AND ost_name IN (?,?)";
 
     private static final String SELECT_ORDER_BY_STATUSES = "SELECT * FROM `order` " +
-            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
             "WHERE ost_name IN (?,?)";
 
     private static final String SELECT_COURIER_ORDERS = "SELECT * FROM `order` " +
-            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_courier = `partner`.usr_id " +
+            "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
             "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
             "ORDER BY ord_deliverydate ASC";
 
@@ -57,6 +59,7 @@ public class OrderDaoImpl implements OrderDao {
             "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
             "WHERE DATE(`order`.ord_Date) BETWEEN ? AND ?";
 
     private static OrderDao instance = new OrderDaoImpl();
@@ -203,6 +206,7 @@ public class OrderDaoImpl implements OrderDao {
                 resultSet.getDouble("shp_pricePerKg"),
                 resultSet.getDouble("shp_pricePerKm")));
         order.setDate(resultSet.getDate("ord_date"));
+        order.setOffice(new Office(resultSet.getString("off_name"), resultSet.getString("off_credentials")));
         order.setDeliveryDate(resultSet.getDate("ord_deliveryDate"));
         return order;
     }
