@@ -1,7 +1,7 @@
 'use strict'
 
-app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService',
-    function ($scope, $rootScope, $location, orderService, managerService) {
+app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService', 'sessionService', 'loginService',
+    function ($scope, $rootScope, $location, orderService, managerService, sessionService, loginService) {
         $rootScope.login = sessionService.get('user');
         $scope.login = sessionService.get('user');
 
@@ -22,5 +22,7 @@ app.controller('applicationlistCtrl', ['$scope', '$rootScope', '$location', 'ord
         } else {
             $scope.applications = managerService.getApplications($scope, $rootScope);
         }
-
+        $scope.exit = function () {
+            loginService.logout($scope, $rootScope);
+        }
     }]);

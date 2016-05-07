@@ -1,11 +1,26 @@
 'use strict'
 
-app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'sessionService',
-    function ($scope, orderService, $rootScope, $location, managerService, sessionService){
-        $rootScope.login = sessionService.get('user');
-        $scope.login = sessionService.get('user');
+app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'sessionService', 'loginService','userService',
+    function ($scope, orderService, $rootScope, $location, managerService, sessionService, loginService, userService){
+        if (!sessionService.get('user'))
+            $location.path('/');
+        else {
+            $rootScope.login = sessionService.get('user');
+            $scope.login = sessionService.get('user');
 
-        $scope.user = $rootScope.user;
+            if (!$rootScope.user) {
+                userService.viewProfile($scope, $rootScope);
+            }
+            $rootScope.login = sessionService.get('user');
+            $scope.login = sessionService.get('user');
 
-        $scope.couriers = managerService.getCourierList($scope);
+            $scope.user = $rootScope.user;
+
+            $scope.couriers = managerService.getCourierList($scope);
+
+            $scope.exit = function () {
+                loginService.logout($scope, $rootScope);
+            }
+            
+        }
     }]);

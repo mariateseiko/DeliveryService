@@ -1,61 +1,7 @@
 <div class="container" ng-controller="orderCtrl">
     <div class="row profile">
         <div class="col-md-3">
-            <div class="profile-sidebar">
-                <!-- SIDEBAR USERPIC -->
-                <div class="profile-userpic">
-                    <img src="assets/images/team1.jpg" class="img-responsive" alt="">
-                </div>
-                <!-- END SIDEBAR USERPIC -->
-                <!-- SIDEBAR USER TITLE -->
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        {{user.login}}
-                    </div>
-                    <div class="profile-usertitle-job">
-                        {{user.role}}
-                    </div>
-                </div>
-                <!-- END SIDEBAR USER TITLE -->
-                <!-- SIDEBAR BUTTONS -->
-                <div class="profile-userbuttons">
-
-                </div>
-                <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
-                        <li class="active">
-                            <a href="#"><i class="glyphicon glyphicon-home"></i>Overview </a>
-                        </li>
-                        <li ng-if="user.role == 'CLIENT'">
-                            <a href="#/order"><i class="fa fa-plus" aria-hidden="true"></i>New application </a>
-                        </li>
-                        <li>
-                            <a href="#/application-listF"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
-                        </li>
-                        <li ng-if="user.role == 'CLIENT'">
-                            <a href="#/order-list"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
-                        </li>
-                        <li ng-if="user.role == 'COURIER'">
-                            <a href="#/order-list"><i class="fa fa-list" aria-hidden="true"></i>Application list </a>
-                        </li>
-                        <li ng-if="user.role == 'ACCOUTANT'">
-                            <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
-                        </li>
-                        <li ng-if="user.role == 'MANAGER'">
-                            <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
-                        </li>
-                        <li>
-                            <a href="#/documents"><i class="fa fa-list-ul" aria-hidden="true"></i>Documents</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- END MENU -->
-            </div>
+            <div ng-include src="'templates/profile-menu.html'"></div>
         </div>
         <div class="col-md-9">
             <div class="profile-content">

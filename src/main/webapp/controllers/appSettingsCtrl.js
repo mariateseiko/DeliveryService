@@ -1,7 +1,7 @@
 'use strict'
 
-app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'sessionService', 'userService',
-    function ($scope, $rootScope, $location, sessionService, userService) {
+app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'sessionService', 'userService','loginService',
+    function ($scope, $rootScope, $location, sessionService, userService, loginService) {
         if (!sessionService.get('user'))
             $location.path('/');
         else {
@@ -10,5 +10,9 @@ app.controller('accSettingsCtrl', ['$scope', '$rootScope', '$location', 'session
             }
             $scope.errorMessage = "";
             $scope.successMessage = "";
+        }
+
+        $scope.exit = function () {
+            loginService.logout($scope, $rootScope);
         }
     }]);

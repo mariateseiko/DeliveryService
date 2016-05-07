@@ -7,6 +7,7 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
         else {
             $rootScope.login = sessionService.get('user');
             $scope.login = sessionService.get('user');
+            
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);
             } else {
@@ -14,11 +15,17 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
                 orderService.getCountApplications($scope, $rootScope);
             }
             $scope.user = $rootScope.user;
-            $scope.applications = [];
-            $scope.type = "";
 
             $scope.exit = function () {
                 loginService.logout($scope, $rootScope);
+            };
+            
+            $scope.viewOrders = function () {
+                $location.path('/order-list');
+            };
+
+            $scope.viewApplications = function () {
+                $location.path('/application-list');
             }
         }
     }]);

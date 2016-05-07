@@ -25,8 +25,7 @@
 </head><!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0" ng-controller="homeCtrl">
-<div ng-init="chooseModal=2"></div>
-
+<div ng-init="login=''"></div>
 
                <!-- header -->
     <header id="header" role="banner">
@@ -50,7 +49,7 @@
                     </ul>
 
                     <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12" ng-switch="login">
-                        <ul class="nav navbar-nav" ng-switch-when="undefined">
+                        <ul class="nav navbar-nav" ng-switch-when="''">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
@@ -74,10 +73,8 @@
     <script src="assets/js/jquery.isotope.min.js"></script>
     <script src="assets/js/jquery.prettyPhoto.js"></script>
     <script src="assets/js/main.js"></script>
-<script src="assets/js/angular-cookies.min.js"></script>
+    <script src="assets/js/angular-cookies.min.js"></script>
     <script src="app.js"></script>
-    <script src="services.js"></script>
-    <script src="controllers.js"></script>
 
 <!--Controllers-->
     <script src="controllers/applicationlistCtrl.js"></script>
