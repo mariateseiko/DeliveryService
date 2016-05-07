@@ -26,9 +26,13 @@ app.factory('loginService', function($http, $location, sessionService, orderServ
                 }
             });
         },
-        logout:function () {
+        logout:function ($scope, $rootScope) {
             sessionService.destroy('user');
-            $location.path('/login');
+            $http.get('logout').then(function () {
+                $rootScope.user = null;
+                $scope.user = null;
+                $location.path('/');
+            });
         }
     }
 });
@@ -161,7 +165,7 @@ app.factory('orderService', ['$http', function ($http) {
        }
    } 
 }]);
-app.factory('userService', ['$http', 'orderService', function($http, orderService){
+app.factory('userService', ['$http', 'orderService', 'sessionService', '$location', function($http, orderService, sessionService, $location){
     return {
         saveAccSettings: function (data, $scope) {
             $http.post('changeAccSettings').then(function(response){
@@ -189,9 +193,6 @@ app.factory('userService', ['$http', 'orderService', function($http, orderServic
                     $scope.user.countApplications = orderService.getCountApplications($scope, $rootScope);
                 } else $scope.errorMessage = "Error";
             })
-        },
-        logOut: function ($scope, $rootScope) {
-            
         }
     }
 }]);
