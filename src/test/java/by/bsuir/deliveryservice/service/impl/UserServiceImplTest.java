@@ -5,13 +5,12 @@ import by.bsuir.deliveryservice.entity.UserRole;
 import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.UserService;
 import by.bsuir.deliveryservice.service.util.Hasher;
-import org.junit.Test;
 
-import java.util.List;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UserServiceImplTest {
+public class UserServiceImplTest extends ServiceTest {
     private final UserService userService = UserServiceImpl.getInstance();
 
     @Test
@@ -24,23 +23,17 @@ public class UserServiceImplTest {
 
     @Test
     public void selectNonexistentUser() throws ServiceException {
-        long userId = -1l;
+        long userId = 0;
         User user = userService.viewUser(userId);
         assertNull(user);
     }
 
     @Test
-    public void selectUserList() throws ServiceException {
-        List<User> users = userService.viewAllUsers();
-        assertNotNull(users);
-        assertNotEquals(users.size(), 0);
-    }
-
-    @Test
     public void validSignIn() throws ServiceException {
-        User user = new User("test", Hasher.md5Hash("test"), "test", "test", "test");
+        User user = new User("test",
+                "test", "test", "test", "test");
         userService.registerUser(user);
-        user = userService.loginUser(user);
+        user = userService.loginUser(new User("test", "test"));
         assertNotNull(user);
         assertEquals(user.getRole(), UserRole.CLIENT);
     }

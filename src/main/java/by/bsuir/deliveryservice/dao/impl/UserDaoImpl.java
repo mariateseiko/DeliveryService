@@ -58,18 +58,20 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User selectById(Long id) throws DaoException {
-        User user = new User();
+        User user = null;
         try(Connection cn = provideConnection();
             PreparedStatement st = cn.prepareStatement(SELECT_USER_BY_ID)) {
             st.setLong(1, id);
             ResultSet resultSet = st.executeQuery();
-            resultSet.next();
-            user.setId(resultSet.getLong("usr_id"));
-            user.setLogin(resultSet.getString("usr_login"));
-            user.setPhone(resultSet.getString("usr_mobileno"));
-            user.setFullName(resultSet.getString("usr_fullname"));
-            user.setPassport(resultSet.getString("usr_passport"));
-            user.setRole(UserRole.valueOf(resultSet.getString("rol_name").toUpperCase()));
+            if (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getLong("usr_id"));
+                user.setLogin(resultSet.getString("usr_login"));
+                user.setPhone(resultSet.getString("usr_mobileno"));
+                user.setFullName(resultSet.getString("usr_fullname"));
+                user.setPassport(resultSet.getString("usr_passport"));
+                user.setRole(UserRole.valueOf(resultSet.getString("rol_name").toUpperCase()));
+            }
         } catch (SQLException|NamingException e) {
             throw new DaoException("Request to database failed", e);
         }

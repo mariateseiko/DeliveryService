@@ -188,7 +188,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private Order retrieveOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
-        order.setId(resultSet.getLong("usr_id"));
+        order.setId(resultSet.getLong("ord_id"));
         order.setPartner(new User(resultSet.getLong("ord_partner"), resultSet.getString("usr_login")));
         order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("usr_fullName")));
         order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
