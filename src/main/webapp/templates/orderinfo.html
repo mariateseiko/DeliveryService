@@ -16,8 +16,8 @@
                                             <h2>Application info</h2>
                                         </div>
                                         <div class="container col-md-12 col-md-offset-2">
-                                            <form class="order">
-                                            <table class="table table-hover" ng-controller="orderinfoCtrl">
+                                            <form class="order" ng-controller="orderinfoCtrl">
+                                            <table class="table table-hover" >
 
                                                 <tbody>
                                                 <tr>
@@ -93,11 +93,11 @@
 
                                                 </tbody>
                                             </table>
-
+                                                <div ng-if="successMessage!=''">
                                                     <div class="form-group">
                                                         <div class="success-message">{{successMessage}}</div>
                                                     </div>
-
+                                                </div>
                                                 <div ng-if="errorMessage!=''">
                                                     <div class="form-group">
                                                         <div class="error-message">{{errorMessage}}</div>
