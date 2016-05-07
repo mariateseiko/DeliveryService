@@ -1,7 +1,7 @@
 'use strict'
 
 
-app.factory('documentService', ['$http', function ($http) {
+app.factory('documentService', ['$http', '$location', function ($http, $location) {
     return {
         getAllApp: function ($scope) {
             $http.get('viewApplications').then(function (response) {
@@ -23,10 +23,11 @@ app.factory('documentService', ['$http', function ($http) {
                 orderId: order,
                 docType: "PDF"
             };
-            $http.get('exportAgreement', {params: data}).then(function (response) {
+            $location.path('/exportAgreement?docType='+data.docType+'&'+'orderId='+data.orderId);
+            /*$http.get('exportAgreement', {params: data}).then(function (response) {
                 console.log('Success exportAgreement' + response.data);
             });
-            console.log('Error exportAgreement ');
+            console.log('Error exportAgreement ');*/
         },
         exportAct: function (order) {
             var data = {
