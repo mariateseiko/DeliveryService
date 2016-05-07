@@ -50,13 +50,10 @@ public class OrderDaoImpl implements OrderDao {
             "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
             "ORDER BY ord_deliverydate ASC";
 
-    /*
-     * This has not been tested yet. Remove if done.
-     */
     private static final String SQL_SELECT_BETWEEN = "SELECT * " +
             "FROM `order` " +
-            "JOIN `user` ON `order`.ord_partner = `user`.usr_id " +
-            "LEFT JOIN `user` ON `order`.ord_courier = `user`.usr_id " +
+            "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
+            "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
             "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
             "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
             "JOIN `office` ON `office`.off_id = `order`.ord_office " +
@@ -247,7 +244,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> selectOrdersSince(Date start) throws DaoException // ToDo: Please, test me! ^^
+    public List<Order> selectOrdersSince(Date start) throws DaoException
     {
         List<Order> orders = new ArrayList<>();
 
