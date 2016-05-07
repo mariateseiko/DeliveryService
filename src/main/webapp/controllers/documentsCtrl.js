@@ -30,8 +30,8 @@ app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'docu
                 $scope.exportPriceList = function (type) {
                     documentService.exportPriceList(type);
                 };
-                $scope.exportFinanceReport = function (order, type) {
-                    documentService.exportFinanceReport(order.id, type);
+                $scope.exportFinanceReport = function (type) {
+                    documentService.exportFinanceReport(type);
                 };
                 $scope.exportOrderList = function () {
 
