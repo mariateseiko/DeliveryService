@@ -160,8 +160,6 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
         $scope.saveOrder = function () {
             managerService.updateOrderStatus($scope, $rootScope, $scope.order);
         }
-
-        //$scope.couriers = managerService.getCourierList($scope);
     }]);
 
 app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',

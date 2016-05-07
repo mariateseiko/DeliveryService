@@ -236,6 +236,9 @@ app.factory('managerService', ['$http', function ($http) {
                 $scope.couriers = response.data;
                 //$rootScope.couriers = response.data;
             })
+        },
+        exportAgreement: function () {
+            
         }
     }
 }]);
