@@ -1,6 +1,6 @@
 package by.bsuir.deliveryservice.service.impl;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+//import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 
@@ -11,7 +11,7 @@ import javax.naming.NamingException;
 public abstract class ServiceTest {
     public static final Logger LOG =Logger.getLogger(ServiceTest.class);
 
-    @BeforeClass
+   /* @BeforeClass
     public static void initializeConnectionPool() throws NamingException {
         BasicDataSource bds = new BasicDataSource();
         bds.setDriverClassName("com.mysql.jdbc.Driver");
@@ -32,6 +32,6 @@ public abstract class ServiceTest {
             c.bind("java:/comp/env/jdbc/delivery", bds);
         } catch (NamingException e) {
             LOG.warn("Already bound");
-        }
-    }
+        }*/
+   // }
 }
