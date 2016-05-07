@@ -70,9 +70,14 @@ app.factory('documentService', ['$http', function ($http) {
                 sinceData: strDateTime,
                 docType: type
             };
+/*
             $http.get('exportFinanceReport ', {params: data}).then(function (response) {
                 console.log('Success exportFinanceReport  '+ response.data);
             });
+*/
+            window.open('exportFinanceReport?docType=' + data.docType +
+                '&sinceDate=' + data.sinceData);
+
             console.log('Error exportFinanceReport ');
         },
         //-------
