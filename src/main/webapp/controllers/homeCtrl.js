@@ -9,7 +9,9 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
             $location.path('/profile');
             return;
         }
-        $scope.login = sessionService.get('user');
+        $scope.loginUser = sessionService.get('user');
+        
+        
         $scope.users = [
             {'name' : 'Grivachevsky Andrey',
                 'img' : 'assets/images/team1.jpg'},

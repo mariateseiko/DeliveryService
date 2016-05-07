@@ -59,13 +59,9 @@
                                                 <tr>
                                                     <td>Status</td>
                                                     <td>
-                                                        <select name="status" ng-switch on="order.status" ng-model="order.status">
+                                                        <select name="status" ng-option="status as order.status for update in updates" ng-model="order.status">
                                                         <div >
-                                                            <option value="AWAITING" selected>AWAITING</option>
-                                                            <option value="DELIVERY" >DELIVERY</option>
-                                                            <option value="DELIVERED" >DELIVERED</option>
-                                                            <option value="CANCELED" >CANCELED</option>
-                                                            <option value="DECLINED" >DECLINED</option>
+
                                                         </div>
 
                                                         </select>

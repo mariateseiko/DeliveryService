@@ -5,8 +5,8 @@ app.controller('documentsCtrl', ['$scope', 'managerService', '$rootScope', 'docu
         if (!sessionService.get('user'))
             $location.path('/');
         else {
-            $rootScope.login = sessionService.get('user');
-            $scope.login = sessionService.get('user');
+            $rootScope.loginUser = sessionService.get('user');
+            $scope.loginUser = sessionService.get('user');
 
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);

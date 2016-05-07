@@ -22,7 +22,8 @@ app.factory('loginService', function($http, $location, sessionService, orderServ
                         countApplications: 0,
                     }
 
-
+                    $scope.loginUser = sessionService.get('user');
+                    $rootScope.loginUser = sessionService.get('user');
                 } else {
                     $scope.errorMessage = "Wrong login or password";
                 }
