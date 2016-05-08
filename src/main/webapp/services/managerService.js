@@ -44,16 +44,32 @@ app.factory('managerService', ['$http', function ($http) {
                 //$rootScope.couriers = response.data;
             })
         },
-        assignCourier: function ($scope, data) {
+        checkPermissionChangeStatus: function ($scope, order, prevStatus) {
+            $scope.errorMessage = "";
+            if (!order.courier) $scope.errorMessage = "You need to assign courier!";
+            if (prevStatus != 'AWAITING' && order.status == 'AWAITING')   {
+               $scope.errorMessage = "You can't change status to this value";
+            }
+            if (order.status == prevStatus) {
+                $scope.errorMessage = "New status and current status are the same.";
+            }
+            return $scope.errorMessage?false:true;
+            
+        },
+        assignCourier: function ($scope, data, prevCourier) {
+            $scope.errorMessage = "";
             var dataToSend = {
                 cid: data.id_courier,
                 oid: data.id_order
             };
-            $http.post('assignCourier', dataToSend).then(function (response) {
-                if (response.status == 200 && response.data){
-                    $scope.successMessage = "Order was updated."
-                } else $scope.errorMessage = "Error";
-            });
+            if (prevCourier == data.id_courier) {
+                $scope.errorMessage = "Previous courier and new courier are the same"
+            } else
+                $http.post('assignCourier', dataToSend).then(function (response) {
+                    if (response.status == 200 && response.data){
+                        $scope.successMessage = "Order was updated."
+                    } else $scope.errorMessage = "Error";
+                });
         }
     }
 }]);

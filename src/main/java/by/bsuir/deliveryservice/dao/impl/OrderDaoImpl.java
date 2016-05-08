@@ -197,8 +197,6 @@ public class OrderDaoImpl implements OrderDao {
                 ".usr_mobileno"));
         if (resultSet.getLong("ord_courier") != 0) {
             order.setCourier(new User(resultSet.getLong("ord_courier"), resultSet.getString("courier.usr_login")));
-        } else {
-            order.setCourier(new User(null, null));
         }
         order.setStatus(OrderStatus.valueOf(resultSet.getString("ost_name")));
         order.setFrom(resultSet.getString("ord_from"));

@@ -24,15 +24,17 @@
                                                     <td>Id client</td>
                                                     <td>{{order.partner.id}}</td>
                                                 </tr>
-                                                <tr>
+                                                <tr ng-if="userData.role != 'CLIENT'">
                                                     <td>Id courier</td>
-                                                    <td ng-if="order.courier==null">
-                                                        <select ng-options="courier.id for courier in couriers" ng-model="selected">
+                                                    <td ng-if="isAssignedCourier==true">
+                                                        {{order.courier.id}}
+                                                    </td>
+                                                    <td ng-if="isAssignedCourier==false">
+                                                        <select ng-options="courier.id for courier in couriers" name="order.courier" id="order.courier" ng-model="order.courier">
                                                         </select>
+
                                                     </td>
-                                                    <td ng-if="order.courier!=null">
-                                                            {{order.courier.id}}
-                                                    </td>
+
                                                 </tr>
                                                 <tr>
                                                     <td>Login</td>
@@ -114,8 +116,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-10 col-sm-offset-10">
-                                                    <button class="btn btn-primary " name="submit" type="submit" data-ng-click="saveOrder()">Save status</button>
-                                                    <button class="btn btn-primary " name="submit" type="submit" data-ng-click="assignCourier()">Assign courier</button>
+                                                    <button class="btn btn-primary " name="submit" type="submit" data-ng-click="saveCourier()">Assign courier</button>
+                                                    <button class="btn btn-primary " name="submit" type="submit" data-ng-click="saveStatus()">Save status</button>
                                                 </div>
                                             </form>
                                         </div>

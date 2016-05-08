@@ -19,20 +19,28 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
 
             $scope.user = $rootScope.user;
             $scope.order = $rootScope.chooseApp;
-
+            var prevDataOrder = {
+                status: $scope.order.status, 
+                courier: {
+                    id: $scope.order.courier.id
+                }
+            };
+            
+            $scope.isAssignedCourier = $scope.order.courier? true: false;
             $scope.userData = managerService.getUserData($scope, $rootScope, $rootScope.chooseApp.partner.id);
             
-            $scope.saveOrder = function () {
+            $scope.saveStatus = function () {
+                if (managerService.checkPermissionChangeStatus($scope, $scope.order, prevDataOrder.status))
                 managerService.updateOrderStatus($scope, $rootScope, $scope.order);
             };
             $scope.couriers = managerService.getCourierList($scope);
             
-            $scope.assignCourier = function() {
+            $scope.saveCourier = function() {
                 var data = {
-                    id_courier: $scope.selected,
+                    id_courier: $scope.order.courier.id,
                     id_order: $scope.order.id
                 }
-                managerService.assignCourier($scope, data);
+                managerService.assignCourier($scope, data, prevDataOrder.courier.id);
             };
             
             $scope.exit = function () {
