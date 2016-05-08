@@ -52,6 +52,10 @@
             <li>
                 <a href="#/documents"><i class="fa fa-list-ul" aria-hidden="true"></i>Documents</a>
             </li>
+            <li ng-if="user.role == 'COURIER'">
+                <a href="exportOrderList?docType=PDF"><i class="fa fa-arrow-down"
+                                 aria-hidden="true"></i>Fetch Task List</a>
+            </li>
             <li>
                 <a href="#" data-ng-click="exit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Exit</a>
             </li>
