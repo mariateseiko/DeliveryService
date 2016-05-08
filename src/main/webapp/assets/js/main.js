@@ -6,7 +6,12 @@ jQuery(function($) {
 			pause: false
 		});
 	});
-
+	$('.nav').click(function() {
+		console.log("Clicked");
+		$('.nav li.active').removeClass('active');
+		$(this).addClass('active');
+	});
+	
 	//Ajax contact
 	var form = $('.contact-form');
 	form.submit(function () {

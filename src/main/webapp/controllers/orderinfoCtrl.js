@@ -22,7 +22,7 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
             var prevDataOrder = {
                 status: $scope.order.status, 
                 courier: {
-                    id: $scope.order.courier.id
+                    id: $scope.order.courier? $scope.order.courier.id : null,
                 }
             };
             
@@ -38,7 +38,7 @@ app.controller('orderinfoCtrl', ['$scope', '$rootScope', '$location', 'orderServ
             $scope.saveCourier = function() {
                 var data = {
                     id_courier: $scope.order.courier.id,
-                    id_order: $scope.order.id
+                    id_order: $scope.order.id 
                 }
                 managerService.assignCourier($scope, data, prevDataOrder.courier.id);
             };

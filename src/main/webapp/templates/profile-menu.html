@@ -21,7 +21,7 @@
     <!-- END SIDEBAR BUTTONS -->
     <!-- SIDEBAR MENU -->
     <div class="profile-usermenu">
-        <ul class="nav">
+        <ul class="nav profile-ul">
             <li class="active">
                 <a href="#/profile"><i class="glyphicon glyphicon-home"></i>Overview </a>
             </li>
@@ -56,6 +56,13 @@
                 <a href="#" data-ng-click="exit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Exit</a>
             </li>
         </ul>
+        <script>
+            $('.nav .profile-ul').click(function() {
+                console.log("Clicked");
+                $('.nav .profile-ul li.active').removeClass('active');
+                $(this).addClass('active');
+            });
+        </script>
     </div>
     <!-- END MENU -->
 </div>

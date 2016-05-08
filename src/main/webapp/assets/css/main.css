@@ -681,7 +681,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
   padding: 20px;
-  min-height: 600px;
+  min-height: 550px;
   background: #f9f9f9;
 }
 
@@ -776,6 +776,8 @@ body {
   padding: 20px;
   background: #f9f9f9;
   min-height: 600px;
+  display: inline-block;
+  width: 100%;
 }
 
 /*================================overview================*/
@@ -951,9 +953,12 @@ z-index: 10;
   width: 95%;
   max-width: 95%;
 }
-table .table-hover .order{
+.order-table{
   color: #93A3B5;
   padding: 6px;
+}
+.buttons > button{
+  padding-left: 50px;
 }
 .login-name{
   color: #52b6ec;

@@ -48,8 +48,8 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
 
-                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12" ng-if="loginUser==''">
-                        <ul class="nav navbar-nav">
+                    <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
+                        <ul class="nav navbar-nav" ng-if="!loginUser">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
@@ -65,7 +65,13 @@
             </div>
         </div>
     </header>
-
+<script>
+    $('.nav').click(function() {
+        console.log("Clicked");
+        $('.nav li.active').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
     <div ng-view></div>
 
     <script src="assets/js/jquery.js"></script>
