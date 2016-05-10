@@ -156,7 +156,7 @@
                 <param name="root">user</param>
             </result>
         </action>
-        <action name="viewPricelist" class="by.bsuir.deliveryservice.action.ViewPricelistAction">
+        <action name="viewPriceList" class="by.bsuir.deliveryservice.action.ViewPricelistAction">
             <interceptor-ref name="json"/>
             <result name="error" type="json">
                 <param name="statusCode">500</param>

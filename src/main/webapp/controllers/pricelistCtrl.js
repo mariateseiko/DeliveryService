@@ -29,10 +29,11 @@ app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$locat
                     $scope.user = $rootScope.user;
 
                     $scope.prices = [];
-                    managerService.getPricelist($scope);
+                    managerService.getPriceList($scope);
                         
                     $scope.savePriceList = function () {
-
+                        if (managerService.checkPriceList($scope))
+                            managerService.savePriceList();
                     }
                 }
                 $scope.exit = function () {
