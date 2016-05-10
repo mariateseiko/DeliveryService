@@ -101,6 +101,17 @@
                 <param name="root">orders</param>
             </result>
         </action>
+        <action name="countCourierOrdersActions" class="by.bsuir.deliveryservice.action.CountCourierOrdersActions">
+            <interceptor-ref name="json"/>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">countOrderCouriers</param>
+            </result>
+        </action>
         <action name="updateProfile" class="by.bsuir.deliveryservice.action.UpdateProfileAction">
             <interceptor-ref name="json"/>
             <result name="error" type="json">

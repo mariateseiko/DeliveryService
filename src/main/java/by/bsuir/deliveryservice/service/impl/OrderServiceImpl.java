@@ -142,4 +142,15 @@ public class OrderServiceImpl implements OrderService {
     public void deliverOrder(Long orderId) throws ServiceException {
         updateOrderStatus(orderId, OrderStatus.DELIVERED);
     }
+
+    @Override
+    public int selectCountCourierOrders(Long courierId) throws ServiceException{
+        int count = 0;
+        try {
+            count = orderDao.selectCountCourierOrders(courierId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return count;
+    }
 }

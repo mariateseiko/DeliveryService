@@ -23,4 +23,6 @@ public interface OrderService {
     List<Order> viewCourierOrders(Long courierId) throws ServiceException;
     List<Order> viewOrders() throws ServiceException;
     List<Order> viewUserOrders(Long userId) throws ServiceException;
+
+    int selectCountCourierOrders(Long courierId) throws ServiceException;
 }
