@@ -6,7 +6,7 @@ import by.bsuir.deliveryservice.service.ShippingService;
 import by.bsuir.deliveryservice.service.impl.ShippingServiceImpl;
 import com.opensymphony.xwork2.Action;
 
-public class UpdatePricelistAction implements Action {
+public class UpdatePriceListAction implements Action {
     private Shipping[] shippings;
     private boolean success = false;
     private ShippingService shippingService = ShippingServiceImpl.getInstance();

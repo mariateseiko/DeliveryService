@@ -32,8 +32,9 @@ app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$locat
                     managerService.getPriceList($scope);
                         
                     $scope.savePriceList = function () {
-                        if (managerService.checkPriceList($scope))
-                            managerService.savePriceList();
+                        $scope.errorMessage = "";
+                        if (managerService.checkPriceList($scope) || !$scope.errorMessage)
+                            managerService.savePriceList($scope);
                     }
                 }
                 $scope.exit = function () {

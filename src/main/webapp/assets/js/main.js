@@ -6,7 +6,7 @@ jQuery(function($) {
 			pause: false
 		});
 	});
-	$('.nav .profile-ul').click(function() {
+	$('.profile-ul').click(function() {
 		console.log("Clicked");
 		$('.nav li.active').removeClass('active');
 		$(this).addClass('active');

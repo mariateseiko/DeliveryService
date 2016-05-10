@@ -1,4 +1,4 @@
-package by.bsuir.deliveryservice.action;
+package by.bsuir.deliveryservice.action.util;
 
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.service.ServiceException;
@@ -8,7 +8,10 @@ import com.opensymphony.xwork2.Action;
 
 import java.util.List;
 
-public class ViewPriceListAction implements Action {
+/**
+ * Created by Анастасия on 10.05.2016.
+ */
+public class UpdateShippingAction implements Action {
     private List<Shipping> shippings;
     private static ShippingService shippingService = ShippingServiceImpl.getInstance();
     @Override

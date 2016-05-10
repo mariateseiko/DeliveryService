@@ -101,7 +101,7 @@
                 <param name="root">orders</param>
             </result>
         </action>
-        <action name="countCourierOrdersActions" class="by.bsuir.deliveryservice.action.CountCourierOrdersActions">
+        <action name="countCourierOrders" class="by.bsuir.deliveryservice.action.CountCourierOrdersActions">
             <interceptor-ref name="json"/>
             <result name="error" type="json">
                 <param name="statusCode">500</param>
@@ -145,6 +145,17 @@
                 <param name="root">success</param>
             </result>
         </action>
+        <action name="viewPriceList" class="by.bsuir.deliveryservice.action.ViewPriceListAction">
+            <interceptor-ref name="json"/>
+            <result name="error" type="json">
+                <param name="statusCode">500</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="root">shippings</param>
+            </result>
+        </action>
         <action name="viewProfile" class="by.bsuir.deliveryservice.action.ViewUserProfileAction">
             <interceptor-ref name="json"/>
             <result name="error" type="json">
@@ -154,17 +165,6 @@
                 <param name="noCache">true</param>
                 <param name="excludeNullProperties">true</param>
                 <param name="root">user</param>
-            </result>
-        </action>
-        <action name="viewPriceList" class="by.bsuir.deliveryservice.action.ViewPricelistAction">
-            <interceptor-ref name="json"/>
-            <result name="error" type="json">
-                <param name="statusCode">500</param>
-            </result>
-            <result type="json" name="success">
-                <param name="noCache">true</param>
-                <param name="excludeNullProperties">true</param>
-                <param name="root">shippings</param>
             </result>
         </action>
         <action name="viewCouriers" class="by.bsuir.deliveryservice.action.ViewCouriersAction">
@@ -178,8 +178,7 @@
                 <param name="root">couriers</param>
             </result>
         </action>
-        <action name="updatePricelist"
-                class="by.bsuir.deliveryservice.action.UpdatePricelistAction">
+        <action name="updatePriceList" class="by.bsuir.deliveryservice.action.UpdatePriceListAction">
             <interceptor-ref name="json"/>
             <result name="error" type="json">
                 <param name="statusCode">500</param>

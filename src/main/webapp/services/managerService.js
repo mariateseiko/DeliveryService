@@ -41,7 +41,13 @@ app.factory('managerService', ['$http', function ($http) {
         getCourierList: function ($scope) {
             $http.get('viewCouriers').then(function (response) {
                 $scope.couriers = response.data;
-                //$rootScope.couriers = response.data;
+                $scope.couriers.forEach(function(courier) {
+                    $http.get('countCourierOrders', {
+                        params: {courierId: courier.id}
+                    }).then(function (response) {
+                        courier.countOrders = response.data;
+                    });
+                });
             })
         },
         checkPermissionChangeStatus: function ($scope, order, prevStatus) {
@@ -75,19 +81,7 @@ app.factory('managerService', ['$http', function ($http) {
         getPriceList : function ($scope) {
             $http.get('viewPriceList').then(function (response) {
                 if (response.status == 200 && response.data){
-                    $scope.prices = [];
-                    response.data.forEach(function (el) {
-                        var price = {
-                            name: '',
-                            kg: 0,
-                            km: 0
-                        };
-                        price.name = el.name;
-                        price.kg = el.pricePerKg;
-                        price.km = el.pricePerKm;
-                        $scope.prices.push(price);
-                    });
-                    
+                    $scope.prices = response.data;
                     
                 } else $scope.errorMessage = "Error of getting price list.";
             });
@@ -96,10 +90,10 @@ app.factory('managerService', ['$http', function ($http) {
             var pattern = /^(\d+)$/;
             var error = "Price should only include the numbers";
             $scope.prices.forEach(function (price) {
-                if (!pattern.exec(price.kg)) {
+                if (!pattern.exec(price.pricePerKg)) {
                     $scope.errorMessage = error;
                     return false;
-                } else if (!pattern.exec(price.km)) {
+                } else if (!pattern.exec(price.pricePerKm)) {
                     $scope.errorMessage = error;
                     return false;
                 }
