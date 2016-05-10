@@ -51,6 +51,15 @@ public class OrderDaoImpl implements OrderDao {
             "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
             "ORDER BY ord_deliverydate ASC";
 
+    private static final String SELECT_COUNT_COURIER_ORDERS = "SELECT count(*) AS total FROM `order` " +
+            "JOIN `user` AS `partner` ON `order`.ord_courier = `partner`.usr_id " +
+            "LEFT JOIN `user` AS `courier` ON `order`.ord_courier = `courier`.usr_id " +
+            "JOIN `shipping` ON `order`.ord_shipping = `shipping`.shp_ID " +
+            "JOIN `status` ON `status`.ost_id = `order`.ord_status " +
+            "JOIN `office` ON `office`.off_id = `order`.ord_office " +
+            "WHERE ord_courier=? AND ost_name = 'DELIVERY' " +
+            "ORDER BY ord_deliverydate ASC";
+
     private static final String SQL_SELECT_BETWEEN = "SELECT * " +
             "FROM `order` " +
             "JOIN `user` AS `partner` ON `order`.ord_partner = `partner`.usr_id " +
@@ -271,5 +280,21 @@ public class OrderDaoImpl implements OrderDao {
         }
 
         return orders;
+    }
+
+    public int selectCountCourierOrders(Long courierId) throws DaoException
+    {
+        int countOrders = 0;
+        try (Connection cn = provideConnection();
+             PreparedStatement st = cn.prepareStatement(SELECT_COUNT_COURIER_ORDERS)) {
+            st.setLong(1, courierId);
+            ResultSet resultSet = st.executeQuery();
+
+            countOrders = resultSet.getInt("total");
+
+        } catch (SQLException|NamingException e) {
+            throw new DaoException("Request to database failed", e);
+        }
+        return countOrders;
     }
 }
