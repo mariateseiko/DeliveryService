@@ -178,7 +178,8 @@
                 <param name="root">couriers</param>
             </result>
         </action>
-        <action name="updatePricelist" class="by.bsuir.deliveryservice.action.UpdatePriceList">
+        <action name="updatePricelist"
+                class="by.bsuir.deliveryservice.action.UpdatePricelistAction">
             <interceptor-ref name="json"/>
             <result name="error" type="json">
                 <param name="statusCode">500</param>
