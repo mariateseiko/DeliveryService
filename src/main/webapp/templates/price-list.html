@@ -9,7 +9,8 @@
                     <h2>Price list</h2>
 
                     <p>The .table-hover class enables a hover state on table rows:</p>
-                        <table class="table table-hover" ng-controller="pricelistCtrl">
+                    <form class="order" ng-controller="pricelistCtrl">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Type</th>
@@ -21,12 +22,19 @@
                             <tbody>
                             <tr ng-repeat="price in prices">
                                 <td>{{price.name}}</td>
-                                <td>{{price.pricePerKg}}</td>
-                                <td>{{price.pricePerKm}}</td>
-                                
+                                <td>
+                                    <input type="text" class="form-control" name="price.pricePerKg" id="pricePerKg" ng-model="price.pricePerKg"/>
+                                    {{price.pricePerKg}}</td>
+                                <td>
+                                    <input type="text" class="form-control" name="price.pricePerKm" id="pricePerKm" ng-model="price.pricePerKm"/>
+                                    {{price.pricePerKm}}
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-primary " name="submit" type="submit" data-ng-click="savePriceList()">Save</button>
+                    </form>
                     </div>
                 </div>
             </div>

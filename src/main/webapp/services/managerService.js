@@ -70,6 +70,14 @@ app.factory('managerService', ['$http', function ($http) {
                         $scope.successMessage = "Order was updated."
                     } else $scope.errorMessage = "Error";
                 });
+        },
+        getPricelist : function ($scope) {
+            $http.get('viewPricelist').then(function (response) {
+                if (response.status == 200 && response.data){
+                    $scope.prices = response.data;
+                    
+                } else $scope.errorMessage = "Error";
+            });
         }
     }
 }]);

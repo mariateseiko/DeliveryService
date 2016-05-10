@@ -47,7 +47,7 @@ app.config(['$routeProvider', function($routeProvide){
     })
     .when('/price-list', {
         templateUrl: 'templates/price-list.html',
-        controller: 'pricelistCtrl'
+        controller: 'priceListCtrl'
     })    
     .when('/accountsettings', {
         templateUrl: 'templates/accset.html'
