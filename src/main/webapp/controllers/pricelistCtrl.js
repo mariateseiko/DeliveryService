@@ -1,7 +1,8 @@
 'use strict'
 
-app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService', 'managerService',
-    function ($scope, orderService, $rootScope, $location, sessionService, userService, managerService){
+app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'sessionService', 'userService',
+    'managerService','loginService',
+    function ($scope, orderService, $rootScope, $location, sessionService, userService, managerService, loginService){
         if (!sessionService.get('user'))
             $location.path('/');
         else {
@@ -12,6 +13,7 @@ app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$locat
 
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);
+            }
                 $rootScope.login = sessionService.get('user');
                 $scope.login = sessionService.get('user');
 
@@ -26,14 +28,16 @@ app.controller('priceListCtrl', ['$scope', 'orderService', '$rootScope' ,'$locat
                         }
                     $scope.user = $rootScope.user;
 
-                    $scope.prices = managerService.getPricelist($scope);
-                    $scope.savePrices = function () {
+                    $scope.prices = [];
+                    managerService.getPricelist($scope);
+                        
+                    $scope.savePriceList = function () {
 
                     }
                 }
                 $scope.exit = function () {
                     loginService.logout($scope, $rootScope);
                 }
-            }
+            
         }
     }]);

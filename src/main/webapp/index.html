@@ -26,10 +26,8 @@
 </head><!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0" ng-controller="homeCtrl">
-<div ng-init="loginUser=''"></div>
-
                <!-- header -->
-    <header id="header" role="banner">
+    <header id="header" role="banner" >
         <div class="container-fluid">
             <div id="navbar" class="navbar-default">
                 <div class="navbar-header">
@@ -50,14 +48,14 @@
                     </ul>
 
                     <div class="reg collapse navbar-collapse pull-right col-md-6  col-xs-12">
-                        <ul class="nav navbar-nav" ng-if="!loginUser">
+                        <ul class="nav navbar-nav" ng-hide="loginUser">
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/login')">
                                 <a href="" data-target="#login"  >Sign in</a></li>
                             <li type="button" class=" " data-toggle="modal" data-target="#myModal" data-ng-click="go('/register')">
                                 <a href="" data-target="#reg">Registration</a>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav" ng-if="loginUser!=''">
+                        <ul class="nav navbar-nav" ng-show="loginUser">
                             <li type="button"><a href="#/profile" class="login-name">{{loginUser}}</a></li>
                         </ul>
 
@@ -95,6 +93,7 @@
     <script src="controllers/orderlistCtrl.js"></script>
     <script src="controllers/profileCtrl.js"></script>
     <script src="controllers/registerCtrl.js"></script>
+    <script src="controllers/pricelistCtrl.js"></script>
 
 <!-- Services-->
     <script src="services/documentService.js"></script>

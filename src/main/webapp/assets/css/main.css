@@ -775,7 +775,7 @@ body {
 .profile-content {
   padding: 20px;
   background: #f9f9f9;
-  min-height: 600px;
+  min-height: 550px;
   display: inline-block;
   width: 100%;
 }
@@ -946,9 +946,7 @@ z-index: 10;
 .order tr td:last-child{
   float:right;
 }
-.order > .table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td{
-  width: 50%;
-}
+
 .table{
   width: 95%;
   max-width: 95%;

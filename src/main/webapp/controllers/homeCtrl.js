@@ -9,8 +9,6 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
             $location.path('/profile');
             return;
         }
-        $scope.loginUser = sessionService.get('user');
-        
         
         $scope.users = [
             {'name' : 'Grivachevsky Andrey',

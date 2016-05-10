@@ -32,8 +32,8 @@ app.factory('loginService', function($http, $location, sessionService, orderServ
         logout:function ($scope, $rootScope) {
             sessionService.destroy('user');
             $http.get('logout').then(function () {
-                $rootScope.user = null;
-                $scope.user = null;
+                $rootScope.loginUser = null;
+                $scope.loginUser = null;
                 $location.path('/');
             });
         }

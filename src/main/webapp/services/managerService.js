@@ -74,7 +74,21 @@ app.factory('managerService', ['$http', function ($http) {
         getPricelist : function ($scope) {
             $http.get('viewPricelist').then(function (response) {
                 if (response.status == 200 && response.data){
-                    $scope.prices = response.data;
+                    
+                    $scope.prices = [];
+                    
+                    response.data.forEach(function (el) {
+                        var price = {
+                            name: '',
+                            kg: 0,
+                            km: 0
+                        };
+                        price.name = el.name;
+                        price.kg = el.pricePerKg;
+                        price.km = el.pricePerKm;
+                        $scope.prices.push(price);
+                    });
+                    
                     
                 } else $scope.errorMessage = "Error";
             });
