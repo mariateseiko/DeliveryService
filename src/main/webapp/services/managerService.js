@@ -41,11 +41,11 @@ app.factory('managerService', ['$http', function ($http) {
         getCourierList: function ($scope) {
             $http.get('viewCouriers').then(function (response) {
                 $scope.couriers = response.data;
-                $scope.couriers.forEach(function(courier) {
+                $scope.couriers.forEach(function(courier, i) {
                     $http.get('countCourierOrders', {
-                        params: {courierId: courier.id}
+                        params: {courierId: $scope.couriers[i].id}
                     }).then(function (response) {
-                        courier.countOrders = response.data;
+                        $scope.couriers[i].countOrders = response.data;
                     });
                 });
             })

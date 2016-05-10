@@ -11,19 +11,19 @@
                     <p>The .table-hover class enables a hover state on table rows:</p>
                     <table class="table table-hover" ng-controller="couriersCtrl">
                         <thead>
-                        <tr>
+
                             <th>Id</th>
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Orders</th>
-                        </tr>
+
                         </thead>
                         <tbody>
                         <tr ng-repeat="courier in couriers">
                             <td>{{courier.id}}</td>
                             <td>{{courier.fullName}}</td>
                             <td>{{courier.phone}}</td>
-                            <td></td>
+                            <td>{{courier.countOrders}}</td>
                         </tr>
 
                         </tbody>

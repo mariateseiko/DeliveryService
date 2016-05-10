@@ -25,9 +25,8 @@ public class CountCourierOrdersActions implements com.opensymphony.xwork2.Action
     public String execute() throws Exception {
         long courierId;
         HttpServletRequest request = ServletActionContext.getRequest();
-        HttpSession session = request.getSession();
-        User user = (User)session.getAttribute(USER);
-        courierId = user.getId();
+
+        courierId = Long.parseLong(request.getParameter("courierId"));
         try {
             countOrderCouriers = orderService.selectCountCourierOrders(courierId);
         } catch(ServiceException e) {
