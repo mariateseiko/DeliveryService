@@ -40,7 +40,7 @@
                     <a class="navbar-brand" href="index.html"></a>
                 </div>
                 <div class="collapse navbar-collapse text-center">
-                    <ul class="nav navbar-nav" id="menu">
+                    <ul class="nav navbar-nav" id="menu" ng-hide="loginUser">
                         <li class="active"><a href="#main-slider"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#about-us">About Us</a></li>
@@ -56,7 +56,7 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav" ng-show="loginUser">
-                            <li><a href="#/profile" class="login-name">{{loginUser}}</a></li>
+                            <li><button class="login-name" id="animate-profile">{{loginUser}}</button></li>
                         </ul>
 
                     </div>
@@ -64,13 +64,17 @@
             </div>
         </div>
     </header>
-<script>
-    $('.nav').click(function() {
-        console.log("Clicked");
-        $('.nav li.active').removeClass('active');
-        $(this).addClass('active');
-    });
-</script>
+   <div class="animate-profile">
+       <div class="profile-usertitle-name">
+           Login: {{user.login}}
+       </div>
+       <div class="profile-usertitle-name">
+           Name: {{user.name}}
+       </div>
+       <div class="profile-usertitle-job">
+           Role: {{user.role}}
+       </div>
+   </div>
     <div ng-view></div>
 
     <script src="assets/js/jquery.js"></script>

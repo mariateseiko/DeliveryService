@@ -6,12 +6,16 @@ jQuery(function($) {
 			pause: false
 		});
 	});
-	$('.profile-ul').click(function() {
+	$('#profile').click(function() {
 		console.log("Clicked");
-		$('.nav li.active').removeClass('active');
+		$('#profile').removeClass('active');
 		$(this).addClass('active');
 	});
-	
+	$('#animate-profile').click(function(){
+		$(".animate-profile").animate({
+			height: 'toggle'
+		});
+	});
 	//Ajax contact
 	var form = $('.contact-form');
 	form.submit(function () {
