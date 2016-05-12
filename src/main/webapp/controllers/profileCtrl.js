@@ -7,7 +7,7 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
         else {
             $scope.errorMessage="";
             $scope.successMessage="";
-            
+            $scope.user = $rootScope.user;
             $rootScope.loginUser = sessionService.get('user');
             $scope.loginUser = sessionService.get('user');
             

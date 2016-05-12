@@ -971,14 +971,13 @@ z-index: 10;
   margin-top: 50px;
 }
 .animate-profile{
-  display: none;
+  /*display: none;*/
   position: absolute;
   z-index: 999;
   right: 0;
   top: 78px;
   background-color: white;
   padding: 2% 5%;
-  height: 100px;
 }
 
 #animate-profile {
