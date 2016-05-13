@@ -7,6 +7,14 @@ import by.bsuir.deliveryservice.service.AbstractExportService;
 import by.bsuir.deliveryservice.service.DocFormat;
 import by.bsuir.deliveryservice.service.FinanceReportExportService;
 import by.bsuir.deliveryservice.service.ServiceException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -14,7 +22,6 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -49,11 +56,13 @@ public class FinanceReportServiceImpl extends AbstractExportService
     {
         try {
 
+/*
             switch (format) {
                 case PDF:
                     throw new ServiceException(format.toString() + " is not " +
                             "supported for this document");
             }
+*/
 
             File file = getTemporaryFile(PREFIX, format.toString());
 
@@ -65,6 +74,9 @@ public class FinanceReportServiceImpl extends AbstractExportService
                     break;
                 case CSV:
                     impl_exportToCsv(file, orders);
+                    break;
+                case PDF:
+                    impl_exportToPdf(file, from, orders);
                     break;
             }
 
@@ -289,5 +301,191 @@ public class FinanceReportServiceImpl extends AbstractExportService
 
             }
         }
+    }
+
+    // ----------------------------------------------------------------------
+
+    public void impl_exportToPdf(File file, Date from,
+                                 List<Order> ordersFromSpecifiedDate)
+            throws Exception
+    {
+        Document d = null;
+
+        try {
+            d = new Document();
+            PdfWriter.getInstance(d, new FileOutputStream(file));
+            d.open();
+
+            d.add(impl_PdfMakeHeader(from));
+            d.add(impl_PdfMakeFinanceTable(ordersFromSpecifiedDate));
+            d.add(impl_PdfMakeSummary(ordersFromSpecifiedDate));
+
+            d.close();
+        } finally {
+            if (d != null) d.close();
+        }
+    }
+
+    // ----------------------------------------------------------------------
+
+    protected Element impl_PdfMakeHeader(Date date) throws Exception
+    {
+        DateFormat dateFormat = DateFormat.getDateInstance();
+
+        String s = String.format("ФИНАНСОВЫЙ ОТЧЕТ\n" +
+                        "начиная с %s",
+                dateFormat.format(date));
+
+        Paragraph p = new Paragraph(s,
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 14,
+                        com.itextpdf.text.Font.BOLD));
+        p.setAlignment(Element.ALIGN_CENTER);
+
+        return p;
+    }
+
+    protected Element impl_PdfMakeFinanceTable(List<Order> orders)
+            throws Exception
+    {
+        PdfPTable table = new PdfPTable(new float[]{12, 24, 12, 32});
+        PdfPCell cell;
+
+        table.setSpacingBefore(15);
+        table.setWidthPercentage(100);
+        table.setSplitRows(true);
+
+        /* Date */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        cell.setPaddingBottom(10);
+
+        cell.setPhrase(new Phrase("Дата",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* Agreement No. */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+        cell.setPhrase(new Phrase("Договор",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* Sum */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+        cell.setPhrase(new Phrase("Сумма",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* Partner */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+        cell.setPhrase(new Phrase("Контрагент",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* Rows */
+
+        DateFormat dateFormat = DateFormat.getDateInstance();
+
+        for (int i = 0; i < orders.size(); i++) {
+
+            Order o = orders.get(i);
+
+            /* Date */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Phrase(dateFormat.format(o.getDate()),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+
+            /* Agreement No. */
+
+            cell = new PdfPCell();
+
+            cell.setPhrase(new Paragraph(String.format("№%d\nот %s г.",
+                    o.getId(),
+                    dateFormat.format(o.getDate())),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+
+            /* Sum */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Paragraph(String.format("%.2f",
+                    o.getTotal()),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+
+            /* Partner */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Phrase(String.format("%s\n%s",
+                    o.getPartner().getFullName(),
+                    o.getPartner().getPassport()),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+        }
+
+        return table;
+    }
+
+    protected Element impl_PdfMakeSummary(List<Order> orders) throws Exception
+    {
+        double totalEarning = 0f;
+
+        for (Order o : orders) {
+            totalEarning += o.getTotal();
+        }
+
+        String s = String.format("Всего заказов: %d\n" +
+                        "Сумма: +%.2f",
+                orders.size(),
+                totalEarning);
+
+        Paragraph p = new Paragraph(s,
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont()));
+        p.setSpacingBefore(25);
+
+        return p;
     }
 }
