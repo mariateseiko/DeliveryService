@@ -35,12 +35,19 @@ public class ExportOrderListAction extends DocExportAction
     {
         String docType = this.getDocType();
 
+        DocFormat docFormat;
+
+        try {
+            docFormat = DocFormat.valueOf(docType);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("unknown file format", e);
+        }
+
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
 
-        File file = service.exportToFile(DocFormat.valueOf(docType),
-                u.getId());
+        File file = service.exportToFile(docFormat, u.getId());
         setFileToDownload(file);
 
         return super.execute();
