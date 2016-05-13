@@ -1,4 +1,4 @@
-package by.bsuir.deliveryservice.action.util;
+package by.bsuir.deliveryservice.action;
 
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.service.ServiceException;
