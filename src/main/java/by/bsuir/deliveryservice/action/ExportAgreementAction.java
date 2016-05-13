@@ -10,6 +10,7 @@ import by.bsuir.deliveryservice.service.DocFormat;
 import by.bsuir.deliveryservice.service.impl.export.AgreementExportServiceFactory;
 
 import java.io.File;
+import java.util.Date;
 
 public class ExportAgreementAction extends DocExportAction
 {
@@ -41,6 +42,8 @@ public class ExportAgreementAction extends DocExportAction
 
         File file = service.exportToFile(docFormat, orderId);
         setFileToDownload(file);
+        setFileName(String.format("agreement-no-%d-%s.%s", orderId,
+                FILENAME_DATE_FORMAT.format(new Date()), docType));
 
         return super.execute();
     }
