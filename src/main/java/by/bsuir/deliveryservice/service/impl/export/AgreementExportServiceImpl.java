@@ -23,14 +23,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 
-public final class AgreementExportServiceImpl extends AbstractExportService
-        implements AgreementExportService
+public class AgreementExportServiceImpl extends AbstractExportService
+    implements AgreementExportService
 {
     AgreementExportServiceImpl() {}
 
     // ----------------------------------------------------------------------
 
-    public static final String PREFIX = "agreement";
+    private static final String PREFIX = "agreement";
 
     // ----------------------------------------------------------------------
 
