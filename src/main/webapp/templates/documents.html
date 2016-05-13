@@ -48,41 +48,7 @@
                         </table>
                     </div>
 
-                    <div ng-if="user.role=='ACCOUNTANT'">
-                        <p>The finance report of last quarter is ready!</p>
-
-                        <table class="table table-hover">
-
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport('CSV')">
-                                        <i class="fa fa-file" aria-hidden="true"></i>
-                                    </button>
-                                    Finance Report (CSV)
-                                </td>
-                                <td>
-                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport('XLS')">
-                                        <i class="fa fa-file" aria-hidden="true"></i>
-                                    </button>
-                                    Finance Report (XLS)
-                                </td>
-                            </tr>
-                            </tbody>
-
-                        </table>
-                    </div>
-
                     <div>
-                        <p>Other documents available for everyone:</p>
-
                         <table class="table table-hover">
 
                             <thead>
@@ -90,34 +56,72 @@
                                 <th>File</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
 
                             <tbody>
+
+                            <div ng-if="user.role=='ACCOUNTANT'">
+                                <tr>
+                                    <td>
+                                        Finance Report
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-custom"
+                                                name="submit"
+                                                type="submit"
+                                                data-ng-click="exportFinanceReport('PDF')">
+                                            <i class="fa fa-file" aria-hidden="true"></i>
+                                        </button>
+                                        PDF
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-custom"
+                                                name="submit"
+                                                type="submit"
+                                                data-ng-click="exportFinanceReport('XLS')">
+                                            <i class="fa fa-file" aria-hidden="true"></i>
+                                        </button>
+                                        XLS
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-custom"
+                                                name="submit"
+                                                type="submit"
+                                                data-ng-click="exportFinanceReport('CSV')">
+                                            <i class="fa fa-file" aria-hidden="true"></i>
+                                        </button>
+                                        CSV
+                                    </td>
+                                </tr>
+                            </div>
+
                             <tr>
-                                <td>
+                                <td>Price List</td>
+                                <!--<td>
                                     <button class="btn btn-custom " name="submit"
                                             type="submit"
-                                            data-ng-click="exportPriceList('CSV')">
+                                            data-ng-click="exportPriceList('PDF')">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Price List (CSV)
-                                </td>
+                                    PDF
+                                </td>-->
                                 <td>
                                     <button class="btn btn-custom " name="submit"
                                             type="submit"
                                             data-ng-click="exportPriceList('XLS')">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Price List (XLS)
+                                    XLS
                                 </td>
                                 <td>
                                     <button class="btn btn-custom " name="submit"
                                             type="submit"
-                                            data-ng-click="exportPriceList('PDF')">
+                                            data-ng-click="exportPriceList('CSV')">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Price List (PDF)
+                                    CSV
                                 </td>
                             </tr>
                             </tbody>
