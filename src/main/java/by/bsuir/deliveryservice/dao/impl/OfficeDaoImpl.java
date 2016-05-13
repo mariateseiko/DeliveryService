@@ -19,6 +19,11 @@ public class OfficeDaoImpl implements OfficeDao
     private static final String SELECT_BY_ID_QUERY =
             "SELECT * FROM `office` WHERE off_ID=?";
 
+    private static final String SQL_UPDATE_OFFICE =
+            "UPDATE `office` " +
+                    "SET off_Name=?, off_Credentials=? " +
+                    "WHERE off_ID=?";
+
     // -----------------------------------------------------------------------
 
     /**
@@ -67,7 +72,8 @@ public class OfficeDaoImpl implements OfficeDao
             }
 
         } catch (SQLException | NamingException e) {
-            throw new DaoException("failed to execute a statement", e);
+            throw new DaoException("failed to select a record " +
+                    "with ID=" + id, e);
         }
 
         return office;
@@ -76,7 +82,19 @@ public class OfficeDaoImpl implements OfficeDao
     @Override
     public void update(Long id, Office entity) throws DaoException
     {
-        throw new DaoException("UPDATE not supported");
+        try (Connection c = provideConnection();
+             PreparedStatement stm = c.prepareStatement(SQL_UPDATE_OFFICE)) {
+
+            stm.setString(1, entity.getName());
+            stm.setString(2, entity.getCredentials());
+            stm.setLong(3, id);
+
+            stm.executeUpdate();
+
+        } catch (SQLException | NamingException e) {
+            throw new DaoException("failed to update 'OFFICE' with " +
+                    "ID=" + id, e);
+        }
     }
 
     // -----------------------------------------------------------------------
