@@ -7,94 +7,125 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <div class="container">
-                    <h2>Courier list</h2>
+                    <h2>Documents</h2>
 
-                    <p>The .table-hover class enables a hover state on table rows:</p>
-                    <table class="table table-hover" ng-controller="documentsCtrl">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Status</th>
-                            <div ng-if="user.role=='MANAGER'"><th></th><th></th></div>
-                            <div ng-if="user.role=='ACCOUNTANT' || user.role=='COURIER'"><th></th></div>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="app in apps">
-                            <td>{{app.id}}</td>
-                            <td>{{app.status}}</td>
-                            <div ng-if="user.role=='MANAGER'">
+                    <div ng-controller="documentsCtrl">
+
+                    <div ng-if="user.role=='MANAGER' || user.role=='COURIER'">
+                        <p>Here is the list of orders. You can create a
+                            print-ready copy of an agreement or an act:</p>
+
+                        <table class="table table-hover">
+
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-repeat="app in apps">
+                                <td>{{app.id}}</td>
+                                <td>{{app.status}}</td>
                                 <td>
                                     <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportAgreement(app)">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Agreement (PDF)
+                                    Agreement
                                 </td>
-
                                 <td >
                                     <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportAct(app)">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
-                                    Act (PDF)
+                                    Act
                                 </td>
-                            </div>
+                            </tr>
+                            </tbody>
 
-                            <div ng-if="user.role=='COURIER'">
-                                <td>
-                                    <!-- **********************************app.courier.id****************************************************-->
-                                    <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportOrderList(app.courier.id)">
-                                        <i class="fa fa-file" aria-hidden="true"></i>
-                                    </button>
-                                    Order List (PDF)
-                                </td>
-                            </div>
-                            <!-- DOCUMENTS FOR ALL USERS-->
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <!--<td></td>-->
-                            <td >
-                                <button class="btn btn-custom " name="submit"
-                                        type="submit"
-                                        data-ng-click="exportPriceList('CSV')">
-                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                </button>
-                                Price-list (CSV)
-                            </td>
-                            <td >
-                                <button class="btn btn-custom " name="submit"
-                                        type="submit"
-                                        data-ng-click="exportPriceList('XLS')">
-                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                </button>
-                                Price-list (XLS)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td>
-                                <div ng-if="user.role=='ACCOUNTANT'">
+                        </table>
+                    </div>
+
+                    <div ng-if="user.role=='ACCOUNTANT'">
+                        <p>The finance report of last quarter is ready!</p>
+
+                        <table class="table table-hover">
+
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
                                 <td>
                                     <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport('CSV')">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
                                     Finance Report (CSV)
                                 </td>
-                                <td >
+                                <td>
                                     <button class="btn btn-custom " name="submit" type="submit" data-ng-click="exportFinanceReport('XLS')">
                                         <i class="fa fa-file" aria-hidden="true"></i>
                                     </button>
                                     Finance Report (XLS)
                                 </td>
-                            </div>
+                            </tr>
+                            </tbody>
 
-                        </tr>
-                        </tbody>
-                    </table>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p>Other documents available for everyone:</p>
+
+                        <table class="table table-hover">
+
+                            <thead>
+                            <tr>
+                                <th>File</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-custom " name="submit"
+                                            type="submit"
+                                            data-ng-click="exportPriceList('CSV')">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Price List (CSV)
+                                </td>
+                                <td>
+                                    <button class="btn btn-custom " name="submit"
+                                            type="submit"
+                                            data-ng-click="exportPriceList('XLS')">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Price List (XLS)
+                                </td>
+                                <td>
+                                    <button class="btn btn-custom " name="submit"
+                                            type="submit"
+                                            data-ng-click="exportPriceList('PDF')">
+                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                    </button>
+                                    Price List (PDF)
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    </div>
                 </div>
             </div>
         </div>
