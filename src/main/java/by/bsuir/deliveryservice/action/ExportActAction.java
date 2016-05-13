@@ -12,6 +12,8 @@ import by.bsuir.deliveryservice.service.impl.export.ActExportServiceFactory;
 import by.bsuir.deliveryservice.service.impl.export.AgreementExportServiceFactory;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class ExportActAction extends DocExportAction
 {
@@ -33,11 +35,13 @@ public class ExportActAction extends DocExportAction
     {
         String docType = this.getDocType();
 
-        if (!docType.equalsIgnoreCase("PDF"))
+        if (!docType.equalsIgnoreCase(DocFormat.PDF.toString()))
             return DocExportAction.FILE_NOT_SUPPORTED;
 
         File file = service.exportToFile(DocFormat.PDF, orderId);
         setFileToDownload(file);
+        setFileName(String.format("act-%d-%s.%s", orderId,
+                FILENAME_DATE_FORMAT.format(new Date()), docType));
 
         return super.execute();
     }
