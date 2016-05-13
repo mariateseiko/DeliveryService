@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.Action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Allows a client to download a file. The file to download should be
@@ -23,6 +25,9 @@ public abstract class DownloadAction implements Action
     private File fileToDownload = null;
     private InputStream fileInputStream = null;
     private String fileName = null;
+
+    protected static final DateFormat FILENAME_DATE_FORMAT =
+            new SimpleDateFormat("dd-MM-yyyy");
 
     // ----------------------------------------------------------------------
 
