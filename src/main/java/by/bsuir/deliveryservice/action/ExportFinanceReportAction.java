@@ -28,8 +28,15 @@ public class ExportFinanceReportAction extends DocExportAction
     {
         String docType = this.getDocType();
 
-        File file = service.exportToFile(DocFormat.valueOf(docType),
-                sinceDate);
+        DocFormat docFormat;
+
+        try {
+            docFormat = DocFormat.valueOf(docType);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("unknown file format", e);
+        }
+
+        File file = service.exportToFile(docFormat, sinceDate);
         setFileToDownload(file);
 
         return super.execute();
