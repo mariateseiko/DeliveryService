@@ -971,7 +971,7 @@ z-index: 10;
   margin-top: 50px;
 }
 .animate-profile{
-  /*display: none;*/
+  display: none;
   position: absolute;
   z-index: 999;
   right: 0;
