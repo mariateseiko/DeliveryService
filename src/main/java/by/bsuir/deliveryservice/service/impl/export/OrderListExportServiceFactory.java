@@ -2,7 +2,7 @@ package by.bsuir.deliveryservice.service.impl.export;
 
 import by.bsuir.deliveryservice.service.OrderListExportService;
 
-public class OrderListExportServiceFactory
+public final class OrderListExportServiceFactory
 {
     private OrderListExportServiceFactory() {}
 

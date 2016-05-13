@@ -2,7 +2,7 @@ package by.bsuir.deliveryservice.service.impl.export;
 
 import by.bsuir.deliveryservice.service.FinanceReportExportService;
 
-public class FinanceReportServiceFactory
+public final class FinanceReportServiceFactory
 {
     private FinanceReportServiceFactory() {}
 
