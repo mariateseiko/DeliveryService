@@ -26,10 +26,15 @@ public class ExportPriceListAction extends DocExportAction
     {
         String docType = this.getDocType();
 
-        if (docType.equalsIgnoreCase(DocFormat.PDF.toString()))
-            return DocExportAction.FILE_NOT_SUPPORTED;
+        DocFormat docFormat;
 
-        File file = service.exportToFile(DocFormat.valueOf(docType));
+        try {
+            docFormat = DocFormat.valueOf(docType);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("unknown file format", e);
+        }
+
+        File file = service.exportToFile(docFormat);
         setFileToDownload(file);
 
         return super.execute();
