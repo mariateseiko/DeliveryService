@@ -1,0 +1,47 @@
+
+<div class="container" ng-controler="profileCtrl">
+    <div class="row profile">
+        <div class="col-md-3">
+            <div ng-include src="'templates/profile-menu.html'"></div>
+        </div>
+        <div class="col-md-9">
+            <div class="profile-content">
+                <div class="container">
+                    <h2>Office list</h2>
+
+                    <p>The .table-hover class enables a hover state on table rows:</p>
+                    <form class="price-list" ng-controller="officeCtrl">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Credentials</th>
+                                <th>Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr >
+                                <td>{{primaryOffice.credentials}}</td>
+                                <td>
+                                    {{primaryOffice.name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="successMessage!=''">
+                            <div class="form-group">
+                                <div class="success-message">{{successMessage}}</div>
+                            </div>
+                        </div>
+                        <div ng-if="errorMessage!=''">
+                            <div class="form-group">
+                                <div class="error-message">{{errorMessage}}</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary " name="submit" type="submit" style="margin-top: 30px;" data-ng-click="savePriceList()">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

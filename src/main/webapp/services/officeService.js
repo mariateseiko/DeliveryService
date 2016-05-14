@@ -3,10 +3,9 @@
 app.factory('officeService', ['$http', function ($http) {
     return {
 
-        getPrimaryOffice: function ($scope, $rootScope) {
+        getPrimaryOffice: function ($scope) {
             $http.get('viewPrimaryOffice').then(function (response) {
                 $scope.primaryOffice = response.data;
-                $rootScope.primaryOffice = response.data;
             });
         },
 
