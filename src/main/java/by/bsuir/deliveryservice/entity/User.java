@@ -1,6 +1,8 @@
 package by.bsuir.deliveryservice.entity;
 
-public class User extends Entity {
+import java.io.Serializable;
+
+public class User extends Entity implements Serializable {
     private String login;
     private String password;
     private String phone;

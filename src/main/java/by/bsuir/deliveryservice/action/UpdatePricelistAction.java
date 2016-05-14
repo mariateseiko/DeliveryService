@@ -6,17 +6,17 @@ import by.bsuir.deliveryservice.service.ShippingService;
 import by.bsuir.deliveryservice.service.impl.ShippingServiceImpl;
 import com.opensymphony.xwork2.Action;
 
-public class UpdatePriceListAction implements Action {
-    private Shipping[] shippings;
+import java.util.List;
+
+public class UpdatePricelistAction implements Action {
+    private Shipping shipping = new Shipping();
     private boolean success = false;
     private ShippingService shippingService = ShippingServiceImpl.getInstance();
 
     @Override
     public String execute() throws Exception {
         try {
-            for (Shipping shipping : shippings) {
-                shippingService.updateShipping(shipping.getId(), shipping);
-            }
+            shippingService.updateShipping(shipping.getId(), shipping);
             success = true;
             return SUCCESS;
         } catch (ServiceException e) {
@@ -24,8 +24,20 @@ public class UpdatePriceListAction implements Action {
         }
     }
 
-    public void setShippings(Shipping[] shippings) {
-        this.shippings = shippings;
+    public void setId(Long id) {
+        shipping.setId(id);
+    }
+
+    public void setName(String name) {
+        shipping.setName(name);
+    }
+
+    public void setPricePerKg(Double pricePerKg) {
+        shipping.setPricePerKg(pricePerKg);
+    }
+
+    public void setPricePerKm(Double pricePerKm) {
+        shipping.setPricePerKm(pricePerKm);
     }
 
     public boolean isSuccess() {
