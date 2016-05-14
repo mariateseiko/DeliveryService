@@ -21,11 +21,12 @@ This project is developing within the discipline "The Modern Platforms of Softwa
 * Price list
 * List of orders (for courier)
 
-##Entity:
+##Entities:
 * Order
 * Application
 * Shipping
 * User
+* Office
 * Role
 * Status
 
