@@ -6,7 +6,7 @@ app.factory('userService', ['$http', 'orderService', 'sessionService', '$locatio
             $http.post('updateProfile', user).then(function(response){
                 if (response.status == 200 && response.data){
                     $scope.successMessage = "Settings have changed"
-                } else $scope.errorMessage = "Error of saving settings";
+                } else $scope.errorMessage = "Settings have changed";
             })
         },
         viewProfile: function($scope, $rootScope) {

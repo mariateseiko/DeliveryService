@@ -1,8 +1,9 @@
 package by.bsuir.deliveryservice.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order extends Entity {
+public class Order extends Entity implements Serializable {
     private User partner;
     private User courier;
     private Office office;
