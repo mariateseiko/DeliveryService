@@ -22,13 +22,18 @@
                             <tbody>
                             <tr ng-repeat="price in prices">
                                 <td>{{price.name}}</td>
-                                <td>
+                                <td ng-if="user.role=='MANAGER'">
                                     <input type="text" class="form-control" name="price.pricePerKg" id="kg" ng-model="price.pricePerKg"/>
                                 </td>
-                                <td>
+                                <td ng-if="user.role=='MANAGER'">
                                     <input type="text" class="form-control" name="price.pricePerKm" id="km" ng-model="price.pricePerKm"/>
                                 </td>
-
+                                <td ng-if="user.role!='MANAGER'">
+                                    {{price.pricePerKg}}
+                                </td>
+                                <td ng-if="user.role!='MANAGER'">
+                                    {{price.pricePerKm}}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
