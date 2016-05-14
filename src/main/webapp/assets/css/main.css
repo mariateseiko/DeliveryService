@@ -957,7 +957,7 @@ z-index: 10;
   margin-top: 50px;
 }
 .animate-profile{
-  visibility: hidden;
+  display: none;
   position: absolute;
   z-index: 999;
   right: 0;
@@ -1011,4 +1011,12 @@ table td:first-child{
 }
 .btn.btn-primary {
   border-radius: 0;
+}
+.panel-exit>.nav>li{
+  background-color: #F9F9F9;
+}
+.panel-exit{
+  margin-top: 10px;
+  border-top: 2px;
+  border-color: black;
 }

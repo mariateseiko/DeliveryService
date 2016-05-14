@@ -49,8 +49,9 @@ app.config(['$routeProvider', function($routeProvide){
         templateUrl: 'templates/price-list.html',
         controller: 'priceListCtrl'
     })    
-    .when('/accountsettings', {
-        templateUrl: 'templates/accset.html'
+    .when('/account-settings', {
+        templateUrl: 'templates/accset.html',
+        controller: 'accountsettingsCtrl'
     })
     .otherwise({
         redirectTo :'/'
