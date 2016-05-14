@@ -12,6 +12,7 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
 
             if (!$rootScope.user) {
                 userService.viewProfile($scope, $rootScope);
+            }
                 $rootScope.login = sessionService.get('user');
                 $scope.login = sessionService.get('user');
 
@@ -35,6 +36,6 @@ app.controller('orderCtrl', ['$scope', 'orderService', '$rootScope' ,'$location'
                 $scope.exit = function () {
                     loginService.logout($scope, $rootScope);
                 }
-            }
+
         }
     }]);
