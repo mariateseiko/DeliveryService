@@ -22,6 +22,9 @@ app.controller('profileCtrl', ['$scope', 'sessionService', '$rootScope', '$locat
             $scope.exit = function () {
                 loginService.logout($scope, $rootScope);
             };
+            $rootScope.exit = function () {
+                loginService.logout($scope, $rootScope);
+            };
             
             $scope.viewOrders = function () {
                 $location.path('/order-list');
