@@ -48,7 +48,11 @@ app.config(['$routeProvider', function($routeProvide){
     .when('/price-list', {
         templateUrl: 'templates/price-list.html',
         controller: 'priceListCtrl'
-    })    
+    }) .when('/office' , {
+        templateUrl: 'templates/office.html',
+        controller: 'officeCtrl'
+    })
+            
     .when('/account-settings', {
         templateUrl: 'templates/accset.html',
         controller: 'accountsettingsCtrl'

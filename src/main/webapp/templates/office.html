@@ -7,32 +7,22 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <div class="container">
-                    <h2>Price list</h2>
+                    <h2>Office list</h2>
 
                     <p>The .table-hover class enables a hover state on table rows:</p>
-                    <form class="price-list" ng-controller="priceListCtrl">
+                    <form class="price-list" ng-controller="officeCtrl">
                         <table>
                             <thead>
                             <tr>
-                                <th>Type</th>
-                                <th>Price per kg</th>
-                                <th>Price per km</th>
+                                <th>Credentials</th>
+                                <th>Name</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="price in prices">
-                                <td>{{price.name}}</td>
-                                <td ng-if="user.role=='MANAGER'">
-                                    <input type="text" class="form-control" name="price.pricePerKg" id="kg" ng-model="price.pricePerKg"/>
-                                </td>
-                                <td ng-if="user.role=='MANAGER'">
-                                    <input type="text" class="form-control" name="price.pricePerKm" id="km" ng-model="price.pricePerKm"/>
-                                </td>
-                                <td ng-if="user.role!='MANAGER'">
-                                    {{price.pricePerKg}}
-                                </td>
-                                <td ng-if="user.role!='MANAGER'">
-                                    {{price.pricePerKm}}
+                            <tr >
+                                <td>{{primaryOffice.credentials}}</td>
+                                <td>
+                                    {{primaryOffice.name}}
                                 </td>
                             </tr>
                             </tbody>
@@ -49,9 +39,9 @@
                         </div>
                         <button class="btn btn-primary " name="submit" type="submit" style="margin-top: 30px;" data-ng-click="savePriceList()">Save</button>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

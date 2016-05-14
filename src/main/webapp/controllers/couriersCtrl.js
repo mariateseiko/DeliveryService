@@ -2,7 +2,7 @@
 
 app.controller('couriersCtrl', ['$scope', 'orderService', '$rootScope' ,'$location', 'managerService', 'sessionService', 'loginService','userService',
     function ($scope, orderService, $rootScope, $location, managerService, sessionService, loginService, userService){
-        if (!sessionService.get('user'))
+        if (!sessionService.get('user') && sessionService.get('user').role != 'MANAGER')
             $location.path('/');
         else {
             $scope.errorMessage="";

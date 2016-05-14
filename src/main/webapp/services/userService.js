@@ -2,11 +2,11 @@
 
 app.factory('userService', ['$http', 'orderService', 'sessionService', '$location', function($http, orderService, sessionService, $location){
     return {
-        saveAccSettings: function (data, $scope) {
-            $http.post('changeAccSettings').then(function(response){
+        saveAccSettings: function ($scope, user) {
+            $http.post('updateProfile', user).then(function(response){
                 if (response.status == 200 && response.data){
                     $scope.successMessage = "Settings have changed"
-                } else $scope.errorMessage = "Error";
+                } else $scope.errorMessage = "Error of saving settings";
             })
         },
         viewProfile: function($scope, $rootScope) {

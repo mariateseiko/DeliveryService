@@ -32,7 +32,7 @@
             <li>
                 <a href="#/application-list"><i class="fa fa-taxi" aria-hidden="true"></i>Applications </a>
             </li>
-            <li>
+            <li ng-if="user.role != 'COURIER'">
                 <a href="#/order-list"><i class="fa fa-check" aria-hidden="true"></i>Orders </a>
             </li>
 
@@ -42,8 +42,8 @@
             <li ng-if="user.role == 'ACCOUTANT'">
                 <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i>See the financial report</a>
             </li>
-            <li ng-if="user.role == 'MANAGER'">
-                <a href="#/price-list"><i class="fa fa-pencil" aria-hidden="true"></i>Edit price list</a>
+            <li>
+                <a href="#/price-list"><i class="fa fa-pencil" aria-hidden="true"></i>Price list</a>
             </li>
 
             <li ng-if="user.role == 'MANAGER'">
@@ -57,7 +57,7 @@
                                  aria-hidden="true"></i>Fetch Task List</a>
             </li>
             <li>
-                <a href="#/account-settings"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
+                <a href="#/account-settings"><i class="glyphicon glyphicon-user"></i>Profile Settings </a>
             </li>
             <li>
                 <a href="#" data-ng-click="exit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Exit</a>
