@@ -20,9 +20,16 @@ app.controller('homeCtrl', ['$scope', '$http', '$location', 'sessionService', 'u
             }
         ];
 
-        $http.get('viewPricelist').then(function(response) {
+        $http.get('viewPriceList').then(function(response) {
             $scope.prices = response.data;
-            
+            $scope.prices.forEach(function (price) {
+                if (price.name == 'NORMAL')
+                    price.description = 'Regular type of shipping   ';
+                else if (price.name == 'FAST')
+                    price.description = 'Fast delivery of your parcels';
+                else if (price.name == 'CAREFULLY')
+                    price.description = 'Reliable delivery of your parcels';
+            })
         });
         
         $scope.applications = [];

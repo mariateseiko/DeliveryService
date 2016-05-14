@@ -375,21 +375,7 @@ a:focus {
   padding: 0;
   border-bottom: 1px solid #e1e1e1;
 }
-#pricing .plan li {
-  padding: 10px 0;
-  margin: 0 15px;
-  border-bottom: 1px dashed #eee;
-}
-#pricing .plan li.plan-name {
-  padding: 15px 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-#pricing .plan li.plan-price {
-  color: #666;
-  padding: 15px 0;
-  font-size: 48px;
-}
+
 #pricing .plan li.plan-action {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -506,7 +492,7 @@ a:focus {
   width: 100px;
   height: 78px;
   background: url(../images/courier-bird.png) no-repeat 0 50%;
-  background-size: 78px;
+  background-size: 68px;
 }
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
@@ -971,7 +957,7 @@ z-index: 10;
   margin-top: 50px;
 }
 .animate-profile{
-  display: none;
+  visibility: hidden;
   position: absolute;
   z-index: 999;
   right: 0;
@@ -983,4 +969,46 @@ z-index: 10;
 #animate-profile {
   background-color: #FFF;
   border: 0;
+  position: absolute;
+  right: 120px;
+  width: 100%;
+  padding: 0 100%;
+}
+
+.plan-name-head{
+  padding: 40px 0;
+  font-size: 25pt;
+  font-weight: 700;
+}
+
+.plan-name{
+  padding: 20px 0;
+  font-size: 16pt;
+  font-weight: normal;
+}
+.plan-name span{
+  font-weight: bold;
+  color: #5298B7;
+}
+table{
+  width: 100%;
+}
+table th{
+  width: 40%;
+  padding: 0 8%;
+}
+table td{
+  width: 40%;
+  padding: 0 8%;
+}
+table th:first-child{
+  width: 20%;
+  padding: 0;
+}
+table td:first-child{
+  width: 20%;
+  padding: 0;
+}
+.btn.btn-primary {
+  border-radius: 0;
 }

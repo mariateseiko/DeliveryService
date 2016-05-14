@@ -8,4 +8,14 @@
     <div class="profile-usertitle-job">
         Role: {{$root.user.role}}
     </div>
+    <div class="col-xs-10 col-sm-2 emphasis">
+        <h2><strong>{{user.countOrders}}</strong></h2>
+        <p><small>Orders</small></p>
+        <button class="btn btn-success btn-block" data-ng-click="viewOrders()">View orders</button>
+    </div>
+    <div class="col-xs-10 col-sm-2 emphasis">
+        <h2><strong>{{user.countApplications}}</strong></h2>
+        <p><small>Applications</small></p>
+        <button class="btn btn-info btn-block" data-ng-click="viewApplications()">View applications</button>
+    </div>
 </div>

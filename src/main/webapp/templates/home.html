@@ -3,7 +3,7 @@
         <div class="item active">
             <div class="container">
                 <div class="carousel-content">
-                    <h1>Fast super blabla courier service</h1>
+                    <h1>Courier bird</h1>
                     <p class="lead">
                         Couriers are distinguished from ordinary mail services by features such as speed, security,
                         <br>tracking, signature, specialization and individualization of express services,
@@ -22,16 +22,16 @@
         <div class="box">
             <div class="center">
                 <h2>See our Pricings</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
+                <p class="lead">We strive to provide the best prices for the high quality of services.</p>
             </div><!--/.center-->
             <div class="big-gap"></div>
             <div id="pricing-table" class="row" >
                 <div class="col-sm-4" ng-repeat="price in prices">
                     <ul class="plan">
-                        <li class="plan-name">{{price.name}}</li>
-                        <li class="plan-name">Price per Kg <br>{{price.pricePerKg | currency}}</li>
-                        <li class="plan-name">Price per Km <br>{{price.pricePerKm | currency}}</li>
-
+                        <li class="plan-name-head">{{price.name}}</li>
+                        <li class="plan-name">{{price.description}}</li>
+                        <li class="plan-name">Price per Kg <br><span>{{price.pricePerKg | currency}}</span></li>
+                        <li class="plan-name">Price per Km <br><span>{{price.pricePerKm | currency}}</span></li>
                     </ul>
                 </div><!--/.col-sm-4-->
             </div>
@@ -43,7 +43,7 @@
         <div class="box">
             <div class="center">
                 <h2>Meet the Team</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis egestas.</p>
+                <p class="lead"> </p>
             </div>
             <div class="gap"></div>
             <div class="item active">
@@ -64,7 +64,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                &copy; 2015 <a  title="Courier-bird">Courier-bird</a>. All Rights Reserved.
             </div>
         </div>
     </div>
