@@ -7,11 +7,20 @@ package by.bsuir.deliveryservice.service.impl.export;
 
 import by.bsuir.deliveryservice.dao.ShippingDao;
 import by.bsuir.deliveryservice.dao.impl.ShippingDaoImpl;
+import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.service.AbstractExportService;
 import by.bsuir.deliveryservice.service.DocFormat;
 import by.bsuir.deliveryservice.service.PriceListExportService;
 import by.bsuir.deliveryservice.service.ServiceException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -34,7 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class PriceListExportServiceImpl extends AbstractExportService
+public class PriceListExportServiceImpl extends AbstractExportService
     implements PriceListExportService
 {
     PriceListExportServiceImpl() {}
@@ -54,18 +63,22 @@ public final class PriceListExportServiceImpl extends AbstractExportService
     public File exportToFile(DocFormat format) throws ServiceException
     {
         try {
-
+/*
             switch (format) {
                 case PDF:
                     throw new ServiceException(format.toString() +
                             " not supported for this document");
             }
+*/
 
             File file = getTemporaryFile(PREFIX, format.toString());
 
             List<Shipping> shippings = shippingDao.selectAllShippings();
 
             switch (format) {
+                case PDF:
+                    impl_exportToPdf(file, shippings);
+                    break;
                 case XLS:
                     impl_exportToXls(file, shippings);
                     break;
@@ -248,4 +261,159 @@ public final class PriceListExportServiceImpl extends AbstractExportService
 
         }
     }
+
+    // ----------------------------------------------------------------------
+
+    public void impl_exportToPdf(File file, List<Shipping> items)
+            throws Exception
+    {
+        Document d = null;
+
+        try {
+            d = new Document();
+            PdfWriter.getInstance(d, new FileOutputStream(file));
+            d.open();
+
+            d.add(impl_PdfMakeHeader());
+            d.add(impl_PdfMakePriceListTable(items));
+            d.add(impl_PdfMakeDateHeader(new Date()));
+
+            d.close();
+        } finally {
+            if (d != null) d.close();
+        }
+    }
+
+    // ----------------------------------------------------------------------
+
+    protected Element impl_PdfMakeHeader() throws Exception
+    {
+        DateFormat dateFormat = DateFormat.getDateInstance();
+
+        String s = "ПРАЙС-ЛИСТ\nна услуги по доставке грузов";
+
+        Paragraph p = new Paragraph(s,
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 14,
+                        com.itextpdf.text.Font.BOLD));
+        p.setAlignment(Element.ALIGN_CENTER);
+
+        return p;
+    }
+
+    protected Element impl_PdfMakePriceListTable(List<Shipping> shippings)
+            throws Exception
+    {
+        PdfPTable table = new PdfPTable(new float[]{24, 12, 12});
+        PdfPCell cell;
+
+        table.setSpacingBefore(25);
+        table.setWidthPercentage(100);
+        table.setSplitRows(true);
+
+        /* Name */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        cell.setPaddingBottom(10);
+
+        cell.setPhrase(new Phrase("Тип",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* PricePerKm */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+        cell.setPhrase(new Phrase("Цена/км",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* PricePerKg */
+
+        cell = new PdfPCell();
+
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+
+        cell.setPhrase(new Phrase("Цена/кг",
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont())));
+
+        table.addCell(cell);
+
+        /* Rows */
+
+        DateFormat dateFormat = DateFormat.getDateInstance();
+
+        for (int i = 0; i < shippings.size(); i++) {
+
+            Shipping sh = shippings.get(i);
+
+            /* Name */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Phrase(sh.getName(),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+
+            /* PricePerKm */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Paragraph(String.format("%.2f",
+                    sh.getPricePerKm()),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+
+            /* PricePerKg */
+
+            cell = new PdfPCell();
+
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell.setPhrase(new Paragraph(String.format("%.2f",
+                    sh.getPricePerKg()),
+                    new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8)));
+
+            table.addCell(cell);
+        }
+
+        return table;
+    }
+
+    protected Element impl_PdfMakeDateHeader(Date date)
+            throws Exception
+    {
+        DateFormat dateFormat = DateFormat.getDateInstance();
+
+        String s = String.format("Цены представлены на %s г.",
+                dateFormat.format(date));
+
+        Paragraph p = new Paragraph(s,
+                new com.itextpdf.text.Font(newTimesNewRomanBaseFont(), 8));
+        p.setAlignment(Element.ALIGN_LEFT);
+        p.setSpacingBefore(15);
+
+        return p;
+    }
+
 }
