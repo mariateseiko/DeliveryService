@@ -102,11 +102,16 @@ app.factory('managerService', ['$http', function ($http) {
         },
         savePriceList: function ($scope) {
             $scope.errorMessage = "";
-            $http.post('updatePriceList', $scope.prices).then(function (response) {
-                if (response.status == 200 && response.data) {
-                    $scope.successMessage = "Price list is updated";
-                } else
-                    $scope.errorMessage = "Error of updating price list";
+            $http.post('updatePriceList', $scope.prices[0]).then(function (response) {
+                $http.post('updatePriceList', $scope.prices[1]).then(function (response) {
+                    $http.post('updatePriceList', $scope.prices[2]).then(function (response) {
+                        if (response.status == 200 && response.data) {
+                            $scope.successMessage = "Price list is updated";
+                        } else
+                            $scope.errorMessage = "Error of updating price list";
+                    });
+                });
+
             });
         }
     }
