@@ -1,8 +1,6 @@
 package by.bsuir.deliveryservice.entity;
 
-import java.io.Serializable;
-
-public class Office extends Entity implements Serializable
+public class Office extends Entity
 {
     private String name;
     private String credentials;

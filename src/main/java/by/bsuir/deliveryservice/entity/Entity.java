@@ -1,8 +1,6 @@
 package by.bsuir.deliveryservice.entity;
 
-import java.io.Serializable;
-
-public class Entity implements Serializable {
+public class Entity {
     private long id;
 
     public long getId() {

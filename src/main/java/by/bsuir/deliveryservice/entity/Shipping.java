@@ -1,8 +1,6 @@
 package by.bsuir.deliveryservice.entity;
 
-import java.io.Serializable;
-
-public class Shipping extends Entity implements Serializable {
+public class Shipping extends Entity {
     private String name;
     private Double pricePerKg;
     private Double pricePerKm;
