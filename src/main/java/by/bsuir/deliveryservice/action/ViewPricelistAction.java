@@ -8,7 +8,7 @@ import com.opensymphony.xwork2.Action;
 
 import java.util.List;
 
-public class ViewPriceListAction implements Action {
+public class ViewPricelistAction implements Action {
     private List<Shipping> shippings;
     private static ShippingService shippingService = ShippingServiceImpl.getInstance();
     @Override
