@@ -20,7 +20,7 @@ app.controller('accountsettingsCtrl', ['$scope', '$rootScope', '$location', 'ses
             }
         }
 
-        $rootScope.exit = function () {
-            $scope.exit();
+        $scope.exit = function () {
+            $rootScope.exit();
         }
     }]);

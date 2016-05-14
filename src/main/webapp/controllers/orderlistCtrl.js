@@ -2,7 +2,7 @@
 
 app.controller('orderlistCtrl', ['$scope', '$rootScope', '$location', 'orderService', 'managerService', 'sessionService', 'loginService', 'userService',
     function ($scope, $rootScope, $location, orderService, managerService, sessionService, loginService, userService) {
-        if (!sessionService.get('user'))
+        if (!sessionService.get('user') )
             $location.path('/');
         else {
             $scope.errorMessage="";
