@@ -39,10 +39,7 @@ import by.bsuir.deliveryservice.entity.User;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 import static junit.framework.TestCase.assertTrue;
 

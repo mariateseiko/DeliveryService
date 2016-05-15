@@ -50,7 +50,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
-import java.util.Date;
 
 public class ActExportServiceImpl extends AbstractExportService
     implements ActExportService

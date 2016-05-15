@@ -34,7 +34,6 @@ package by.bsuir.deliveryservice.dao;
 
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.OrderStatus;
-import by.bsuir.deliveryservice.service.ServiceException;
 
 import java.util.Date;
 import java.util.List;

@@ -34,7 +34,6 @@ package by.bsuir.deliveryservice.service.impl.export;
 
 import by.bsuir.deliveryservice.dao.ShippingDao;
 import by.bsuir.deliveryservice.dao.impl.ShippingDaoImpl;
-import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.Shipping;
 import by.bsuir.deliveryservice.service.AbstractExportService;
 import by.bsuir.deliveryservice.service.DocFormat;

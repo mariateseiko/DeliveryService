@@ -38,8 +38,6 @@ import by.bsuir.deliveryservice.service.ShippingService;
 import by.bsuir.deliveryservice.service.impl.ShippingServiceImpl;
 import com.opensymphony.xwork2.Action;
 
-import java.util.List;
-
 public class UpdatePricelistAction implements Action {
     private Shipping shipping = new Shipping();
     private boolean success = false;

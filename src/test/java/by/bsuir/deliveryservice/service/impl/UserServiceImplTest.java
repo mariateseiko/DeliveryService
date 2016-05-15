@@ -37,7 +37,6 @@ import by.bsuir.deliveryservice.entity.UserRole;
 import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.UserService;
 import by.bsuir.deliveryservice.service.util.Hasher;
-
 import org.junit.Test;
 
 import java.util.List;

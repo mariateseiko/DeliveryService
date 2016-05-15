@@ -40,8 +40,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.Assert.*;
-
 public class StringToDateConverterTest
 {
     private final StringToDateConverter converter =

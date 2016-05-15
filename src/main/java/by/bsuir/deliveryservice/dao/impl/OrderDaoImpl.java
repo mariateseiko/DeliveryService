@@ -34,12 +34,21 @@ package by.bsuir.deliveryservice.dao.impl;
 
 import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.OrderDao;
-import by.bsuir.deliveryservice.entity.*;
+import by.bsuir.deliveryservice.entity.Office;
+import by.bsuir.deliveryservice.entity.Order;
+import by.bsuir.deliveryservice.entity.OrderStatus;
+import by.bsuir.deliveryservice.entity.Shipping;
+import by.bsuir.deliveryservice.entity.User;
 
 import javax.naming.NamingException;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
     private static final String SELECT_ORDER_BY_ID = "SELECT * " +

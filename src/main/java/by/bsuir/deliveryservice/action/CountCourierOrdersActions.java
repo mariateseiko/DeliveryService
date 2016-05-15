@@ -32,21 +32,12 @@
 
 package by.bsuir.deliveryservice.action;
 
-import by.bsuir.deliveryservice.entity.User;
-import by.bsuir.deliveryservice.service.ServiceException;
-import by.bsuir.deliveryservice.service.UserService;
-import by.bsuir.deliveryservice.service.impl.UserServiceImpl;
-import com.opensymphony.xwork2.*;
-
-import java.util.List;
 import by.bsuir.deliveryservice.service.OrderService;
 import by.bsuir.deliveryservice.service.ServiceException;
 import by.bsuir.deliveryservice.service.impl.OrderServiceImpl;
-import com.opensymphony.xwork2.Action;
 import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class CountCourierOrdersActions implements com.opensymphony.xwork2.Action {
     private static final String USER = "user";

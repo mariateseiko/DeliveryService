@@ -36,7 +36,6 @@ import by.bsuir.deliveryservice.dao.DaoException;
 import by.bsuir.deliveryservice.dao.ShippingDao;
 import by.bsuir.deliveryservice.entity.Shipping;
 
-
 import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

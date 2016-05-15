@@ -35,7 +35,6 @@ package by.bsuir.deliveryservice.service;
 import by.bsuir.deliveryservice.entity.Order;
 import by.bsuir.deliveryservice.entity.OrderStatus;
 
-import javax.xml.ws.Service;
 import java.util.List;
 
 public interface OrderService {
