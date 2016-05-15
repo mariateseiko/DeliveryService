@@ -65,7 +65,7 @@ The 3rd party libraries used in the project:
 
 ##Run
 
-Use [Apache Tomcat] (version 8.0 and higher) to deploy and run the application.
+Use [Apache Tomcat] \(version 8.0 and higher\) to deploy and run the application.
 
 ##Further development
 
