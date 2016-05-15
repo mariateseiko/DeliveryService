@@ -18,8 +18,6 @@ The application is still in the Beta stage, so it may contain bugs, as well as s
 
 **Courier Bird** is a JavaEE application. The backend is written on the [Apache Struts 2] framework, and the frontend is written in HTML5, CSS3 and JavaScript, using [Bootstrap] and [AngularJS].
 
-> The frontend is based on a free [Xeon Onepage Site Template].
-
 ####Actors
 
 * Guest
