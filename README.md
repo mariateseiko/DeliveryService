@@ -45,6 +45,17 @@ The application is still in the Beta stage, so it may contain bugs, as well as s
 * Role
 * Status
 
+##Dependencies
+
+The 3rd party libraries used in the project:
+
+- [Apache Commons]
+- [Apache Log4J 2.x]
+- [Apache POI]
+- [iText PDF]
+- [JUnit 4]
+- [MySQL Connector/J]
+
 ##Build
 
 1. [Download] and unzip the source repository, or clone it using Git:  
@@ -79,3 +90,9 @@ This software is distributing without any licence. You can use, modify and distr
 [Xeon Onepage Site Template]: https://shapebootstrap.net/item/1524966-xeon-best-onepage-site-template
 [Download]: https://github.com/mariateseiko/DeliveryService/archive/master.zip
 [Apache Tomcat]: http://tomcat.apache.org/
+[Apache Commons]: https://commons.apache.org/
+[Apache Log4J 2.x]: http://logging.apache.org/log4j/2.x/
+[Apache POI]: https://poi.apache.org/
+[iText PDF]: http://itextpdf.com/
+[JUnit 4]: http://junit.org/junit4/
+[MySQL Connector/J]: https://dev.mysql.com/downloads/connector/j/
