@@ -1,4 +1,4 @@
-# Courier Service
+# Courier Bird
 
 <img align="right" src="logo_128.png?raw=true">
 
